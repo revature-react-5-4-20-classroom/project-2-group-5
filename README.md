@@ -1,4 +1,4 @@
-## GROUP 5 PROJECT 2
+# GROUP 5 PROJECT 2
 
 Mark Alsip
 Steven Gutierrez
@@ -6,15 +6,15 @@ Kruti Fadadu
 Janak Acharya
 
 
-## UNTITLED PROJECT
+# UNTITLED PROJECT
 
 
-# Summary - 
+## Summary 
 	This app will be designed to allow users to post messages on an online board.  Each user has their own board, as
 	well as a board to view other users they are "subscribed" to.  At a high level, it will be a social media app.
 
 
-# User Stories
+## User Stories
 	- users can be created and deleted
 	- every user has a profile page
 	- a user can make posts
@@ -36,7 +36,7 @@ Janak Acharya
 	- admin and moderators can delete user posts and users (optional)
 
 
-# Relational Database - 
+## Relational Database - 
 
 - users
 	- userid
@@ -58,9 +58,9 @@ Janak Acharya
 	- subscriber
 
 - blocked
-	-blocker id
-	-blockee
-	-blocker
+	- blocker id
+	- blockee
+	- blocker
 
 - comment
 	- postid
@@ -74,7 +74,7 @@ Janak Acharya
 	-reciever
 	
 	
-# Frontend Decisions
+## Frontend Decisions
 
 - reactstrap for styling
 - flow

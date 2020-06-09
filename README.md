@@ -37,7 +37,7 @@
 	- admin and moderators can delete user posts and users (optional)
 
 
-## Relational Database - 
+## Relational Database
 
 - users
 	- userid
@@ -70,9 +70,9 @@
 	- text
 
 - messages
-	-messageid
-	-author
-	-reciever
+	- messageid
+	- author
+	- reciever
 	
 	
 ## Frontend Decisions

@@ -25,12 +25,6 @@ CREATE TABLE subscriptions(
     blocked boolean NOT NULL 
 );
 
-CREATE TABLE blocked(
-    blockedId SERIAL PRIMARY KEY,
-    blockee int NOT NULL REFERENCES users(userId),
-    blocker int NOT NULL REFERENCES users(userId)
-);
-
 CREATE TABLE comments(
     commentId SERIAL PRIMARY KEY,
     postId int NOT NULL REFERENCES post(postId),

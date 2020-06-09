@@ -1,4 +1,4 @@
-##GROUP 5 PROJECT 2
+## GROUP 5 PROJECT 2
 
 Mark Alsip
 Steven Gutierrez
@@ -6,13 +6,15 @@ Kruti Fadadu
 Janak Acharya
 
 
-##UNTITLED PROJECT
+## UNTITLED PROJECT
 
-#summary - 
+
+# Summary - 
 	This app will be designed to allow users to post messages on an online board.  Each user has their own board, as
 	well as a board to view other users they are "subscribed" to.  At a high level, it will be a social media app.
 
-#user stories - 
+
+# User Stories
 	- users can be created and deleted
 	- every user has a profile page
 	- a user can make posts
@@ -33,49 +35,53 @@ Janak Acharya
 	- admin can ugrade users to moderators (optional)
 	- admin and moderators can delete user posts and users (optional)
 
-#relational database - 
-	users
-		- userid
-		- username
-		- password
-		- alias
-		- role
 
-	posts
-		- postid 
-		- author
-		- dateposted
-		- title
-		- text
+# Relational Database - 
 
-	subscription
-		- subscription id
-		- subscribee
-		- subscriber
+- users
+	- userid
+	- username
+	- password
+	- alias
+	- role
 
-	blocked
-		-blocker id
-		-blockee
-		-blocker
+- posts
+	- postid 
+	- author
+	- dateposted
+	- title
+	- text
 
-	comment
-		- postid
-		- commentid
-		- author
-		- text
+- subscription
+	- subscription id
+	- subscribee
+	- subscriber
 
-	messages
-		-messageid
-		-author
-		-reciever
-		
-frontend decisions
-	- reactstrap for styling
-	- flow
-		- site homepage (all new posts) (or if already logged in redirect to user homepage)
-		- view specific users page
-		- login/create user
-		- user homepage (branching point)
-		- user profile page/ view other user pages
-		- create post, view other users, view subscribers/subscribed users, back to homepage
+- blocked
+	-blocker id
+	-blockee
+	-blocker
+
+- comment
+	- postid
+	- commentid
+	- author
+	- text
+
+- messages
+	-messageid
+	-author
+	-reciever
+	
+	
+# Frontend Decisions
+
+- reactstrap for styling
+- flow
+	- site homepage (all new posts) (or if already logged in redirect to user homepage)
+	- view specific users page
+	- login/create user
+	- user homepage (branching point)
+	- user profile page/ view other user pages
+	- create post, view other users, view subscribers/subscribed users, back to homepage
 	

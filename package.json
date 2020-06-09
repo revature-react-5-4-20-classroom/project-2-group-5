@@ -1,0 +1,19 @@
+{
+  "name": "postit",
+  "version": "1.0.0",
+  "description": "Project 2 Janak, Kruti, Mark, Steven",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/revature-react-5-4-20-classroom/project-2-group-5.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/revature-react-5-4-20-classroom/project-2-group-5/issues"
+  },
+  "homepage": "https://github.com/revature-react-5-4-20-classroom/project-2-group-5#readme"
+}

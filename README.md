@@ -1,9 +1,10 @@
-# GROUP 5 PROJECT 2
+# GROUP 5 
+## PROJECT 2
 
-Mark Alsip
-Steven Gutierrez
-Kruti Fadadu
-Janak Acharya
+- Mark Alsip
+- Steven Gutierrez
+- Kruti Fadadu
+- Janak Acharya
 
 
 # UNTITLED PROJECT

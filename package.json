@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/revature-react-5-4-20-classroom/project-2-group-5/issues"
   },
-  "homepage": "https://github.com/revature-react-5-4-20-classroom/project-2-group-5#readme"
+  "homepage": "https://github.com/revature-react-5-4-20-classroom/project-2-group-5#readme",
+  "dependencies": {
+    "react-router-dom": "^5.2.0",
+    "reactstrap": "^8.4.1"
+  }
 }

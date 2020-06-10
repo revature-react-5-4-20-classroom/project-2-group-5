@@ -13,7 +13,7 @@ CREATE TABLE users(
 CREATE TABLE posts(
     postId SERIAL PRIMARY KEY,
     author int NOT NULL REFERENCES users(userId),
-    datePosted int NOT NULL
+    datePosted int NOT NULL,
     title text,
     content text NOT NULL
 );
@@ -25,15 +25,9 @@ CREATE TABLE subscriptions(
     blocked boolean NOT NULL 
 );
 
-CREATE TABLE blocked(
-    blockedId SERIAL PRIMARY KEY,
-    blockee int NOT NULL REFERENCES users(userId),
-    blocker int NOT NULL REFERENCES users(userId)
-);
-
 CREATE TABLE comments(
     commentId SERIAL PRIMARY KEY,
-    postId int NOT NULL REFERENCES post(postId),
+    postId int NOT NULL REFERENCES posts(postId),
     author int NOT NULL REFERENCES users(userId),
     content text NOT NULL
 );
@@ -54,11 +48,11 @@ INSERT INTO users(username, password, alias, role) values
 ('testUser', '12345', 'TeStInG', 'user');
 
 INSERT INTO posts(author, datePosted, title, content) values 
-((SELECT userid FROM users WHERE username = 'admin'), 202009061228, 'Initializing Post', 'Initial Post from the database initialization.');
+((SELECT userid FROM users WHERE username = 'admin'), 20200906, 'Initializing Post', 'Initial Post from the database initialization.');
 
 INSERT INTO subscriptions(subscribee, subscriber, blocked) values
-((SELECT userid FROM users WHERE username = 'admin'), (SELECT userid FROM users WHERE username = 'user', FALSE)),
-((SELECT userid FROM users WHERE username = 'testUser'), (SELECT userid FROM users WHERE username = 'user', TRUE));
+((SELECT userid FROM users WHERE username = 'admin'), (SELECT userid FROM users WHERE username = 'user'), FALSE),
+((SELECT userid FROM users WHERE username = 'testUser'), (SELECT userid FROM users WHERE username = 'user'), TRUE);
 
 INSERT INTO comments(postId, author, content) values
 (1, (SELECT userid FROM users WHERE username = 'user'), 'FIRST!');

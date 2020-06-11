@@ -3,11 +3,12 @@ package com.g5.p2.models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -16,6 +17,7 @@ public class Posts {
 
 	@Id
 	@Column(name = "postid")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer postId;
 	@JoinColumn(name = "author")
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -31,6 +33,14 @@ public class Posts {
 	public Posts() {
 		super();
 	}
+	
+	public Posts(Integer postId, Integer datePosted, String title, String content) {
+      super();
+      this.postId = postId;
+      this.datePosted = datePosted;
+      this.title = title;
+      this.content = content;
+  }
 	
 	public Posts(Integer postId, Users author, Integer datePosted, String title, String content) {
 		super();
@@ -57,7 +67,7 @@ public class Posts {
 		this.author = author;
 	}
 
-	public Integer getDatePosted() {
+    public Integer getDatePosted() {
 		return datePosted;
 	}
 

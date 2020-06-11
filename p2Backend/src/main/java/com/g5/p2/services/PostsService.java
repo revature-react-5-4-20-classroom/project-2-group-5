@@ -10,11 +10,13 @@ public interface PostsService {
 	
 	Posts getById(Integer postId);
 	
-	Posts create(Posts u);
+	List<Posts> getByUserId(Integer userId);
 	
-	Posts update(Posts u);
+	Posts create(Posts p, Integer userId);
 	
-	Posts createOrUpdate(Posts u);
+	Posts update(Posts p);
+	
+	Posts createOrUpdate(Posts p);
 	
 	boolean delete(Integer postId);
 }

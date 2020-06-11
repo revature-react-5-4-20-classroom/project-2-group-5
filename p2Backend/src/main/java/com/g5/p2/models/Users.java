@@ -33,6 +33,12 @@ public class Users {
 	@OneToMany(mappedBy = "author")
 	@JsonIgnoreProperties({"author"})
 	private List<Posts> posts;
+	@OneToMany(mappedBy = "subscribee")
+    @JsonIgnoreProperties({"subscribee"})
+	private List<Subscriptions> subscribee;
+	@OneToMany(mappedBy = "subscriber")
+    @JsonIgnoreProperties({"subscriber"})
+	private List<Subscriptions> subscriber;
 	
 	public Users() {
 		super();

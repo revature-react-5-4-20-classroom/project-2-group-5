@@ -12,56 +12,49 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "comments")
-public class Comments {
-
+@Table(name = "messages")
+public class Messages {
+  
     @Id
-    @Column(name = "commentid")
+    @Column(name = "messageid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer commentId;
-    @JoinColumn(name = "postid")
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JsonIgnoreProperties({"comments"})
-    private Posts post;
+    private Integer messageId;
     @JoinColumn(name = "author")
     @ManyToOne(fetch = FetchType.EAGER)
-    @JsonIgnoreProperties({"comments"})
-    private Users author; 
+    @JsonIgnoreProperties({"writtenMessages"})
+    private Users author;
+    @JoinColumn(name = "receiver")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({"receivedMessages"})
+    private Users receiver;
     @Column(name = "content")
-    private String content;
+    private String content; 
     
-    public Comments() {
+    
+    public Messages() {
       super();
     }
-    
-    public Comments(Integer commentId, String content) {
+
+    public Messages(Integer messageId, String content) {
       super();
-      this.commentId = commentId;
+      this.messageId = messageId;
       this.content = content;
     }
-    
-    public Comments(Integer commentId, Posts post, Users author, String content) {
+
+    public Messages(Integer messageId, Users author, Users receiver, String content) {
       super();
-      this.commentId = commentId;
-      this.post = post;
+      this.messageId = messageId;
       this.author = author;
+      this.receiver = receiver;
       this.content = content;
     }
 
-    public Integer getCommentId() {
-      return commentId;
+    public Integer getMessageId() {
+      return messageId;
     }
 
-    public void setCommentId(Integer commentId) {
-      this.commentId = commentId;
-    }
-
-    public Posts getPost() {
-      return post;
-    }
-
-    public void setPost(Posts post) {
-      this.post = post;
+    public void setMessageId(Integer messageId) {
+      this.messageId = messageId;
     }
 
     public Users getAuthor() {
@@ -72,6 +65,14 @@ public class Comments {
       this.author = author;
     }
 
+    public Users getReceiver() {
+      return receiver;
+    }
+
+    public void setReceiver(Users receiver) {
+      this.receiver = receiver;
+    }
+
     public String getContent() {
       return content;
     }
@@ -79,7 +80,7 @@ public class Comments {
     public void setContent(String content) {
       this.content = content;
     }
-  
+    
     
     
 }

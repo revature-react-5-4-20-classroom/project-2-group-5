@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.g5.p2.exceptions.PostNotFoundException;
 import com.g5.p2.models.Posts;
 import com.g5.p2.repositories.PostsRepository;
+import com.g5.p2.repositories.UsersRepository;
 
 @Service
 @Primary
@@ -17,6 +18,8 @@ public class PostsServiceImplementation implements PostsService {
 	
 	@Autowired
 	PostsRepository postsRepository;
+	@Autowired
+	UsersRepository usersRepository;
 
 	@Override
 	public List<Posts> getAll() {
@@ -33,10 +36,16 @@ public class PostsServiceImplementation implements PostsService {
 			throw new PostNotFoundException();
 		}
 	}
+	
+	@Override
+    public List<Posts> getByUserId(Integer userId) {
+       return postsRepository.findByAuthor(usersRepository.findByUserId(userId));
+    }
 
 	@Override
-	public Posts create(Posts p) {
-		p.setPostId(0);
+	public Posts create(Posts p, Integer userId) {
+		p.setPostId(postsRepository.findAll().get(postsRepository.findAll().size()-1).getPostId() + 1);
+		p.setAuthor(usersRepository.findByUserId(userId));
 		return postsRepository.save(p);
 	}
 

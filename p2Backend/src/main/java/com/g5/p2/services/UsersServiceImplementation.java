@@ -36,7 +36,7 @@ public class UsersServiceImplementation implements UsersService{
 
 	@Override
 	public Users create(Users u) {
-		u.setUserId(0);
+		u.setUserId(usersRepository.findAll().get(usersRepository.findAll().size()-1).getUserId() + 1);
 		return usersRepository.save(u);
 	}
 

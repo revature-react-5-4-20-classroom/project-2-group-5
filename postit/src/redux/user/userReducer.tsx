@@ -1,5 +1,12 @@
-import { User } from '../../../models/user';
 import { AnyAction } from 'redux';
+import { User } from '../../models/user';
+import {
+  SIGNUP_SUCCESS,
+  SIGNUP_FAIL,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  LOGOUT,
+} from '../types';
 
 export interface UserState {
   currUser: User | null;
@@ -14,11 +21,33 @@ export const userReducer = (
   action: AnyAction
 ): UserState => {
   switch (action.type) {
-    case userActionTypes.LOGIN: {
-      return a;
-    }
+    case LOGIN_SUCCESS:
+      const fetchedUser = action.payload.user;
+      if (!fetchedUser) {
+        return state;
+      } else {
+        return {
+          currUser: fetchedUser,
+        };
+      }
+    case LOGIN_FAIL:
+      return state;
+    case SIGNUP_SUCCESS:
+      const newUser = action.payload.user;
+      if (!newUser) {
+        return state;
+      } else {
+        return {
+          currUser: newUser,
+        };
+      }
+    case SIGNUP_FAIL:
+      return state;
+    case LOGOUT:
+      return {
+        currUser: null,
+      };
     default:
-      //Leaves state alone if there are no action matches
       return state;
   }
 };

@@ -25,7 +25,7 @@ public class Comments {
     private Posts post;
     @JoinColumn(name = "author")
     @ManyToOne(fetch = FetchType.EAGER)
-    @JsonIgnoreProperties({"comments"})
+    @JsonIgnoreProperties({"comments", "posts", "subscribee", "subscriber"})
     private Users author; 
     @Column(name = "content")
     private String content;

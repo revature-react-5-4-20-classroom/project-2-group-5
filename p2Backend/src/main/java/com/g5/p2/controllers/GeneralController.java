@@ -25,8 +25,4 @@ public class GeneralController {
 	  return usersService.findOneUser(c.get("username"), c.get("password"));
 	}
 	
-	//logout
-	
-	//getCredentials
-	
 }

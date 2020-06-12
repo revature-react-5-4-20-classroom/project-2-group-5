@@ -42,7 +42,7 @@ export class SignUp extends React.Component<any, any> {
               type='email'
               name='email'
               id='email'
-              placeholder='email'
+              placeholder='Email'
               required
             />
           </FormGroup>

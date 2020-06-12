@@ -16,10 +16,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Comments {
 
     @Id
-    @Column(name = "commentid")
+    @Column(name = "comment_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer commentId;
-    @JoinColumn(name = "postid")
+    @JoinColumn(name = "post_id")
     @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties({"comments"})
     private Posts post;

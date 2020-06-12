@@ -1,9 +1,11 @@
-import React from "react";
+import React from 'react';
 
-export class NewPost extends React.Component<any, any> {
+// Component that has form to take in title and content
+
+export class CreatePostForm extends React.Component<any, any> {
   submitPost = () => {};
 
   render() {
-    return <div className="center"></div>;
+    return <div className='center'></div>;
   }
 }

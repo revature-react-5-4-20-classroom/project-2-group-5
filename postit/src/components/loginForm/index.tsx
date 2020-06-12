@@ -12,6 +12,8 @@ import {
   Button,
 } from 'reactstrap';
 
+// Component that has form that takes username/password and has login button
+
 export class Login extends React.Component<any, any> {
   setusername = (un: any) => {
     this.setState({

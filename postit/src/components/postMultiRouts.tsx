@@ -2,8 +2,8 @@ import React from 'react';
 import { Switch, Route, Router } from 'react-router';
 import { Nav, Navbar, NavItem, Button } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
-import { NewPost } from './createPostForm';
-import { PostById } from './postsById';
+import { CreatePostForm } from './createPostForm';
+import { PostById } from './postsContainer';
 
 export class PostMultiRoute extends React.Component<any, any> {
   constructor(props: any) {
@@ -51,7 +51,7 @@ export class PostMultiRoute extends React.Component<any, any> {
         <Switch>
           <Route path={`${this.props.path}`}>
             {this.props.loggedInUser ? (
-              <NewPost
+              <CreatePostForm
                 path={`${this.props.path}`}
                 loggedInUser={this.props.loggedInUser}
               />

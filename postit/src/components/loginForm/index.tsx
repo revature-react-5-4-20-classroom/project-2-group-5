@@ -52,46 +52,40 @@ export class Login extends React.Component<any, any> {
   };
   render() {
     return (
-      <div className='center'>
-        <Container>
-          <Row>
-            <Col md={{ size: 6, offset: 3 }}>
-              <h3>Login</h3>
-              <br />
-              <Form onSubmit={this.attemptLogin}>
-                <FormGroup>
-                  <Label for='username'>username: </Label>
+      <Col md={{ size: 8, offset: 2 }}>
+        <Form className='center' onSubmit={this.attemptLogin}>
+          <FormGroup>
+            <Label for='username'>Username:</Label>
 
-                  {/* onChange lets Input change state, value lets Input display state */}
-                  <Input
-                    onChange={this.setusername}
-                    //value={this.state.username}
-                    type='text'
-                    name='username'
-                    id='username'
-                    placeholder='your username'
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Label for='password'>Password:</Label>
+            {/* onChange lets Input change state, value lets Input display state */}
+            <Input
+              onChange={this.setusername}
+              //value={this.state.username}
+              type='text'
+              name='username'
+              id='username'
+              placeholder='Username'
+              required
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for='password'>Password:</Label>
 
-                  <Input
-                    onChange={this.setPassword}
-                    //value={this.state.password}
-                    type='password'
-                    name='password'
-                    id='password'
-                    required
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <Button color='secondary'>Submit</Button>
-                </FormGroup>
-              </Form>
-            </Col>
-          </Row>
-        </Container>
-      </div>
+            <Input
+              onChange={this.setPassword}
+              //value={this.state.password}
+              type='password'
+              name='password'
+              id='password'
+              placeholder='Password'
+              required
+            />
+          </FormGroup>
+          <FormGroup>
+            <Button color='secondary'>Submit</Button>
+          </FormGroup>
+        </Form>
+      </Col>
     );
   }
 }

@@ -1,7 +1,16 @@
-import React from "react";
-import { User } from "../models/user";
-import { login } from "../apis/login";
-import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from "reactstrap";
+import React from 'react';
+import { User } from '../../models/user';
+import { login } from '../../apis/login';
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Button,
+} from 'reactstrap';
 
 export class Login extends React.Component<any, any> {
   setusername = (un: any) => {
@@ -17,7 +26,7 @@ export class Login extends React.Component<any, any> {
 
   clearError = () => {
     this.setState({
-      errorMessage: "",
+      errorMessage: '',
       isError: false,
     });
   };
@@ -30,10 +39,10 @@ export class Login extends React.Component<any, any> {
         this.state.password
       );
       this.props.updateUser(loggedInUser);
-      this.props.history.push("/home");
+      this.props.history.push('/home');
     } catch (error) {
       this.setState({
-        password: "",
+        password: '',
         isError: true,
         errorMessage: error.message,
       });
@@ -41,40 +50,40 @@ export class Login extends React.Component<any, any> {
   };
   render() {
     return (
-      <div className="center">
+      <div className='center'>
         <Container>
           <Row>
             <Col md={{ size: 6, offset: 3 }}>
               <h3>Login</h3>
-              <br/>
+              <br />
               <Form onSubmit={this.attemptLogin}>
-                <FormGroup >
-                  <Label for="username">username: </Label>
+                <FormGroup>
+                  <Label for='username'>username: </Label>
 
                   {/* onChange lets Input change state, value lets Input display state */}
                   <Input
                     onChange={this.setusername}
                     //value={this.state.username}
-                    type="text"
-                    name="username"
-                    id="username"
-                    placeholder="your username"
+                    type='text'
+                    name='username'
+                    id='username'
+                    placeholder='your username'
                   />
                 </FormGroup>
-                <FormGroup >
-                  <Label for="password">Password:</Label>
+                <FormGroup>
+                  <Label for='password'>Password:</Label>
 
                   <Input
                     onChange={this.setPassword}
                     //value={this.state.password}
-                    type="password"
-                    name="password"
-                    id="password"
+                    type='password'
+                    name='password'
+                    id='password'
                     required
                   />
                 </FormGroup>
                 <FormGroup>
-                  <Button color="secondary">Submit</Button>
+                  <Button color='secondary'>Submit</Button>
                 </FormGroup>
               </Form>
             </Col>

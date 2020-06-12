@@ -5,12 +5,12 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
-import { Navigation } from './components/navigation';
+import { Navigation } from './components/navbar';
 import { Jumbotron } from 'reactstrap';
-import { Login } from './components/login';
-import { UserProfile } from './components/userProfile';
+import { Login } from './components/loginForm';
+import { UserProfile } from './components/pages/Profile';
 import { User } from './models/user';
-import { Home } from './components/home';
+import { Home } from './components/pages/Home';
 import { PostMultiRoute } from './components/postMultiRouts';
 import { Provider } from 'react-redux';
 import { store } from './redux/user/userStore';

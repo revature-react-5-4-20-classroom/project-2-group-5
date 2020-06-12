@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -66,4 +67,11 @@ public class SubscriptionsController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Subscription Not Found", e);
         }
     }
+    
+    //delete subscription
+    @DeleteMapping
+    public boolean deleteSubscription(@RequestBody LinkedHashMap<String, Object> s) {
+        return subscriptionsService.delete((Integer)s.get("subscriptionId"));
+    }
+    
 }

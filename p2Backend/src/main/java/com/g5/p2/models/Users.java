@@ -31,7 +31,7 @@ public class Users {
 	@Column(name = "role")
 	private String role;
 	@OneToMany(mappedBy = "author")
-	@JsonIgnoreProperties({"author"})
+	@JsonIgnoreProperties({"author", "comments"})
 	private List<Posts> posts;
 	@OneToMany(mappedBy = "subscribee")
     @JsonIgnoreProperties({"subscribee"})
@@ -40,7 +40,8 @@ public class Users {
     @JsonIgnoreProperties({"subscriber"})
 	private List<Subscriptions> subscriber;
 	
-	public Users() {
+
+  public Users() {
 		super();
 	}
 	
@@ -111,5 +112,19 @@ public class Users {
 		this.posts = posts;
 	}
 	
-	
+	public List<Subscriptions> getSubscribee() {
+	    return subscribee;
+	}
+
+	public void setSubscribee(List<Subscriptions> subscribee) {
+	    this.subscribee = subscribee;
+	}
+
+	public List<Subscriptions> getSubscriber() {
+	    return subscriber;
+	}
+
+	public void setSubscriber(List<Subscriptions> subscriber) {
+	    this.subscriber = subscriber;
+	}
 }

@@ -13,7 +13,7 @@ getUser=()=>{
     return (
       <div className="center">
           {/* pass user ingormation as props */}
-       <PostById  ></PostById>
+       <PostById></PostById>
       </div>
     );
   }

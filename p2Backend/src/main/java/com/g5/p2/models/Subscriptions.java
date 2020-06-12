@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Subscriptions {
 
   @Id
-  @Column(name = "subscriptionid")
+  @Column(name = "subscription_id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer subscriptionId;
   @JoinColumn(name = "subscribee")

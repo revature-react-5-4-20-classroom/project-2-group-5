@@ -1,46 +1,46 @@
-import React from "react";
-import { Switch, Route, Router } from "react-router";
-import { Nav, Navbar, NavItem, Button } from "reactstrap";
-import { NavLink } from "react-router-dom";
-import { NewPost } from "./newPost";
-import { PostById } from "./postsById";
+import React from 'react';
+import { Switch, Route, Router } from 'react-router';
+import { Nav, Navbar, NavItem, Button } from 'reactstrap';
+import { NavLink } from 'react-router-dom';
+import { CreatePostForm } from './createPostForm';
+import { PostById } from './postsContainer';
 
 export class PostMultiRoute extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      pathUrl: "",
+      pathUrl: '',
     };
   }
 
   render() {
     return (
       <>
-        <Navbar expand="md">
-          <Nav className="mr-auto" navbar>
+        <Navbar expand='md'>
+          <Nav className='mr-auto' navbar>
             <NavItem>
-              <NavLink to="/allPosts" hidden={!this.props.loggedInUser}>
+              <NavLink to='/allPosts' hidden={!this.props.loggedInUser}>
                 <Button>posts</Button>
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to="/posts" hidden={!this.props.loggedInUser}>
+              <NavLink to='/posts' hidden={!this.props.loggedInUser}>
                 <Button>new post</Button>
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to="/Posts/postid" hidden={!this.props.loggedInUser}>
+              <NavLink to='/Posts/postid' hidden={!this.props.loggedInUser}>
                 <Button> Post Id</Button>
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to="/posts/userId" hidden={!this.props.loggedInUser}>
+              <NavLink to='/posts/userId' hidden={!this.props.loggedInUser}>
                 <Button> User Id</Button>
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink
-                to="/posts/subscribeeId"
+                to='/posts/subscribeeId'
                 hidden={!this.props.loggedInUser}
               >
                 <Button>subscribee Id</Button>
@@ -51,7 +51,7 @@ export class PostMultiRoute extends React.Component<any, any> {
         <Switch>
           <Route path={`${this.props.path}`}>
             {this.props.loggedInUser ? (
-              <NewPost
+              <CreatePostForm
                 path={`${this.props.path}`}
                 loggedInUser={this.props.loggedInUser}
               />

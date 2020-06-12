@@ -5,6 +5,7 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
+import './App.css';
 import { Navigation } from './components/navbar';
 import { Jumbotron } from 'reactstrap';
 import { Login } from './components/loginForm';
@@ -14,6 +15,8 @@ import { Home } from './components/pages/Home';
 import { PostMultiRoute } from './components/postMultiRouts';
 import { Provider } from 'react-redux';
 import { store } from './redux/user/userStore';
+import { LoginPage } from './components/pages/Login';
+import { SignupPage } from './components/pages/Signup';
 
 interface IAppState {
   loggedInUser: User | null;
@@ -46,11 +49,6 @@ export class App extends React.Component<any, IAppState> {
               logoutUser={this.logoutUser}
               loggedInUser={this.state.loggedInUser}
             />
-            <Jumbotron>
-              <h1 className='display-4'>
-                <span role='img'>Post your thoughts</span>
-              </h1>
-            </Jumbotron>
             <Switch>
               <Route exact path='/'>
                 {this.state.loggedInUser ? (
@@ -63,7 +61,19 @@ export class App extends React.Component<any, IAppState> {
                 path='/login'
                 render={(props: any) => {
                   return (
-                    <Login
+                    <LoginPage
+                      {...props}
+                      path='/login'
+                      updateUser={this.updateUser}
+                    />
+                  );
+                }}
+              />
+              <Route
+                path='/signup'
+                render={(props: any) => {
+                  return (
+                    <SignupPage
                       {...props}
                       path='/login'
                       updateUser={this.updateUser}

@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, NavbarBrand, Nav, NavItem, Button } from "reactstrap";
+import { Navbar, NavbarBrand, Nav, NavItem } from "reactstrap";
 import { NavLink } from "react-router-dom";
 
 
@@ -9,7 +9,7 @@ export class Navigation extends React.Component<any, any> {
       <div>
         {/*just writing the name of a prop is shorthand for prop={true}*/}
         <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">NameError Ltd.</NavbarBrand>
+          <NavbarBrand href="/">PostIt</NavbarBrand>
           <Nav className="mr-auto" navbar>
             <NavItem>
               <NavLink

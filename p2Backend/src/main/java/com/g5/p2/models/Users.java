@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Users {
 	
 	@Id
-	@Column(name = "userid")
+	@Column(name = "user_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer userId;
 	@Column(name = "username")
@@ -43,6 +43,12 @@ public class Users {
 	public Users() {
 		super();
 	}
+	
+//	public Users(String username, String password) { -- working login route
+//	  this();
+//	  this.username = username;
+//	  this.password = password;
+//	} 
 	
 	public Users(Integer userId, String username, String password, String role) {
 		this(userId, username, password, "", role);

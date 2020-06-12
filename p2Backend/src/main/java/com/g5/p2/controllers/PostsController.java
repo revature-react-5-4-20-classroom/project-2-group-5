@@ -27,6 +27,12 @@ public class PostsController {
 		return postsService.getAll();
 	}
 	
+	//get post by postId
+	@GetMapping("/posts/{postId}")
+	public Posts getPostsByPostId(@PathVariable Integer postId){
+	  return postsService.getById(postId);
+	}
+	
 	//create post
 	@PostMapping
     public Posts createPost(@RequestBody LinkedHashMap<String, Object> p) {
@@ -41,10 +47,14 @@ public class PostsController {
     }
 	
 	//get post by author id
-	@GetMapping("/{userId}")
+	@GetMapping("/author/{userId}")
     public List<Posts> getPostsByAuthorId(@PathVariable Integer userId) {;
         return postsService.getByUserId(userId);
     }
+	
+	//update post
+	
+	//get all posts by subscribee list
 	
 	
 }

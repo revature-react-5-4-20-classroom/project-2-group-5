@@ -28,7 +28,7 @@ public class PostsController {
 	}
 	
 	//get post by postId
-	@GetMapping("/{postId}")
+	@GetMapping("/posts/{postId}")
 	public Posts getPostsByPostId(@PathVariable Integer postId){
 	  return postsService.getById(postId);
 	}
@@ -47,7 +47,7 @@ public class PostsController {
     }
 	
 	//get post by author id
-	@GetMapping("/{userId}")
+	@GetMapping("/author/{userId}")
     public List<Posts> getPostsByAuthorId(@PathVariable Integer userId) {;
         return postsService.getByUserId(userId);
     }

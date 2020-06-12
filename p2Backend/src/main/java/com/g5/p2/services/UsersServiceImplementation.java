@@ -56,6 +56,16 @@ public class UsersServiceImplementation implements UsersService{
 	public Users createOrUpdate(Users u) {
 		return usersRepository.save(u);
 	}
+	
+//    @Override  --- working login route
+//    public Users findOneUsers(String username, String password) {
+//      Optional<Users> existingUser = usersRepository.findByUsernameAndPassword(username, password);
+//      if (existingUser.isPresent()) {
+//        return existingUser.get();
+//      } else {
+//        throw new UserNotFoundException();
+//      }
+//    }
 
 	@Override
 	public boolean delete(Integer userId) {

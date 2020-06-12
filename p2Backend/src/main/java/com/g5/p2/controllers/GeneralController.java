@@ -25,8 +25,4 @@ public class GeneralController {
 //	  return usersService.login(username, password);
 //	}
 	
-	//logout
-	
-	//getCredentials
-	
 }

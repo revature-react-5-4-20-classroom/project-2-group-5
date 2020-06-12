@@ -12,6 +12,8 @@ public class MessagesController {
   @Autowired
   MessagesServiceImplementation messagesService;
   
+  //get messages by author
+  
   //get messages by author and receiver
   
 }

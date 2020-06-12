@@ -1,5 +1,6 @@
 package com.g5.p2.controllers;
 
+import java.util.LinkedHashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,11 +20,10 @@ public class GeneralController {
 		return "hello";
 	}
 	
-	//login - in progress
-//	@PostMapping("/login")
-//	public String login(@RequestBody String username, String password) {
-//	  return usersService.login(username, password);
-//	}
+	@PostMapping("/login")
+	public Users attemptLogin(@RequestBody LinkedHashMap<String, String> c) {
+	  return usersService.findOneUser(c.get("username"), c.get("password"));
+	}
 	
 	//logout
 	

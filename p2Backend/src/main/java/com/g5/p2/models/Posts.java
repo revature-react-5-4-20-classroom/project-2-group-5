@@ -16,14 +16,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Posts {
 
 	@Id
-	@Column(name = "postid")
+	@Column(name = "post_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer postId;
 	@JoinColumn(name = "author")
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonIgnoreProperties({"posts"})
 	private Users author;
-	@Column(name = "dateposted")
+	@Column(name = "date_posted")
 	private Integer datePosted;
 	@Column(name = "title")
 	private String title;

@@ -38,7 +38,7 @@ public class MessagesServiceImplementation implements MessagesService {
 
   @Override
   public List<Messages> getByAuthor(Integer userId) {
-    return messagesRepository.findByAuthor(usersRepository.findByUserId(userId));
+    return messagesRepository.findByAuthor(userId); // think this had (User userid too?)
   }
 
   @Override

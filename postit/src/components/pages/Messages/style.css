@@ -1,7 +1,13 @@
+.left-panel {
+  box-shadow: 0px 10px 5px #5e5e5e, 0px 3px 5px #5e5e5e inset;
+}
+
+.right-panel {
+  box-shadow: 0px 10px 5px #5e5e5e, 0px 3px 5px #5e5e5e inset;
+}
 .main-container {
   height: calc(100% - 56px);
   max-width: 100% !important;
-  box-shadow: 0px 10px 5px #5e5e5e, 0px 3px 5px #5e5e5e inset;
 }
 
 .center-div {

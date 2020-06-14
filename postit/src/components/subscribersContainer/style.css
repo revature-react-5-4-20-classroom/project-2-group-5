@@ -1,0 +1,9 @@
+.subscriber-container {
+  border: 1px solid black;
+  height: 510px;
+  max-width: 500px !important;
+  flex: 1;
+  margin-top: 1vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}

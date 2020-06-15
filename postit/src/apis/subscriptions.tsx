@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Subscription } from "../models/subscription";
 const subscriberClient = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: "http://3.133.86.196:8081",
   withCredentials: true,
 });
 
@@ -46,7 +46,7 @@ export async function createSubscriptions(
   return new Subscription(subscription_id, subscriber, subscribee, blocked);
 }
 
-export async function DeleteSubscriptions(
+export async function deleteSubscriptions(
   uid: number,
   s: Subscription
 ): Promise<Subscription> {
@@ -55,6 +55,20 @@ export async function DeleteSubscriptions(
     //   subscriber: s.subscriber,
     //   subscribee: s.subscribee,
     //   blocked: s.blocked,
+  });
+  const { subscription_id, subscriber, subscribee, blocked } = response.data;
+  return new Subscription(subscription_id, subscriber, subscribee, blocked);
+}
+
+export async function updateSubscriptions(
+  uid: number,
+  s: Subscription
+): Promise<Subscription> {
+  const response = await subscriberClient.patch("/subscribee" + uid, {
+    subscription_id: s.subscriptionId,
+      subscriber: s.subscriber,
+      subscribee: s.subscribee,
+      blocked: s.blocked,
   });
   const { subscription_id, subscriber, subscribee, blocked } = response.data;
   return new Subscription(subscription_id, subscriber, subscribee, blocked);

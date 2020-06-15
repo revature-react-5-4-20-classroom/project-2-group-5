@@ -2,7 +2,7 @@ import axios from "axios";
 import { Comment } from "../models/comment";
 
 const commentClient = axios.create({
-  baseURL: "localhost:8080",
+  baseURL: "http://3.133.86.196:8081",
   withCredentials: true,
 });
 

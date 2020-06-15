@@ -4,7 +4,7 @@ import { User } from "../models/user";
 // import { FailedLoginErro/r } from "../errors/DisplayErrorMessage";
 
 const loginClient = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: "http://3.133.86.196:8081",
   // If you don't have the following line, your login won't work!
   withCredentials: true,
 });

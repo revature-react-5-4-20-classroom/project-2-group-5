@@ -22,3 +22,17 @@ body {
 .App-link {
   color: #61dafb;
 }
+
+.Hr{
+  padding-left:10%;
+  width:80%;
+  text-align:right;
+  
+}
+.image{
+  text-align: center;
+  margin-top: 10px;
+border-radius: 50%;
+height:50%;
+border: 1px solid black;
+}

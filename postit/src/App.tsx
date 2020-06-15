@@ -1,22 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
-} from 'react-router-dom';
-import './App.css';
-import { Navigation } from './components/navbar';
-import { Jumbotron } from 'reactstrap';
-import { Login } from './components/loginForm';
-import { UserProfile } from './components/pages/Profile';
-import { User } from './models/user';
-import { Home } from './components/pages/Home';
-import { PostMultiRoute } from './components/postMultiRouts';
-import { Provider } from 'react-redux';
-import { store } from './redux/user/userStore';
-import { LoginPage } from './components/pages/Login';
-import { SignupPage } from './components/pages/Signup';
+} from "react-router-dom";
+import "./App.css";
+import { Navigation } from "./components/navbar";
+import { Jumbotron } from "reactstrap";
+import { Login } from "./components/loginForm";
+import { UserProfile } from "./components/pages/Profile";
+import { User } from "./models/user";
+import { Home } from "./components/pages/Home";
+import { PostMultiRoute } from "./components/postMultiRouts";
+import { Provider } from "react-redux";
+import { store } from "./redux/user/userStore";
+import { LoginPage } from "./components/pages/Login";
+import { SignupPage } from "./components/pages/Signup";
 
 interface IAppState {
   loggedInUser: User | null;
@@ -43,56 +43,52 @@ export class App extends React.Component<any, IAppState> {
   render() {
     return (
       <Provider store={store}>
-        <div className='App'>
+        <div className="App">
           <Router>
             <Navigation
               logoutUser={this.logoutUser}
               loggedInUser={this.state.loggedInUser}
             />
             <Switch>
-              <Route exact path='/'>
+              <Route exact path="/">
                 {this.state.loggedInUser ? (
-                  <Redirect to='/home' />
+                  <Redirect to="/home" />
                 ) : (
-                  <Redirect to='/login' />
+                  <Redirect to="/login" />
                 )}
               </Route>
               <Route
-                path='/login'
+                path="/login"
                 render={(props: any) => {
                   return (
                     <LoginPage
                       {...props}
-                      path='/login'
+                      path="/login"
                       updateUser={this.updateUser}
                     />
                   );
                 }}
               />
               <Route
-                path='/signup'
+                path="/signup"
                 render={(props: any) => {
                   return (
                     <SignupPage
                       {...props}
-                      path='/login'
+                      path="/login"
                       updateUser={this.updateUser}
                     />
                   );
                 }}
               />
-              <Route path='/home'>
-                {this.state.loggedInUser && true ? (
-                  <Home loggedInUser={this.state.loggedInUser} path='/home' />
-                ) : (
-                  <h4>Please Login</h4>
-                )}
+              <Route path="/home">
+                <Home loggedInUser={this.state.loggedInUser} path="/home" />
               </Route>
-              <Route loggedInUser={this.state.loggedInUser} path='/users'>
+              <Route loggedInUser={this.state.loggedInUser} path="/users">
                 {this.state.loggedInUser && true ? (
                   <UserProfile
                     loggedInUser={this.state.loggedInUser}
-                    path='/home'
+                    path="/home"
                   />
                 ) : (
                   <h4>Please Login</h4>
@@ -101,10 +97,10 @@ export class App extends React.Component<any, IAppState> {
               <Route>
                 <PostMultiRoute
                   loggedInUser={this.state.loggedInUser}
-                  path='/posts'
+                  path="/posts"
                 />
               </Route>
-              <Route path='/logout'></Route>
+              <Route path="/logout"></Route>
             </Switch>
           </Router>
         </div>

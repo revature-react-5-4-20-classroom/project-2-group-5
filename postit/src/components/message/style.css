@@ -14,6 +14,18 @@
 }
 
 .message-card {
-  border-bottom: grey !important;
-  height: 125px;
+  height: auto;
+  width: 100%;
+}
+
+.left-justified {
+  align-items: left !important;
+  text-align: left !important;
+  align-self: left !important;
+}
+
+.right-justified {
+  align-items: right !important;
+  text-align: right !important;
+  align-self: right !important;
 }

@@ -8,7 +8,7 @@ export class MessagesPage extends React.Component<any, any> {
   render() {
     return (
       <Container className='main-container'>
-        <Row>
+        <Row className='h-100'>
           <Col className='title-row message-panel' xs={4}>
             {/* <Row className='title-row'>
               <Col> */}

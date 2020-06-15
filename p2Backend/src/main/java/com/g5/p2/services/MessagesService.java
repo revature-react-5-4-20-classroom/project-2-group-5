@@ -11,7 +11,7 @@ public interface MessagesService {
   
   List<Messages> getByUser(Integer userId);
   
-  List<Messages> getByConversation(Integer authorId, Integer receiverId);
+  List<Messages> getByAuthorAndUser(Integer authorId, Integer userId);
   
   Messages create(Messages m, Integer author, Integer receiver);
   

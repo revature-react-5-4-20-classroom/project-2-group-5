@@ -19,16 +19,16 @@ public class MessagesController {
   @Autowired
   MessagesServiceImplementation messagesService;
   
-  //get messages to and from author
-  @GetMapping("/{userId}")
-  public List<Messages> getMessagesByUser(@PathVariable Integer userId){
-      return messagesService.getByUser(userId);
+  //get list of users w/messages that have conversations open with the current user
+  @GetMapping("/user/{userId}")
+  public List<Messages> getUserMessages(@PathVariable Integer userId) {
+    return messagesService.getByUser(userId);
   }
   
-  //get messages by author and receiver
-  @GetMapping("/{authorId}/{receiverId}")
-  public List<Messages> getMessages(@PathVariable Integer authorId, @PathVariable Integer receiverId){
-      return messagesService.getByConversation(authorId, receiverId);
+  //get conversation between author ID and userId
+  @GetMapping("/author/{authorId}/{userId}")
+  public List<Messages> getConversation(@PathVariable Integer authorId, @PathVariable Integer userId) {
+    return messagesService.getByAuthorAndUser(authorId, userId);
   }
   
   //post messages

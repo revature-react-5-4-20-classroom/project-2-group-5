@@ -17,6 +17,8 @@ import { Provider } from 'react-redux';
 import { store } from './redux/user/userStore';
 import { LoginPage } from './components/pages/Login';
 import { SignupPage } from './components/pages/Signup';
+import { SubscribersPage } from './components/pages/Subscribers';
+import { MessagesPage } from './components/pages/Messages';
 
 interface IAppState {
   loggedInUser: User | null;
@@ -82,11 +84,21 @@ export class App extends React.Component<any, IAppState> {
                 }}
               />
               <Route path='/home'>
-                {this.state.loggedInUser && true ? (
-                  <Home loggedInUser={this.state.loggedInUser} path='/home' />
-                ) : (
+                <Home loggedInUser={this.state.loggedInUser} path='/home' />
+              </Route>
+              <Route path='/subscribers'>
+                {/* {this.state.loggedInUser && true ? ( */}
+                <SubscribersPage path='/subscribers' />
+                {/* ) : (
                   <h4>Please Login</h4>
-                )}
+                )} */}
+              </Route>
+              <Route path='/messages'>
+                {/* {this.state.loggedInUser && true ? ( */}
+                <MessagesPage path='/messages' />
+                {/* ) : (
+                  <h4>Please Login</h4>
+                )} */}
               </Route>
               <Route loggedInUser={this.state.loggedInUser} path='/users'>
                 {this.state.loggedInUser && true ? (

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.g5.p2.exceptions.MessageNotFoundException;
 import com.g5.p2.exceptions.NotYetImplementedException;
 import com.g5.p2.models.Messages;
+import com.g5.p2.models.Users;
 import com.g5.p2.repositories.MessagesRepository;
 import com.g5.p2.repositories.UsersRepository;
 
@@ -35,17 +36,23 @@ public class MessagesServiceImplementation implements MessagesService {
         throw new MessageNotFoundException();
     }
   }
-
+  
   @Override
-  public List<Messages> getByAuthor(Integer userId) {
-    return messagesRepository.findByAuthor(userId); // think this had (User userid too?)
+  public List<Messages> getByAuthor(Integer authorId) {
+    Optional<Users> author = usersRepository.findById(authorId);
+    return messagesRepository.findByReceiver(author.get());
   }
 
   @Override
-  public List<Messages> getByConversation(Integer authorId, Integer receiverId) {
-    //return messagesRepository.findbyConversation(usersRepository.findByUserId(authorId), usersRepository.findByUserId(receiverId));
-    throw new NotYetImplementedException();
+  public List<Messages> getByAuthorAndUser(Integer authorId, Integer userId) {
+    Optional<Users> author = usersRepository.findById(authorId);
+    Optional<Users> currUser = usersRepository.findById(userId);
+    List<Messages> authToUserMessages = messagesRepository.findByAuthorAndReceiver(author.get(), currUser.get());
+    List<Messages> userToAuthMessages = messagesRepository.findByAuthorAndReceiver(currUser.get(), author.get());
+    authToUserMessages.addAll(userToAuthMessages);
+    return authToUserMessages; // think this had (User userid too?)
   }
+
 
   @Override
   public Messages create(Messages m, Integer author, Integer receiver) {

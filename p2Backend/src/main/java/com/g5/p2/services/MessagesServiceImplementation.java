@@ -38,9 +38,9 @@ public class MessagesServiceImplementation implements MessagesService {
   }
   
   @Override
-  public List<Messages> getByAuthor(Integer authorId) {
-    Optional<Users> author = usersRepository.findById(authorId);
-    return messagesRepository.findByReceiver(author.get());
+  public List<Messages> getByUser(Integer userId) {
+    Optional<Users> user = usersRepository.findById(userId);
+    return messagesRepository.findByReceiverorAuthor(user.get());
   }
 
   @Override

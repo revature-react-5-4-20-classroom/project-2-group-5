@@ -10,8 +10,9 @@ import com.g5.p2.models.Users;
 @Repository
 public interface MessagesRepository extends JpaRepository<Messages, Integer>{
   Messages findByMessageId(Integer messageId);
-  
-  List<Messages> findByReceiver(Users authorId); 
+
+  @Query(value = "SELECT * FROM messages m WHERE (author = :userId) OR (receiver = :userId)", nativeQuery=true)
+  List<Messages> findByReceiverorAuthor(Users userId); 
   
   @Query(value = "SELECT * FROM messages m WHERE author = :authorId AND receiver = :userId", nativeQuery=true)
   List<Messages> findByAuthorAndReceiver(Users authorId, Users userId); 

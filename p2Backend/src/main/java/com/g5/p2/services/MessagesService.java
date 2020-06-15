@@ -9,7 +9,7 @@ public interface MessagesService {
   
   Messages getById(Integer messageId);
   
-  List<Messages> getByAuthor(Integer authorId);
+  List<Messages> getByUser(Integer userId);
   
   List<Messages> getByAuthorAndUser(Integer authorId, Integer userId);
   

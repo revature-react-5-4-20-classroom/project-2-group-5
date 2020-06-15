@@ -17,10 +17,10 @@ public class MessagesController {
   @Autowired
   MessagesServiceImplementation messagesService;
   
-  //get all messages sent  to receiver 
-  @GetMapping("/user/{authorId}")
-  public List<Messages> getUserMessages(@PathVariable Integer authorId) {
-    return messagesService.getByAuthor(authorId);
+  //get list of users w/messages that have conversations open with the current user
+  @GetMapping("/user/{userId}")
+  public List<Messages> getUserMessages(@PathVariable Integer userId) {
+    return messagesService.getByUser(userId);
   }
   
   //get conversation between author ID and userId

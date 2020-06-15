@@ -20,4 +20,8 @@ public interface UsersService {
 	
 	boolean delete(Integer userId);
 	
+	Users findOneUser(String username);
+	
+	Users findOneUser(String username, String password);
+	
 }

@@ -1,5 +1,6 @@
 package com.g5.p2.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,7 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.g5.p2.exceptions.PostNotFoundException;
 import com.g5.p2.models.Posts;
+import com.g5.p2.models.Subscriptions;
+import com.g5.p2.models.Users;
 import com.g5.p2.repositories.PostsRepository;
+import com.g5.p2.repositories.SubscriptionsRepository;
 import com.g5.p2.repositories.UsersRepository;
 
 @Service
@@ -20,6 +24,8 @@ public class PostsServiceImplementation implements PostsService {
 	PostsRepository postsRepository;
 	@Autowired
 	UsersRepository usersRepository;
+	@Autowired
+	SubscriptionsRepository subscriptionsRepository;
 
 	@Override
 	public List<Posts> getAll() {
@@ -41,6 +47,17 @@ public class PostsServiceImplementation implements PostsService {
     public List<Posts> getByUserId(Integer userId) {
        return postsRepository.findByAuthor(usersRepository.findByUserId(userId));
     }
+	
+	public List<Posts> getPostBySubscribees(Integer userId){
+	    List<Posts> out = new ArrayList<Posts>();
+	    Users subscriber = usersRepository.findByUserId(userId);
+	    List<Subscriptions> subscriptions = subscriptionsRepository.findBySubscriber(subscriber);
+	    for (Subscriptions s : subscriptions) {
+	        out.addAll(s.getSubscribee().getPosts());
+	    }
+	    
+	    return out;
+	}
 
 	@Override
 	public Posts create(Posts p, Integer userId) {
@@ -50,7 +67,8 @@ public class PostsServiceImplementation implements PostsService {
 	}
 
 	@Override
-	public Posts update(Posts p) {
+	public Posts update(Posts p, Integer userId) {
+	    p.setAuthor(usersRepository.findByUserId(userId));
 		Optional<Posts> existingPost = postsRepository.findById(p.getPostId());
 		if(existingPost.isPresent()) {
 			return existingPost.get();

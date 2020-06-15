@@ -37,14 +37,13 @@ public class MessagesServiceImplementation implements MessagesService {
   }
 
   @Override
-  public List<Messages> getByAuthor(Integer userId) {
-    return messagesRepository.findByAuthor(usersRepository.findByUserId(userId));
+  public List<Messages> getByUser(Integer userId) {
+    return messagesRepository.findByUser(usersRepository.findByUserId(userId));
   }
-
+  
   @Override
   public List<Messages> getByConversation(Integer authorId, Integer receiverId) {
-    //return messagesRepository.findbyConversation(usersRepository.findByUserId(authorId), usersRepository.findByUserId(receiverId));
-    throw new NotYetImplementedException();
+    return messagesRepository.findByConversation(usersRepository.findByUserId(authorId), usersRepository.findByUserId(receiverId));
   }
 
   @Override

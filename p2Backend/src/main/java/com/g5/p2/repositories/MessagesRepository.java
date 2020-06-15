@@ -17,7 +17,4 @@ public interface MessagesRepository extends JpaRepository<Messages, Integer>{
   @Query(value = "SELECT * FROM messages m WHERE author = :authorId AND receiver = :userId", nativeQuery=true)
   List<Messages> findByAuthorAndReceiver(Users authorId, Users userId); 
   
-  
-  // Changed from (Users userId)
-  //List<Messages> findByConversation(Users author, Users receiver);
 }

@@ -1,0 +1,19 @@
+.profile-pic {
+  border-radius: 50%;
+}
+
+.remove-button {
+  width: 135px;
+  height: auto;
+  font-size: 1.4rem !important;
+}
+
+.card-row {
+  justify-content: center;
+  align-items: center;
+}
+
+.message-card {
+  border-bottom: grey !important;
+  height: 125px;
+}

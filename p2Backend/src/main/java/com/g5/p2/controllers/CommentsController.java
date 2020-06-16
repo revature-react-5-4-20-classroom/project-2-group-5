@@ -24,7 +24,7 @@ public class CommentsController {
   CommentsServiceImplementation commentsService;
  
   //get comments by postId
-  @GetMapping("{commentId}")
+  @GetMapping("/{commentId}")
   public java.util.List<Comments> getCommentByPostId(@PathVariable Integer commentId){
 	  return commentsService.getAll();
 	

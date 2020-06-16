@@ -21,18 +21,22 @@ export class SearchPage extends React.Component<any, any> {
     return this.state.searchedUsername
   }
 
+  search(){
+    console.log(this.state.searchedUsername);
+  }
+
   render() {
     return (
-      <Container className='main-container'>
+      <Container className='main-container' >
       <Row>
         <Col className='title-row message-panel' xs={4}>
           <Row>
-            <Search setSearchedUsername={(username:String)=>{this.setSearchedUsername(username)}} getSearchedUsername={():String=>{return this.getSearchedUsername()}}/>
+            <Search setSearchedUsername={(username:String)=>{this.setSearchedUsername(username)}} getSearchedUsername={():String=>{return this.getSearchedUsername()}} search={()=>{this.search()}}/>
           </Row>
         </Col>
 
         <Col className='content-panel' xs={8}>
-          <SearchPostsResults />
+          <SearchPostsResults searchResults={this.state.searchResults}/>
         </Col>
       </Row>
     </Container>

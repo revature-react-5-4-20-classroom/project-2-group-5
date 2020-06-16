@@ -111,9 +111,6 @@ export class App extends React.Component<any, IAppState> {
                   <h4>Please Login</h4>
                 )}
               </Route>
-              <Route path='/search'>
-                <SearchPage />
-              </Route>
               <Route>
                 <PostMultiRoute
                   loggedInUser={this.state.loggedInUser}

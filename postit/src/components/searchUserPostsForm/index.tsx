@@ -1,6 +1,5 @@
 //will use postById
 import React from 'react';
-import { PostContainer } from '../postsContainer';
 import { UserProfile } from '../pages/Profile';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
@@ -21,9 +20,9 @@ export class Search extends React.Component<any, any> {
 
   render() {
     return (
-      <div className='center'>
+      <div className='center' style={{marginLeft: 15 + "vh"}}>
         <h3>User Post Search</h3>
-        <Form className='center' onSubmit={this.search}>
+        <Form className='center' >
           <FormGroup>
             <Input
               onChange={this.setUsername}
@@ -35,15 +34,10 @@ export class Search extends React.Component<any, any> {
             />
           </FormGroup>
           <FormGroup>
-            <Button color='secondary'>Search</Button>
+            <Button color='secondary' onClick={this.search}>Search</Button>
           </FormGroup>
         </Form>
 
-
-
-
-        {/* will pss user id as a props */}
-        <UserProfile></UserProfile>
       </div>
     );
   }

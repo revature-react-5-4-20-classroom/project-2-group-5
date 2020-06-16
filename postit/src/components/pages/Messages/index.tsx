@@ -3,6 +3,7 @@ import { Row, Col, Container } from 'reactstrap';
 import './style.css';
 import { MessageListContainer } from '../../messageListContainer';
 import { MessageDisplayContainer } from '../../messageDisplayContainer';
+import { CreateMessageForm } from '../../createMessageForm';
 
 export class MessagesPage extends React.Component<any, any> {
   render() {
@@ -22,7 +23,8 @@ export class MessagesPage extends React.Component<any, any> {
           </Col>
 
           <Col className='content-panel' xs={8}>
-            <MessageDisplayContainer />
+            {/* <MessageDisplayContainer /> */}
+            <CreateMessageForm />
           </Col>
         </Row>
       </Container>

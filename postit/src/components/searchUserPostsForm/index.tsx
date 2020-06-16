@@ -1,6 +1,6 @@
 //will use postById
 import React from 'react';
-import { PostById } from '../postsContainer';
+import { PostContainer } from '../postsContainer';
 import { UserProfile } from '../pages/Profile';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 

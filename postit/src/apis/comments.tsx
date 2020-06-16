@@ -6,23 +6,35 @@ const commentClient = axios.create({
   withCredentials: true,
 });
 
-export async function getAllByPostId(id: number): Promise<Comment[]> {
-  const response = await commentClient.get("/Comments/all" + id);
-  return response.data.map((ommentObj: any) => {
-    const { comment_id, post_id, author, content } = ommentObj;
-    return new Comment(comment_id, post_id, author, content);
+export async function getAllCommentsByPostId(id: number): Promise<Comment[]> {
+  const response = await commentClient.get("/Comments/" + id);
+  return response.data.map((commentObj: any) => {
+    // const pId=commentObj.post.postId;
+    // const uId= commentObj.author.userId;
+    const { comment_id, content } = commentObj;
+    return new Comment(
+      comment_id,
+      commentObj.post.postId,
+      commentObj.author.userId,
+      content
+    );
   });
 }
 
 export async function createComment(c: Comment): Promise<Comment[]> {
-  const response = await commentClient.post("/Comment/new", {
+  const response = await commentClient.post("/Comments", {
     omment_id: 0,
     post_id: c.postId,
     author: c.author,
     content: c.content,
   });
-  return response.data.map((ommentObj: any) => {
-    const { comment_id, post_id, author, content } = ommentObj;
-    return new Comment(comment_id, post_id, author, content);
+  return response.data.map((commentObj: any) => {
+    const { comment_id, content } = commentObj;
+    return new Comment(
+      comment_id,
+      commentObj.post.postId,
+      commentObj.author.userId,
+      content
+    );
   });
 }

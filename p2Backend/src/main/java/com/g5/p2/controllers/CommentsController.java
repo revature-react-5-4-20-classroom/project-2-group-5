@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.g5.p2.models.Comments;
-import com.g5.p2.models.Subscriptions;
+
 import com.g5.p2.services.CommentsServiceImplementation;
 
 import antlr.collections.List;
@@ -24,10 +24,10 @@ public class CommentsController {
   CommentsServiceImplementation commentsService;
  
   //get comments by postId
+
   @GetMapping("{postId}")
   public java.util.List<Comments> getCommentByPostId(@PathVariable Integer postId){
-	  return commentsService.getByPost(postId);
-	
+	  return commentsService.getByPost(postId);	
   }
   
   //create comment

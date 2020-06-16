@@ -5,8 +5,8 @@ const subscriberClient = axios.create({
   withCredentials: true,
 });
 
-export async function getAllSubscriptions(id: number): Promise<Subscription[]> {
-  const response = await subscriberClient.get("/subscribee" + id);
+export async function getAllsubscription(): Promise<Subscription[]> {
+  const response = await subscriberClient.get("/subscriptions");
   return response.data.map((subscriptionObj: any) => {
     const {
       subscription_id,
@@ -18,8 +18,23 @@ export async function getAllSubscriptions(id: number): Promise<Subscription[]> {
   });
 }
 
-export async function getAllSubscribees(id: number): Promise<Subscription[]> {
-  const response = await subscriberClient.get("/subscribee" + id);
+//get subscriptions by subscribee
+export async function getAllsubscribee(id: number): Promise<Subscription[]> {
+  const response = await subscriberClient.get("/subscriptions/subscribee" + id);
+  return response.data.map((subscriptionObj: any) => {
+    const { subscription_id, blocked } = subscriptionObj;
+    return new Subscription(
+      subscription_id,
+      subscriptionObj.subscriber.userId,
+      subscriptionObj.subscribee.userId,
+      blocked
+    );
+  });
+}
+
+//get subscriptions by subscriber
+export async function getAllsubscriber(id: number): Promise<Subscription[]> {
+  const response = await subscriberClient.get("/subscriptions/subscriber" + id);
   return response.data.map((subscriptionObj: any) => {
     const {
       subscription_id,
@@ -35,7 +50,7 @@ export async function createSubscriptions(
   uid: number,
   s: Subscription
 ): Promise<Subscription> {
-  const response = await subscriberClient.post("/subscribee" + uid, {
+  const response = await subscriberClient.post("/subscriptions" + uid, {
     subscription_id: 0,
     subscriber: s.subscriber,
     subscribee: s.subscribee,
@@ -47,14 +62,18 @@ export async function createSubscriptions(
 }
 
 export async function deleteSubscriptions(
-  uid: number,
   s: Subscription
 ): Promise<Subscription> {
-  const response = await subscriberClient.post("/subscribee" + uid, {
-    subscription_id: s.subscriptionId,
-    //   subscriber: s.subscriber,
-    //   subscribee: s.subscribee,
-    //   blocked: s.blocked,
+  const response = await subscriberClient.delete("/subscriptions", {
+    data: {
+      subscription_id: s.subscriptionId,
+      //   subscriber: s.subscriber,
+      //   subscribee: s.subscribee,
+      //   blocked: s.blocked,
+    },
+    headers: {
+      Authorization: "***",
+    },
   });
   const { subscription_id, subscriber, subscribee, blocked } = response.data;
   return new Subscription(subscription_id, subscriber, subscribee, blocked);
@@ -64,11 +83,11 @@ export async function updateSubscriptions(
   uid: number,
   s: Subscription
 ): Promise<Subscription> {
-  const response = await subscriberClient.patch("/subscribee" + uid, {
+  const response = await subscriberClient.patch("/subscriptions" + uid, {
     subscription_id: s.subscriptionId,
-      subscriber: s.subscriber,
-      subscribee: s.subscribee,
-      blocked: s.blocked,
+    subscriber: s.subscriber,
+    subscribee: s.subscribee,
+    blocked: s.blocked,
   });
   const { subscription_id, subscriber, subscribee, blocked } = response.data;
   return new Subscription(subscription_id, subscriber, subscribee, blocked);

@@ -1,6 +1,6 @@
 //will use postById
 import React from 'react';
-import { PostById } from '../postsContainer';
+import { PostContainer } from '../postsContainer';
 import { UserProfile } from '../pages/Profile';
 
 // Container that has Form with 'User Post Search' text or something,

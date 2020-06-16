@@ -3,7 +3,7 @@ import { Switch, Route, Router } from 'react-router';
 import { Nav, Navbar, NavItem, Button } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import { CreatePostForm } from './createPostForm';
-import { PostById } from './postsContainer';
+import { PostContainer } from './postsContainer';
 
 export class PostMultiRoute extends React.Component<any, any> {
   constructor(props: any) {
@@ -62,7 +62,7 @@ export class PostMultiRoute extends React.Component<any, any> {
 
           <Route path={`${this.props.path}/userId`}>
             {this.props.loggedInUser ? (
-              <PostById
+              <PostContainer
                 path={`${this.props.path}/userId`}
                 loggedInUser={this.props.loggedInUser}
               />
@@ -73,7 +73,7 @@ export class PostMultiRoute extends React.Component<any, any> {
 
           <Route path={`${this.props.path}/allposts`}>
             {this.props.loggedInUser ? (
-              <PostById
+              <PostContainer
                 loggedInUser={this.props.loggedInUser}
                 path={`${this.props.path}`}
               />
@@ -83,7 +83,7 @@ export class PostMultiRoute extends React.Component<any, any> {
           </Route>
           <Route path={`${this.props.path}/postid`}>
             {this.props.loggedInUser ? (
-              <PostById
+              <PostContainer
                 loggedInUser={this.props.loggedInUser}
                 path={`${this.props.path}`}
               />
@@ -93,7 +93,7 @@ export class PostMultiRoute extends React.Component<any, any> {
           </Route>
           <Route path={`${this.props.path}/subscribeeId`}>
             {this.props.loggedInUser ? (
-              <PostById
+              <PostContainer
                 loggedInUser={this.props.loggedInUser}
                 path={`${this.props.path}`}
               />

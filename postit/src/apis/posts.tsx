@@ -16,12 +16,12 @@ export async function getAllPosts(): Promise<Post[]> {
     const response = await postClient.get("/posts");
     //console.log("response"+ response.data[0].postId);
     return response.data.map((postObj: any) => {
-      const { postId, date_posted, title, content } = postObj;
+      const { postId, datePosted, title, content } = postObj;
       return new Post(
         postId,
         postObj.author.userId,
         postObj.author.username,
-        date_posted,
+        datePosted,
         title,
         content
       );
@@ -43,12 +43,12 @@ export async function getAllSubscibersPosts(id: number): Promise<Post[]> {
   const response = await postClient.get("/posts/subscriptions/" + id);
   return response.data.map((postObj: any) => {
     const userObj: User = postObj.author;
-    const { postId, date_posted, title, content } = postObj;
+    const { postId, datePosted, title, content } = postObj;
     return new Post(
       postId,
       userObj.userId,
       userObj.username,
-      date_posted,
+      datePosted,
       title,
       content
     );
@@ -59,12 +59,12 @@ export async function getAllSubscibersPosts(id: number): Promise<Post[]> {
 export async function getPostsByPostId(postid: number): Promise<Post> {
   const response = await postClient.get("/posts/posts/" + postid);
   const userObj: User = response.data;
-  const { postId, date_posted, title, content } = response.data;
+  const { postId, datePosted, title, content } = response.data;
   return new Post(
     postId,
     userObj.userId,
     userObj.username,
-    date_posted,
+    datePosted,
     title,
     content
   );
@@ -75,12 +75,12 @@ export async function getPostsByUserId(userid: number): Promise<Post[]> {
   const response = await postClient.get("/posts/author/" + userid);
   return response.data.map((postObj: any) => {
     const userObj: User = postObj.author;
-    const { postId, date_posted, title, content } = postObj;
+    const { postId, datePosted, title, content } = postObj;
     return new Post(
       postId,
       userObj.userId,
       userObj.username,
-      date_posted,
+      datePosted,
       title,
       content
     );
@@ -90,19 +90,19 @@ export async function getPostsByUserId(userid: number): Promise<Post[]> {
 //new post
 export async function addNewPost(p: Post): Promise<Post> {
   const response = await postClient.post("/post", {
-    post_id: p.postId,
+    postId: p.postId,
     author: p.author,
-    date_posted: p.datePosted,
+    datePosted: p.datePosted,
     title: p.title,
     content: p.content,
   });
   const userObj: User = response.data;
-  const { postId, date_posted, title, content } = response.data;
+  const { postId, datePosted, title, content } = response.data;
   return new Post(
     postId,
     userObj.userId,
     userObj.username,
-    date_posted,
+    datePosted,
     title,
     content
   );
@@ -112,17 +112,17 @@ export async function UpdatePost(p: Post): Promise<Post> {
   const response = await postClient.patch("/post", {
     post_id: p.postId,
     author: p.author,
-    date_posted: p.datePosted,
+    datePosted: p.datePosted,
     title: p.title,
     content: p.content,
   });
   const userObj: User = response.data;
-  const { postId, date_posted, title, content } = response.data;
+  const { postId, datePosted, title, content } = response.data;
   return new Post(
     postId,
     userObj.userId,
     userObj.username,
-    date_posted,
+    datePosted,
     title,
     content
   );

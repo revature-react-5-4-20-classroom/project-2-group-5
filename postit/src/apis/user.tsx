@@ -22,7 +22,7 @@ export async function getUsersById(id: number): Promise<User> {
 }
 
 export async function updateUser(u: User): Promise<User> {
-  const response = await userClient.patch('/users/', {
+  const response = await userClient.patch('/users', {
     user_id: u.userId,
     username: u.username,
     password: u.password,
@@ -34,7 +34,7 @@ export async function updateUser(u: User): Promise<User> {
 }
 
 export async function addNewUser(u: User): Promise<User> {
-  const response = await userClient.post('/users/', {
+  const response = await userClient.post('/users', {
     user_id: u.userId,
     username: u.username,
     password: u.password,

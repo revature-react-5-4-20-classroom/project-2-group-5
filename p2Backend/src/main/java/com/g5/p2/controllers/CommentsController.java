@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.g5.p2.models.Comments;
-import com.g5.p2.models.Subscriptions;
+
 import com.g5.p2.services.CommentsServiceImplementation;
 
 import antlr.collections.List;

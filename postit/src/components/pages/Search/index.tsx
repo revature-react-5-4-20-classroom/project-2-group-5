@@ -6,6 +6,7 @@ import { getUsersLikeUsername } from '../../../apis/user';
 import { User } from '../../../models/user';
 import { Post } from '../../../models/post';
 import { getPostsByUserId } from '../../../apis/posts';
+import { PostContainer } from '../../postsContainer';
 
 interface ISearchPageState{
   searchedUsername: String;
@@ -30,13 +31,19 @@ export class SearchPage extends React.Component<any, ISearchPageState> {
   }
 
   async search(){
-    let results: User[] = await getUsersLikeUsername(this.state.searchedUsername);
-    let posts: Post[] = [];
-    results.forEach(async (element) => {
-      let morePosts: Post[] = await getPostsByUserId(element.userId);
-      posts = [...posts, ...morePosts];
-      this.setState({searchResults: posts});
-    });
+    if(this.state.searchedUsername != ""){
+      let results: User[] = await getUsersLikeUsername(this.state.searchedUsername);
+      let posts: Post[] = [];
+      this.setState({searchResults: []});
+      results.forEach(async (element) => {
+        let morePosts: Post[] = await getPostsByUserId(element.userId);
+        posts = [...posts, ...morePosts];
+        this.setState({searchResults: posts});
+      });
+    }
+    else{
+      this.setState({searchResults: []});
+    }
   }
 
   render() {
@@ -50,7 +57,7 @@ export class SearchPage extends React.Component<any, ISearchPageState> {
         </Col>
 
         <Col className='content-panel' xs={8}>
-          <SearchPostsResults searchResults={this.state.searchResults}/>
+          <PostContainer posts={this.state.searchResults} />
         </Col>
       </Row>
     </Container>

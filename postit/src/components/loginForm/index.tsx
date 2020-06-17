@@ -61,7 +61,10 @@ class LoginComponent extends React.Component<any, ILoginState> {
         username: '',
         password: '',
       });
-      // this.props.updateUser(loggedInUser);
+      if (this.props.currUser === null) {
+        // ERROR USER NOT FOUND
+        return;
+      }
       this.props.history.push('/home');
     } catch (error) {
       this.setState({

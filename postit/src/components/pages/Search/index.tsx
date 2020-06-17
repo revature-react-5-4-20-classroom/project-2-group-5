@@ -1,11 +1,11 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import { Search } from '../../searchUserPostsForm';
-import { SearchPostsResults } from '../../searchPostsResults';
 import { getUsersLikeUsername } from '../../../apis/user';
 import { User } from '../../../models/user';
 import { Post } from '../../../models/post';
 import { getPostsByUserId } from '../../../apis/posts';
+import { PostContainer } from '../../postsContainer';
 
 interface ISearchPageState{
   searchedUsername: String;
@@ -56,7 +56,7 @@ export class SearchPage extends React.Component<any, ISearchPageState> {
         </Col>
 
         <Col className='content-panel' xs={8}>
-          <SearchPostsResults searchResults={this.state.searchResults}/>
+          <PostContainer posts={this.state.searchResults} />
         </Col>
       </Row>
     </Container>

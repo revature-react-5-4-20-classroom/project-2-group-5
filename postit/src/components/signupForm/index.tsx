@@ -1,17 +1,37 @@
 import React from 'react';
 import { Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { UserState } from '../../redux/user/userReducer';
+import { signupUser } from '../../redux/user/userActionMappers';
+import { connect } from 'react-redux';
+import { User } from '../../models/user';
+
 //the updateUser prop takes a function that takes a user and returns voide
 // it will match updateUser in App.
 
-export class SignUp extends React.Component<any, any> {
-  setEmail = (un: any) => {
+interface ISignupState {
+  username: string;
+  alias: string;
+  password: string;
+}
+
+export class SignUpComponent extends React.Component<any, ISignupState> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      username: '',
+      alias: '',
+      password: '',
+    };
+  }
+
+  setUsername = (un: any) => {
     this.setState({
-      email: un.currentTarget.value,
+      username: un.currentTarget.value,
     });
   };
-  setuserName = (un: any) => {
+  setAlias = (un: any) => {
     this.setState({
-      userName: un.currentTarget.value,
+      alias: un.currentTarget.value,
     });
   };
   setPassword = (pw: any) => {
@@ -20,39 +40,57 @@ export class SignUp extends React.Component<any, any> {
     });
   };
 
-  clearError = () => {
-    this.setState({
-      errorMessage: '',
-      isError: false,
-    });
+  // clearError = () => {
+  //   this.setState({
+  //     errorMessage: '',
+  //     isError: false,
+  //   });
+  // };
+  addNewUser = async (event: any) => {
+    event.preventDefault();
+    console.log('in add new user function');
+    if (
+      this.state.username.length < 1 ||
+      this.state.alias.length < 1 ||
+      this.state.password.length < 1
+    ) {
+      return;
+    }
+    try {
+      let newUser = new User(
+        0,
+        this.state.username,
+        this.state.alias,
+        'user',
+        this.state.password
+      );
+      const createNewUser: User = await this.props.signupUser(newUser);
+      this.setState({
+        username: '',
+        alias: '',
+        password: '',
+      });
+      this.props.history.push('/home');
+    } catch (error) {
+      this.setState({
+        username: '',
+        alias: '',
+        password: '',
+      });
+    }
   };
-  addNewUser = () => {};
 
   render() {
     return (
       <Col md={{ size: 8, offset: 2 }}>
-        <Form className='center'>
-          <FormGroup>
-            <Label for='email'>Email:</Label>
-
-            {/* onChange lets Input change state, value lets Input display state */}
-            <Input
-              onChange={this.setEmail}
-              //value={this.state.email}
-              type='email'
-              name='email'
-              id='email'
-              placeholder='Email'
-              required
-            />
-          </FormGroup>
+        <Form className='center' onSubmit={this.addNewUser}>
           <FormGroup>
             <Label for='username'>Username:</Label>
 
             {/* onChange lets Input change state, value lets Input display state */}
             <Input
-              onChange={this.setuserName}
-              //value={this.state.username}
+              onChange={this.setUsername}
+              value={this.state.username}
               type='text'
               name='username'
               id='username'
@@ -61,11 +99,25 @@ export class SignUp extends React.Component<any, any> {
             />
           </FormGroup>
           <FormGroup>
+            <Label for='username'>Username:</Label>
+
+            {/* onChange lets Input change state, value lets Input display state */}
+            <Input
+              onChange={this.setAlias}
+              value={this.state.alias}
+              type='text'
+              name='alias'
+              id='alias'
+              placeholder='Alias'
+              required
+            />
+          </FormGroup>
+          <FormGroup>
             <Label for='password'>Password:</Label>
 
             <Input
               onChange={this.setPassword}
-              //value={this.state.password}
+              value={this.state.password}
               type='password'
               name='password'
               id='password'
@@ -81,3 +133,18 @@ export class SignUp extends React.Component<any, any> {
     );
   }
 }
+
+const mapStateToProps = (state: UserState) => {
+  return {
+    ...state,
+  };
+};
+
+const mapDispatchToProps = {
+  signupUser,
+};
+
+export const SignUp = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignUpComponent);

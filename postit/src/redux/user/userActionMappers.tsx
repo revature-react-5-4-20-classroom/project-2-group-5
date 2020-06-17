@@ -7,55 +7,57 @@ import {
   LOGOUT,
 } from '../types';
 
-export const signupUser = (user: User) => {
-  return {
-    // this return is a placeholder!  Use trycatch below
-    type: SIGNUP_SUCCESS,
-    payload: {
-      user,
-    },
-  };
-  // try {
-  //     const response = await axios.post('/signup', user);
-  //     return {
-  //         type: SIGNUP_SUCCESS,
-  //         payload: {
-  //             response.data
-  //         }
-  //     }
-  // } catch (error) {
-  //     return {
-  //         type: SIGNUP_FAIL,
-  //         payload: {
-  //             error
-  //         }
-  // }
+import { login } from '../../apis/login';
+import { addNewUser } from '../../apis/user';
+import { Dispatch } from 'redux';
+
+export const signupUser = (user: User) => async (dispatch: Dispatch) => {
+  console.log('in signup mapper');
+  try {
+    console.log('in mapper user: ', user);
+    const newUser = await addNewUser(user);
+    dispatch({
+      type: SIGNUP_SUCCESS,
+      payload: {
+        newUser,
+      },
+    });
+  } catch (error) {
+    dispatch({
+      type: SIGNUP_FAIL,
+      payload: {
+        error,
+      },
+    });
+  }
 };
 
-export const loginUser = (username: string, password: string) => {
-  // Below variable and return are placeholders!  User try/catch below!!!
-  let user: User = new User(1000, username, 'fake', password, 'fake)');
-  return {
-    type: LOGIN_SUCCESS,
-    payload: {
-      user,
-    },
-  };
-  // try {
-  //     const response = await axios.post('/login', user);
-  //     return {
-  //         type: LOGIN_SUCCESS,
-  //         payload: {
-  //             response.data
-  //         }
-  //     }
-  // } catch (error) {
-  //     return {
-  //         type: LOGIN_FAIL,
-  //         payload: {
-  //             error
-  //         }
-  // }
+export const loginUser = (username: string, password: string) => async (
+  dispatch: Dispatch
+) => {
+  try {
+    const user = await login(username, password);
+    if (user.userId) {
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: {
+          user,
+        },
+      });
+    } else {
+      dispatch({
+        type: LOGIN_FAIL,
+        payload: {},
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: LOGIN_FAIL,
+      payload: {
+        error,
+      },
+    });
+  }
 };
 
 export const logoutUser = () => {

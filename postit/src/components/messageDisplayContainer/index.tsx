@@ -1,6 +1,15 @@
 import React from 'react';
 import './style.css';
-import { Col, Row, Button, Container } from 'reactstrap';
+import {
+  Col,
+  Row,
+  Button,
+  Container,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText,
+  Input,
+} from 'reactstrap';
 import { MessageRow } from '../message';
 
 export class MessageDisplayContainer extends React.Component<any, any> {
@@ -15,10 +24,20 @@ export class MessageDisplayContainer extends React.Component<any, any> {
             <Button>New Message</Button>
           </Col>
         </Row>
-        <Row className='h-95'>
-          <Container>
+        <Row className='h-90 center-div'>
+          <Col className='message-box' xs={12}>
             <MessageRow />
-          </Container>
+          </Col>
+        </Row>
+        <Row className='h-5'>
+          <Col xs={12} className='center-div'>
+            <InputGroup className='input-box'>
+              <Input placeholder='username' />
+              <InputGroupAddon addonType='append'>
+                <Button>Send</Button>
+              </InputGroupAddon>
+            </InputGroup>
+          </Col>
         </Row>
       </>
     );

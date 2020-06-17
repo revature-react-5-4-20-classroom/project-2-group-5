@@ -1,0 +1,11 @@
+.search-users-card {
+  border: 1px solid black;
+  height: 20vh;
+  max-width: 35vw !important;
+  margin-top: 1vh;
+  margin: 0px 20px 0px 20px !important;
+}
+
+.search-users-input {
+  width: 80% !important;
+}

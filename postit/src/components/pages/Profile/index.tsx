@@ -7,13 +7,22 @@ import img from "./1.png";
 import { SubscriberCard } from "../../subscriberCard/index";
 import { getPostsByUserId } from "../../../apis/posts";
 import ReactS3Uploader from 'react-s3-uploader';
+import { Post } from "../../../models/post";
+import { User } from "../../../models/user";
 // import { Pic } from "../../../fileUpdoad";
-export class UserProfile extends React.Component<any, any> {
+
+interface IUserProfileState{
+    response: User;
+    posts: Post[];
+    data: boolean;
+}
+
+export class UserProfile extends React.Component<any, IUserProfileState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      response: "any",
-      posts: "any",
+      response: new User(0, "", "", ""),
+      posts: [],
       data: false,
     };
   }
@@ -56,7 +65,7 @@ export class UserProfile extends React.Component<any, any> {
           </Col>
           <Col md={7}>
             {this.state.data ? (
-              <PostContainer postObject={this.state.posts}></PostContainer>
+              <PostContainer posts={this.state.posts}></PostContainer>
             ) : (
               <Spinner></Spinner>
             )}

@@ -28,7 +28,7 @@ export class App extends React.Component<any, IAppState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      loggedInUser: null,
+      loggedInUser: new User(0, "", "", "", ""),
     };
   }
 

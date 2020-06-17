@@ -21,6 +21,14 @@ export async function getUsersById(id: number): Promise<User> {
   return new User(userId, username, alias, role, password);
 }
 
+export async function getUsersLikeUsername(uname: String): Promise<User[]> {
+  const response = await userClient.get('/users/username/' + uname);
+  return response.data.map((userObj: any) => {
+    const { userId, username, alias, role, password } = userObj;
+    return new User(userId, username, alias, role, password);
+  });
+}
+
 export async function updateUser(u: User): Promise<User> {
   const response = await userClient.patch('/users', {
     user_id: u.userId,

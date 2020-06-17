@@ -2,9 +2,17 @@ import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import { Search } from '../../searchUserPostsForm';
 import { SearchPostsResults } from '../../searchPostsResults';
+import { getUsersLikeUsername } from '../../../apis/user';
+import { User } from '../../../models/user';
+import { Post } from '../../../models/post';
+import { getPostsByUserId } from '../../../apis/posts';
 
+interface ISearchPageState{
+  searchedUsername: String;
+  searchResults: Post[];
+}
 
-export class SearchPage extends React.Component<any, any> {
+export class SearchPage extends React.Component<any, ISearchPageState> {
   constructor(props: any){
     super(props);
     this.state = {
@@ -21,8 +29,14 @@ export class SearchPage extends React.Component<any, any> {
     return this.state.searchedUsername
   }
 
-  search(){
-    console.log(this.state.searchedUsername);
+  async search(){
+    let results: User[] = await getUsersLikeUsername(this.state.searchedUsername);
+    let posts: Post[] = [];
+    results.forEach(async (element) => {
+      let morePosts: Post[] = await getPostsByUserId(element.userId);
+      posts = [...posts, ...morePosts];
+      this.setState({searchResults: posts});
+    });
   }
 
   render() {

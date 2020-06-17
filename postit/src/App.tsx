@@ -102,10 +102,10 @@ export class App extends React.Component<any, IAppState> {
               </Route>
               <Route loggedInUser={this.state.loggedInUser} path='/users'>
                 {/* {this.state.loggedInUser && true ? ( */}
-                  <UserProfile
-                    loggedInUser={this.state.loggedInUser}
-                    path='/home'
-                  />
+                <UserProfile
+                  loggedInUser={this.state.loggedInUser}
+                  path='/home'
+                />
                 {/* // ) : (
                 //   <h4>Please Login</h4>
                 // )} */}

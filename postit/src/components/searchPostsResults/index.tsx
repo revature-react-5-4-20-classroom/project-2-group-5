@@ -13,7 +13,7 @@ export class SearchPostsResults extends React.Component<ISearchPostsResultsProps
   render() {
     
     return (
-        <Container className='main-container'>
+        <Container className='main-container' style={{marginTop: 20,marginBottom: 60}}>
             <PostContainer posts={this.props.searchResults} />
         </Container>
     );

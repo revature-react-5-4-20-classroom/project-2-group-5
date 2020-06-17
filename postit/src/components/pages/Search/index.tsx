@@ -30,13 +30,19 @@ export class SearchPage extends React.Component<any, ISearchPageState> {
   }
 
   async search(){
-    let results: User[] = await getUsersLikeUsername(this.state.searchedUsername);
-    let posts: Post[] = [];
-    results.forEach(async (element) => {
-      let morePosts: Post[] = await getPostsByUserId(element.userId);
-      posts = [...posts, ...morePosts];
-      this.setState({searchResults: posts});
-    });
+    if(this.state.searchedUsername != ""){
+      let results: User[] = await getUsersLikeUsername(this.state.searchedUsername);
+      let posts: Post[] = [];
+      this.setState({searchResults: []});
+      results.forEach(async (element) => {
+        let morePosts: Post[] = await getPostsByUserId(element.userId);
+        posts = [...posts, ...morePosts];
+        this.setState({searchResults: posts});
+      });
+    }
+    else{
+      this.setState({searchResults: []});
+    }
   }
 
   render() {

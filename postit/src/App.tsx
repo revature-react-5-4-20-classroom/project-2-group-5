@@ -7,13 +7,7 @@ import {
 } from 'react-router-dom';
 import './App.css';
 import { Navigation } from './components/navbar';
-<<<<<<< HEAD
-import { UserProfile } from './components/pages/Profile';
-import { User } from './models/user';
-import { Home } from './components/pages/Home';
-=======
 import { PrivateRoutes } from './components/privateRoutes';
->>>>>>> 7ece782d55f04f126896cbb3b5423fffa743ebc5
 import { Provider } from 'react-redux';
 import { store } from './redux/user/userStore';
 import { LoginPage } from './components/pages/Login';
@@ -43,43 +37,11 @@ class App extends React.Component<any, any> {
                   return <SignupPage {...props} path='/signup' />;
                 }}
               />
-<<<<<<< HEAD
-              <Route path='/home'>
-                <Home loggedInUser={this.state.loggedInUser} path='/home' />
-              </Route>
-              <Route path='/subscribers'>
-                {/* {this.state.loggedInUser && true ? ( */}
-                <SubscribersPage path='/subscribers' />
-                {/* ) : (
-                  <h4>Please Login</h4>
-                )} */}
-              </Route>
-              <Route path='/messages'>
-                {this.state.loggedInUser ? ( 
-                <MessagesPage path='/messages' />
-                 ) : (
-                  <h4>Please Login</h4>
-                )}
-              </Route>
-              <Route loggedInUser={this.state.loggedInUser} path='/users'>
-                {/* {this.state.loggedInUser && true ? ( */}
-                  <UserProfile
-                    loggedInUser={this.state.loggedInUser}
-                    path='/home'
-                  />
-                {/* // ) : (
-                //   <h4>Please Login</h4>
-                // )} */}
-              </Route>
-              <Route path='/search'>
-                <SearchPage />
-=======
               <Route path='/logout'>
                 <Redirect to='/signup' />
               </Route>
               <Route>
                 <PrivateRoutes />
->>>>>>> 7ece782d55f04f126896cbb3b5423fffa743ebc5
               </Route>
             </Switch>
           </Router>

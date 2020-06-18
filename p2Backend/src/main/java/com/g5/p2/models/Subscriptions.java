@@ -21,11 +21,11 @@ public class Subscriptions {
   private Integer subscriptionId;
   @JoinColumn(name = "subscribee")
   @ManyToOne(fetch = FetchType.EAGER)
-  @JsonIgnoreProperties({"subscribee"})
+  @JsonIgnoreProperties({"subscribee", "subscriber", "posts"})
   private Users subscribee;
   @JoinColumn(name = "subscriber")
   @ManyToOne(fetch = FetchType.EAGER)
-  @JsonIgnoreProperties({"subscriber"})
+  @JsonIgnoreProperties({"subscribee", "subscriber", "posts"})
   private Users subscriber;
   @Column(name = "blocked")
   private boolean blocked;

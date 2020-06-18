@@ -2,8 +2,27 @@ import React from 'react';
 import { Row, Col, Container } from 'reactstrap';
 import './style.css';
 import { SubscribersContainer } from '../../subscribersContainer';
+import { connect } from 'react-redux';
+import { UserState } from '../../../redux/user/userReducer';
+import { Subscription } from '../../../models/subscription';
 
-export class SubscribersPage extends React.Component<any, any> {
+interface ISubscribersPageState {
+  userSubscribersArray: Subscription[];
+  userSubscriptionsArray: Subscription[] | null;
+}
+
+export class SubscribersPageComponent extends React.Component<
+  any,
+  ISubscribersPageState
+> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      userSubscribersArray: [],
+      userSubscriptionsArray: [],
+    };
+  }
+
   render() {
     return (
       <Container className='main-container'>
@@ -27,3 +46,13 @@ export class SubscribersPage extends React.Component<any, any> {
     );
   }
 }
+
+const mapStateToProps = (state: UserState) => {
+  return {
+    ...state,
+  };
+};
+
+export const SubscribersPage = connect(mapStateToProps)(
+  SubscribersPageComponent
+);

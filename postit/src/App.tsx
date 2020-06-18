@@ -7,12 +7,9 @@ import {
 } from 'react-router-dom';
 import './App.css';
 import { Navigation } from './components/navbar';
-import { Jumbotron } from 'reactstrap';
-import { Login } from './components/loginForm';
 import { UserProfile } from './components/pages/Profile';
 import { User } from './models/user';
 import { Home } from './components/pages/Home';
-import { PostMultiRoute } from './components/postMultiRouts';
 import { Provider } from 'react-redux';
 import { store } from './redux/user/userStore';
 import { LoginPage } from './components/pages/Login';
@@ -95,11 +92,11 @@ export class App extends React.Component<any, IAppState> {
                 )} */}
               </Route>
               <Route path='/messages'>
-                {/* {this.state.loggedInUser && true ? ( */}
+                {this.state.loggedInUser ? ( 
                 <MessagesPage path='/messages' />
-                {/* ) : (
+                 ) : (
                   <h4>Please Login</h4>
-                )} */}
+                )}
               </Route>
               <Route loggedInUser={this.state.loggedInUser} path='/users'>
                 {/* {this.state.loggedInUser && true ? ( */}
@@ -111,11 +108,8 @@ export class App extends React.Component<any, IAppState> {
                 //   <h4>Please Login</h4>
                 // )} */}
               </Route>
-              <Route>
-                <PostMultiRoute
-                  loggedInUser={this.state.loggedInUser}
-                  path='/posts'
-                />
+              <Route path='/search'>
+                <SearchPage />
               </Route>
               <Route path='/logout'></Route>
             </Switch>

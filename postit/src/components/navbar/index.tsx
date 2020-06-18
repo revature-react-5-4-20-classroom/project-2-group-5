@@ -36,7 +36,7 @@ export class Navigation extends React.Component<any, any> {
                 activeClassName='active'
                 hidden={!this.props.loggedInUser}
                 className='nav-link'
-                to='/posts/all'
+                to='/search'
               >
                 search
               </NavLink>

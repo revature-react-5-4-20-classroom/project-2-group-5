@@ -1,7 +1,6 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import { Search } from '../../searchUserPostsForm';
-import { SearchPostsResults } from '../../searchPostsResults';
 import { getUsersLikeUsername } from '../../../apis/user';
 import { User } from '../../../models/user';
 import { Post } from '../../../models/post';
@@ -64,3 +63,9 @@ export class SearchPage extends React.Component<any, ISearchPageState> {
     );
   }
 }
+
+
+//todo: 
+//  set max height, and scrollable
+//  ajust left column to be centered correctly
+//  other things can be done if i discover why the submit function isnt awaiting properly, or add a new endpoint to make the multiple fetches redundant

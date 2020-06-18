@@ -2,6 +2,7 @@
 import React from 'react';
 import { UserProfile } from '../pages/Profile';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { findByLabelText } from '@testing-library/react';
 
 // Container that has Form with 'User Post Search' text or something,
 // text seach box and 'search' button that does call to DB to find
@@ -20,7 +21,7 @@ export class Search extends React.Component<any, any> {
 
   render() {
     return (
-      <div className='center' style={{marginLeft: 15 + "vh"}}>
+      <div className='center'>
         <h3>User Post Search</h3>
         <Form className='center' >
           <FormGroup>

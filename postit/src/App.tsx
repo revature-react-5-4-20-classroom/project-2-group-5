@@ -7,80 +7,43 @@ import {
 } from 'react-router-dom';
 import './App.css';
 import { Navigation } from './components/navbar';
+<<<<<<< HEAD
 import { UserProfile } from './components/pages/Profile';
 import { User } from './models/user';
 import { Home } from './components/pages/Home';
+=======
+import { PrivateRoutes } from './components/privateRoutes';
+>>>>>>> 7ece782d55f04f126896cbb3b5423fffa743ebc5
 import { Provider } from 'react-redux';
 import { store } from './redux/user/userStore';
 import { LoginPage } from './components/pages/Login';
 import { SignupPage } from './components/pages/Signup';
-import { SubscribersPage } from './components/pages/Subscribers';
-import { MessagesPage } from './components/pages/Messages';
-import { SearchPage } from './components/pages/Search';
 
-interface IAppState {
-  loggedInUser: User | null;
-}
-export class App extends React.Component<any, IAppState> {
+class App extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
-    this.state = {
-      loggedInUser: new User(0, "", "", "", ""),
-    };
   }
 
-  updateUser = (user: User) => {
-    console.log(user);
-    this.setState({
-      loggedInUser: user,
-    });
-  };
-  logoutUser = () => {
-    this.setState({
-      loggedInUser: null,
-    });
-  };
   render() {
     return (
       <Provider store={store}>
         <div className='App'>
           <Router>
-            <Navigation
-              logoutUser={this.logoutUser}
-              loggedInUser={this.state.loggedInUser}
-            />
+            <Navigation />
             <Switch>
-              <Route exact path='/'>
-                {this.state.loggedInUser ? (
-                  <Redirect to='/home' />
-                ) : (
-                  <Redirect to='/login' />
-                )}
-              </Route>
               <Route
                 path='/login'
                 render={(props: any) => {
-                  return (
-                    <LoginPage
-                      {...props}
-                      path='/login'
-                      updateUser={this.updateUser}
-                    />
-                  );
+                  return <LoginPage {...props} path='/login' />;
                 }}
               />
               <Route
                 path='/signup'
                 render={(props: any) => {
-                  return (
-                    <SignupPage
-                      {...props}
-                      path='/login'
-                      updateUser={this.updateUser}
-                    />
-                  );
+                  return <SignupPage {...props} path='/signup' />;
                 }}
               />
+<<<<<<< HEAD
               <Route path='/home'>
                 <Home loggedInUser={this.state.loggedInUser} path='/home' />
               </Route>
@@ -110,8 +73,14 @@ export class App extends React.Component<any, IAppState> {
               </Route>
               <Route path='/search'>
                 <SearchPage />
+=======
+              <Route path='/logout'>
+                <Redirect to='/signup' />
               </Route>
-              <Route path='/logout'></Route>
+              <Route>
+                <PrivateRoutes />
+>>>>>>> 7ece782d55f04f126896cbb3b5423fffa743ebc5
+              </Route>
             </Switch>
           </Router>
         </div>
@@ -119,6 +88,7 @@ export class App extends React.Component<any, IAppState> {
     );
   }
 }
+
 export default App;
 
 // TO USE STATE IN COMPONENT:
@@ -136,7 +106,7 @@ export default App;
 //
 // const mapStateToProps = (state: UserState) => {
 //   return {
-//     ...state.currUser
+//     ...state
 //   }
 // }
 

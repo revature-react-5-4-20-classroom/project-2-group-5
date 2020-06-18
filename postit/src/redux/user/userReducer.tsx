@@ -10,10 +10,12 @@ import {
 
 export interface UserState {
   currUser: User | null;
+  isAuthenticated: boolean;
 }
 
 const initialUserState: UserState = {
   currUser: null,
+  isAuthenticated: false,
 };
 
 export const userReducer = (
@@ -24,44 +26,53 @@ export const userReducer = (
     case LOGIN_SUCCESS: {
       const u = action.payload.user;
       if (!u) {
-        return state;
+        return {
+          ...state,
+          isAuthenticated: false,
+        };
       } else {
         let fetchedUser = new User(u.userId, u.username, u.alias, u.role);
         return {
           currUser: fetchedUser,
+          isAuthenticated: true,
         };
       }
     }
     case LOGIN_FAIL: {
       return {
-        currUser: null,
+        ...state,
+        isAuthenticated: false,
       };
     }
     case SIGNUP_SUCCESS: {
       const u = action.payload.newUser;
-      console.log('in reducer signup_success', u);
       let newUser = new User(u.userId, u.username, u.alias, u.role);
       if (!newUser) {
-        return state;
+        return {
+          ...state,
+          isAuthenticated: false,
+        };
       } else {
         return {
           currUser: newUser,
+          isAuthenticated: true,
         };
       }
     }
 
     case SIGNUP_FAIL: {
       return {
-        currUser: null,
+        ...state,
+        isAuthenticated: false,
       };
     }
     case LOGOUT: {
       return {
         currUser: null,
+        isAuthenticated: false,
       };
     }
     default:
-      console.log('default of reducer');
       return state;
   }
 };

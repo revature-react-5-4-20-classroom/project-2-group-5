@@ -63,10 +63,6 @@ export class PostMultiRoute extends React.Component<any, any> {
 
           <Route path={`${this.props.path}/user`}>
             {this.props.loggedInUser ? (
-              /*<PostContainer
-                path={`${this.props.path}/user`}
-                loggedInUser={this.props.loggedInUser}
-              />*/
               <SearchPage path={`${this.props.path}/user`} />
             ) : (
               <h4>Please Login</h4>
@@ -76,8 +72,7 @@ export class PostMultiRoute extends React.Component<any, any> {
           <Route path={`${this.props.path}/allposts`}>
             {this.props.loggedInUser ? (
               <PostContainer
-                loggedInUser={this.props.loggedInUser}
-                path={`${this.props.path}`}
+                posts={[]}
               />
             ) : (
               <h4>Please Login</h4>
@@ -86,8 +81,7 @@ export class PostMultiRoute extends React.Component<any, any> {
           <Route path={`${this.props.path}/postid`}>
             {this.props.loggedInUser ? (
               <PostContainer
-                loggedInUser={this.props.loggedInUser}
-                path={`${this.props.path}`}
+                posts={[]}
               />
             ) : (
               <h4>Please Login</h4>
@@ -96,8 +90,7 @@ export class PostMultiRoute extends React.Component<any, any> {
           <Route path={`${this.props.path}/subscribeeId`}>
             {this.props.loggedInUser ? (
               <PostContainer
-                loggedInUser={this.props.loggedInUser}
-                path={`${this.props.path}`}
+                posts={[]}
               />
             ) : (
               <h4>Please Login</h4>

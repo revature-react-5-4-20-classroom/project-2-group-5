@@ -2,24 +2,15 @@
 import React from "react";
 import { PostContainer } from "../../postsContainer";
 import { Container, Row, Col, Spinner, Input } from "reactstrap";
-import { getUsersById, updateUser } from "../../../apis/user";
+import { getUsersById } from "../../../apis/user";
 import img from "./1.png";
 import { SubscriberCard } from "../../subscriberCard/index";
 import { getPostsByUserId } from "../../../apis/posts";
-import ReactS3Uploader from 'react-s3-uploader';
-import { Post } from "../../../models/post";
-import { User } from "../../../models/user";
-import { UserState } from "../../../redux/user/userReducer";
+import ReactS3Uploader from "react-s3-uploader";
 import { connect } from "react-redux";
+import { UserState } from "../../../redux/user/userReducer";
 // import { Pic } from "../../../fileUpdoad";
-
-interface IUserProfileState{
-    response: User;
-    posts: Post[];
-    data: boolean;
-}
-
-export class UserProfileComponent extends React.Component<any, IUserProfileState> {
+class UserProfileComponent extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -31,9 +22,9 @@ export class UserProfileComponent extends React.Component<any, IUserProfileState
 
   componentDidMount = async () => {
     this.setState({
-      response: await getUsersById(this.state.response.userId),
-      posts: await getPostsByUserId(this.state.response.userId),
-
+      response: await getUsersById(this.state.currUser.userId),
+      posts: await getPostsByUserId(this.state.currUser.userId),
+      
       data: true,
     });
   };
@@ -55,11 +46,11 @@ export class UserProfileComponent extends React.Component<any, IUserProfileState
 
   render() {
     return (
-      <Container className="center" style={{ overflowY: "auto" }}>
+      <Container className="center" style={{overflowY:"auto"}}>
         <Row>
           <Col md={2}>
             <img src={img} />
-            <Input type="file" onChange={this.changePic} />
+            <Input type="file" onChange={this.changePic}/>
           </Col>
           <Col md={10}>
             <h1>{this.state.response.username} </h1>
@@ -94,8 +85,9 @@ export class UserProfileComponent extends React.Component<any, IUserProfileState
 
 const mapStateToProps = (state: UserState) => {
   return {
-    ...state,
-  };
-};
+    ...state
+  }
+}
+
 
 export const UserProfile = connect(mapStateToProps)(UserProfileComponent);

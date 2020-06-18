@@ -23,6 +23,7 @@ export async function getAllCommentsByPostId(id: number): Promise<Comment[]> {
 }
 
 export async function createComment(c: Comment): Promise<Comment[]> {
+<<<<<<< HEAD
   try {
     const response = await commentClient.post("/comments", {
       commentId: 0,
@@ -43,4 +44,21 @@ export async function createComment(c: Comment): Promise<Comment[]> {
     console.log("from comment api", e);
     throw e;
   }
+=======
+  const response = await commentClient.post("/comments", {
+    ommentId: 0,
+    postId: c.postId,
+    author: c.author,
+    content: c.content,
+  });
+  return response.data.map((commentObj: any) => {
+    const { commentId, content } = commentObj;
+    return new Comment(
+      commentId,
+      commentObj.post.postId,
+      commentObj.author.userId,
+      content
+    );
+  });
+>>>>>>> fa7a10639d5d79dce20646c20e8f312271a39156
 }

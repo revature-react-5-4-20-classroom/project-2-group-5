@@ -6,6 +6,9 @@ import { Login } from '../../loginForm';
 // site landing page for all guest users.  Will have conditionally rendered login/signup containers
 
 export class LoginPage extends React.Component<any, any> {
+  constructor(props: any) {
+    super(props);
+  }
   render() {
     return (
       <Container className='main-container'>
@@ -16,7 +19,7 @@ export class LoginPage extends React.Component<any, any> {
               <h3 className='title-text'>Sign In</h3>
             </Row>
             <Row className='login-form'>
-              <Login />
+              <Login history={this.props.history} />
             </Row>
             <Row className='flex-container'>
               <p className='sub-text'>

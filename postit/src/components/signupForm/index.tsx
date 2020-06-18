@@ -70,6 +70,11 @@ export class SignUpComponent extends React.Component<any, ISignupState> {
         alias: '',
         password: '',
       });
+
+      if (this.props.currUser === null) {
+        // SIGNUP FAILED
+        return;
+      }
       this.props.history.push('/home');
     } catch (error) {
       this.setState({

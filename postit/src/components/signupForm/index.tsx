@@ -104,7 +104,7 @@ export class SignUpComponent extends React.Component<any, ISignupState> {
             />
           </FormGroup>
           <FormGroup>
-            <Label for='username'>Username:</Label>
+            <Label for='username'>Alias:</Label>
 
             {/* onChange lets Input change state, value lets Input display state */}
             <Input

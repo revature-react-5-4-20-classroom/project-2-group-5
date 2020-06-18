@@ -28,7 +28,7 @@ public class P2BackendApplication {
       @Override
       public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-            .allowedOrigins("http://3.133.86.196:8081")
+            .allowedOrigins("http://localhost:3000")
             .allowCredentials(true)
             .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS");
 

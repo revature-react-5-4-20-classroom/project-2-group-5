@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import com.g5.p2.exceptions.PostNotFoundException;
 import com.g5.p2.models.Posts;
-import com.g5.p2.models.Users;
 import com.g5.p2.services.PostsServiceImplementation;
 
 @RequestMapping(path = "/posts")

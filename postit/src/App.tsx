@@ -19,6 +19,7 @@ import { LoginPage } from './components/pages/Login';
 import { SignupPage } from './components/pages/Signup';
 import { SubscribersPage } from './components/pages/Subscribers';
 import { MessagesPage } from './components/pages/Messages';
+import { SearchPage } from './components/pages/Search';
 
 interface IAppState {
   loggedInUser: User | null;

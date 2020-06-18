@@ -1,7 +1,7 @@
 package com.g5.p2.controllers;
 
 import java.util.LinkedHashMap;
-
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +14,7 @@ import com.g5.p2.models.Comments;
 
 import com.g5.p2.services.CommentsServiceImplementation;
 
-import antlr.collections.List;
+
 
 @RequestMapping(path = "/comments")
 @RestController
@@ -26,7 +26,7 @@ public class CommentsController {
   //get comments by postId
 
   @GetMapping("/{postId}")
-  public java.util.List<Comments> getCommentByPostId(@PathVariable Integer postId){
+  public List<Comments> getCommentByPostId(@PathVariable Integer postId){
 	  return commentsService.getByPost(postId);	
   }
   

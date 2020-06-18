@@ -14,8 +14,15 @@ import {
 import { UserState } from '../../redux/user/userReducer';
 import { loginUser } from '../../redux/user/userActionMappers';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 
 // Component that has form that takes username/password and has login button
+
+// interface ILoginProps {
+//   currUser: User | null;
+//   loginUser: (u: string, p: string) => User | null;
+//   history: any;
+// }
 
 interface ILoginState {
   username: string;

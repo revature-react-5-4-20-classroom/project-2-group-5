@@ -1,6 +1,6 @@
 import React from 'react';
-import { Navbar, NavbarBrand, Nav, NavItem } from 'reactstrap';
-import { NavLink, Redirect } from 'react-router-dom';
+import { Navbar, Nav, NavItem } from 'reactstrap';
+import { NavLink, Link } from 'react-router-dom';
 import { UserState } from '../../redux/user/userReducer';
 import { logoutUser } from '../../redux/user/userActionMappers';
 import { connect } from 'react-redux';
@@ -10,23 +10,19 @@ export class NavigationComponent extends React.Component<any, any> {
     super(props);
   }
 
-  logout = (e: any) => {
-    e.preventDefault();
-    this.props.logoutUser();
-  };
-
   render() {
     return (
       <div>
-        {/*just writing the name of a prop is shorthand for prop={true}*/}
         <Navbar color='light' light expand='md'>
-          <NavbarBrand href='/'>PostIt</NavbarBrand>
+          <Link className='navbar-brand' to='/'>
+            PostIt
+          </Link>
           <Nav className='mr-auto' navbar>
             <NavItem>
               <NavLink
                 to='/home'
                 color='secondary'
-                hidden={!this.props.currUser}
+                hidden={this.props.isAuthenticated === false}
                 className='nav-link'
                 activeClassName='active'
               >
@@ -36,7 +32,7 @@ export class NavigationComponent extends React.Component<any, any> {
             <NavItem>
               <NavLink
                 color='secondary'
-                hidden={!this.props.currUser}
+                hidden={this.props.isAuthenticated === false}
                 className='nav-link'
                 to='/user'
               >
@@ -47,7 +43,7 @@ export class NavigationComponent extends React.Component<any, any> {
               <NavLink
                 color='secondary'
                 activeClassName='active'
-                hidden={!this.props.currUser}
+                hidden={this.props.isAuthenticated === false}
                 className='nav-link'
                 to='/posts/all'
               >
@@ -58,7 +54,7 @@ export class NavigationComponent extends React.Component<any, any> {
               <NavLink
                 color='secondary'
                 activeClassName='active'
-                hidden={!this.props.currUser}
+                hidden={this.props.isAuthenticated === false}
                 className='nav-link'
                 to='/subscribers'
               >
@@ -69,7 +65,7 @@ export class NavigationComponent extends React.Component<any, any> {
               <NavLink
                 color='secondary'
                 activeClassName='active'
-                hidden={!this.props.currUser}
+                hidden={this.props.isAuthenticated === false}
                 className='nav-link'
                 to='/messages'
               >
@@ -101,10 +97,10 @@ export class NavigationComponent extends React.Component<any, any> {
             <NavItem>
               <NavLink
                 activeClassName='active'
-                hidden={!this.props.currUser}
+                hidden={this.props.isAuthenticated === false}
                 className='nav-link'
                 to='/logout'
-                onClick={this.logout}
+                onClick={this.props.logoutUser}
               >
                 logout
               </NavLink>

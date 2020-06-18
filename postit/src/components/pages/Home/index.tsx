@@ -1,6 +1,6 @@
-import React from "react";
-import { getAllPosts } from "../../../apis/posts";
-import img from "./1.png";
+import React from 'react';
+import { getAllPosts } from '../../../apis/posts';
+import img from './1.png';
 import {
   Card,
   CardHeader,
@@ -9,8 +9,8 @@ import {
   CardTitle,
   Table,
   Spinner,
-} from "reactstrap";
-import { PostContainer } from "../../postsContainer";
+} from 'reactstrap';
+import { PostContainer } from '../../postsContainer';
 // User's logged in homepage.  Will need subscPosts container and newestPosts container
 
 export class Home extends React.Component<any, any> {
@@ -38,6 +38,7 @@ export class Home extends React.Component<any, any> {
   // };
 
   render() {
+    console.log('from home this.props: ', this.props && this.props);
     return (
       <>
         {this.state.data ? (

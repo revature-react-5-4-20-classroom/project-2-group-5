@@ -6,6 +6,7 @@ import { User } from '../../../models/user';
 import { Post } from '../../../models/post';
 import { getPostsByUserId } from '../../../apis/posts';
 import { PostContainer } from '../../postsContainer';
+import './style.css';
 
 interface ISearchPageState {
   searchedUsername: String;
@@ -48,10 +49,9 @@ export class SearchPage extends React.Component<any, ISearchPageState> {
 
   render() {
     return (
-      <Container className='main-container'>
-        <Row>
+      <Container className='main-container' style={{height:80 + "vh"}}>
+        <Row style={{height:80 + "vh"}}>
           <Col className='title-row message-panel' xs={4}>
-            <Row>
               <Search
                 setSearchedUsername={(username: String) => {
                   this.setSearchedUsername(username);
@@ -63,10 +63,9 @@ export class SearchPage extends React.Component<any, ISearchPageState> {
                   this.search();
                 }}
               />
-            </Row>
           </Col>
 
-          <Col className='content-panel' xs={8}>
+          <Col className='content-panel' xs={8} style={{height:80 + "vh", overflowY: "scroll"}}>
             <PostContainer posts={this.state.searchResults} />
           </Col>
         </Row>
@@ -77,6 +76,5 @@ export class SearchPage extends React.Component<any, ISearchPageState> {
 
 
 //todo: 
-//  set max height, and scrollable
 //  ajust left column to be centered correctly
 //  other things can be done if i discover why the submit function isnt awaiting properly, or add a new endpoint to make the multiple fetches redundant

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import com.g5.p2.exceptions.MessageNotFoundException;
-import com.g5.p2.exceptions.NotYetImplementedException;
 import com.g5.p2.models.Messages;
 import com.g5.p2.models.Users;
 import com.g5.p2.repositories.MessagesRepository;
@@ -42,7 +41,7 @@ public class MessagesServiceImplementation implements MessagesService {
     Optional<Users> user = usersRepository.findById(userId);
     return messagesRepository.findByReceiverorAuthor(user.get());
   }
-
+  
   @Override
   public List<Messages> getByAuthorAndUser(Integer authorId, Integer userId) {
     Optional<Users> author = usersRepository.findById(authorId);

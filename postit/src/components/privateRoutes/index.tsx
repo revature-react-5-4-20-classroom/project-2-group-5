@@ -6,6 +6,9 @@ import { SubscribersPage } from '../pages/Subscribers';
 import { MessagesPage } from '../pages/Messages';
 import { Home } from '../pages/Home';
 import { UserProfile } from '../pages/Profile';
+import { CreatePostForm } from '../createPostForm';
+import { PostContainer } from '../postsContainer';
+import { SearchPage } from '../pages/Search';
 
 class PrivateRoutesComponent extends React.Component<any, any> {
   constructor(props: any) {
@@ -29,6 +32,20 @@ class PrivateRoutesComponent extends React.Component<any, any> {
             <Redirect to='/' />
           )}
         </Route>
+        <Route path='/users'>
+          {this.props.isAuthenticated === true ? (
+            <UserProfile path='/users' />
+          ) : (
+            <Redirect to='/' />
+          )}
+        </Route>
+        <Route path='/post'>
+          {this.props.isAuthenticated === true ? (
+            <SearchPage path='/post' />
+          ) : (
+            <Redirect to='/' />
+          )}
+        </Route>
         <Route path='/subscribers'>
           {this.props.isAuthenticated === true ? (
             <SubscribersPage path='/subscribers' />
@@ -39,13 +56,6 @@ class PrivateRoutesComponent extends React.Component<any, any> {
         <Route path='/messages'>
           {this.props.isAuthenticated === true ? (
             <MessagesPage path='/messages' />
-          ) : (
-            <Redirect to='/' />
-          )}
-        </Route>
-        <Route path='/users'>
-          {this.props.isAuthenticated === true ? (
-            <UserProfile path='/users' />
           ) : (
             <Redirect to='/' />
           )}

@@ -11,9 +11,15 @@ import {
   Spinner,
 } from 'reactstrap';
 import { PostContainer } from '../../postsContainer';
+import { Post } from '../../../models/post';
 // User's logged in homepage.  Will need subscPosts container and newestPosts container
 
-export class Home extends React.Component<any, any> {
+interface IHomeState {
+  response: Post[];
+  data: boolean;
+}
+
+export class Home extends React.Component<any, IHomeState> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -42,7 +48,7 @@ export class Home extends React.Component<any, any> {
     return (
       <>
         {this.state.data ? (
-          <PostContainer postObject={this.state.response}></PostContainer>
+          <PostContainer posts={this.state.response}></PostContainer>
         ) : (
           <Spinner></Spinner>
         )}

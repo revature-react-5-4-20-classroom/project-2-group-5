@@ -12,6 +12,8 @@ public interface UsersService {
 	
 	Users getById(Integer userId);
 	
+	Users[] getLikeUsername(String username);
+	
 	Users create(Users u);
 	
 	Users update(Users u);

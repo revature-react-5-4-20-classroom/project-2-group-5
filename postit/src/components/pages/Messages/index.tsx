@@ -23,8 +23,8 @@ export class MessagesPage extends React.Component<any, any> {
           </Col>
 
           <Col className='content-panel' xs={8}>
-            {/* <MessageDisplayContainer /> */}
-            <CreateMessageForm />
+            <MessageDisplayContainer />
+            {/* <CreateMessageForm /> */}
           </Col>
         </Row>
       </Container>

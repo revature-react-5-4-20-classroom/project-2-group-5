@@ -12,9 +12,7 @@ import { addNewUser } from '../../apis/user';
 import { Dispatch } from 'redux';
 
 export const signupUser = (user: User) => async (dispatch: Dispatch) => {
-  console.log('in signup mapper');
   try {
-    console.log('in mapper user: ', user);
     const newUser = await addNewUser(user);
     dispatch({
       type: SIGNUP_SUCCESS,

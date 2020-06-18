@@ -1,18 +1,27 @@
 import React from 'react';
 import { SubscriberCard } from '../subscriberCard';
 import './style.css';
+import { Subscription } from '../../models/subscription';
 
-export class SubscribersContainer extends React.Component<any, any> {
+interface ISubscribersContainerProps {
+  subsArray: Subscription[];
+}
+
+export class SubscribersContainer extends React.Component<
+  ISubscribersContainerProps,
+  any
+> {
+  constructor(props: ISubscribersContainerProps) {
+    super(props);
+  }
   render() {
     return (
       <>
         <div className='subscriber-container'>
-          <SubscriberCard />
-          <SubscriberCard />
-          <SubscriberCard />
-          <SubscriberCard />
-          <SubscriberCard />
-          <SubscriberCard />
+          {this.props.subsArray &&
+            this.props.subsArray.map((u) => {
+              return <SubscriberCard key={u.subscriptionId} subscription={u} />;
+            })}
         </div>
       </>
     );

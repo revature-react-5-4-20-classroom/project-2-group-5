@@ -5,6 +5,10 @@ import { SubscribersContainer } from '../../subscribersContainer';
 import { connect } from 'react-redux';
 import { UserState } from '../../../redux/user/userReducer';
 import { Subscription } from '../../../models/subscription';
+import {
+  getAllsubscribee,
+  getAllsubscriber,
+} from '../../../apis/subscriptions';
 
 interface ISubscribersPageState {
   userSubscribersArray: Subscription[];
@@ -23,6 +27,27 @@ export class SubscribersPageComponent extends React.Component<
     };
   }
 
+  componentDidMount() {
+    this.retrieveSubscribers();
+    this.retrieveSubscriptions();
+  }
+
+  retrieveSubscribers = async () => {
+    // Case for if viewing subscriptions of a random user.  UserID would be passed as prop to this component from /profile page
+
+    // Case for if viewing your own subscriptions
+    let currUserId = this.props.currUser.userId;
+    let results = await getAllsubscribee(currUserId);
+    console.log('users subscribed to userID ' + currUserId + ' ', results);
+  };
+
+  retrieveSubscriptions = async () => {
+    // Case for if viewing your own subscriptions
+    let currUserId = this.props.currUser.userId;
+    let results = await getAllsubscriber(currUserId);
+    console.log('users userID' + currUserId + 'is subscribed to ', results);
+  };
+
   render() {
     return (
       <Container className='main-container'>
@@ -36,10 +61,10 @@ export class SubscribersPageComponent extends React.Component<
         </Row>
         <Row className='h-95'>
           <Col className='center-div' xs={6}>
-            <SubscribersContainer />
+            <SubscribersContainer subsArray={this.state.userSubscribersArray} />
           </Col>
           <Col className='center-div' xs={6}>
-            <SubscribersContainer />
+            <SubscribersContainer subsArray={this.state.userSubscribersArray} />
           </Col>
         </Row>
       </Container>

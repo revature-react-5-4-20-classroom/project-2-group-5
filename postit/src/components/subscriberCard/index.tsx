@@ -12,8 +12,16 @@ import {
   Col,
 } from 'reactstrap';
 import pic from '../../img/profileplaceholder.jpg';
+import { Subscription } from '../../models/subscription';
 
-export class SubscriberCard extends React.Component<any, any> {
+interface ISubscriberCardProps {
+  subscription: Subscription;
+}
+
+export class SubscriberCard extends React.Component<ISubscriberCardProps, any> {
+  constructor(props: ISubscriberCardProps) {
+    super(props);
+  }
   render() {
     return (
       <Card className='subscriber-card'>

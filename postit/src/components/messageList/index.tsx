@@ -14,6 +14,8 @@ import {
 import pic from '../../img/profileplaceholder.jpg';
 
 export class MessageListCard extends React.Component<any, any> {
+
+  
   render() {
     return (
       <Card className='message-card'>

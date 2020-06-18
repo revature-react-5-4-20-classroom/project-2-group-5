@@ -34,10 +34,10 @@ public class Users {
 	@JsonIgnoreProperties({"author", "comments"})
 	private List<Posts> posts;
 	@OneToMany(mappedBy = "subscribee")
-    @JsonIgnoreProperties({"subscribee"})
+    @JsonIgnoreProperties({"subscriber", "posts", "subscribee"})
 	private List<Subscriptions> subscribee;
 	@OneToMany(mappedBy = "subscriber")
-    @JsonIgnoreProperties({"subscriber"})
+    @JsonIgnoreProperties({"subscriber", "posts", "subscribee"})
 	private List<Subscriptions> subscriber;
 	
 

@@ -1,6 +1,6 @@
-import React from "react";
-import { getAllPosts } from "../../../apis/posts";
-import img from "./1.png";
+import React from 'react';
+import { getAllPosts } from '../../../apis/posts';
+import img from './1.png';
 import {
   Card,
   CardHeader,
@@ -9,12 +9,12 @@ import {
   CardTitle,
   Table,
   Spinner,
-} from "reactstrap";
-import { PostContainer } from "../../postsContainer";
-import { Post } from "../../../models/post";
+} from 'reactstrap';
+import { PostContainer } from '../../postsContainer';
+import { Post } from '../../../models/post';
 // User's logged in homepage.  Will need subscPosts container and newestPosts container
 
-interface IHomeState{
+interface IHomeState {
   response: Post[];
   data: boolean;
 }
@@ -44,6 +44,7 @@ export class Home extends React.Component<any, IHomeState> {
   // };
 
   render() {
+    console.log('from home this.props: ', this.props && this.props);
     return (
       <>
         {this.state.data ? (

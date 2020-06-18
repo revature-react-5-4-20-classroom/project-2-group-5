@@ -11,5 +11,4 @@ import com.g5.p2.models.Users;
 public interface PostsRepository extends JpaRepository<Posts, Integer>{
 	Posts findByPostId(Integer postId);
 	List<Posts> findByAuthor(Users author);
-	
 }

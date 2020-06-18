@@ -32,6 +32,11 @@ public class UsersServiceImplementation implements UsersService {
       throw new UserNotFoundException();
     }
   }
+  
+  @Override
+  public Users[] getLikeUsername(String username) {
+    return usersRepository.findLikeUsername(username + "%");
+  }
 
   @Override
   public Users create(Users u) {

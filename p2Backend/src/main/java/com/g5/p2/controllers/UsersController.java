@@ -43,6 +43,12 @@ public class UsersController {
 		
 	}
 	
+	//get users by username
+	@GetMapping("/username/{username}")
+	public Users[] getUserLikeUsername(@PathVariable String username) {
+	  return usersService.getLikeUsername(username);
+	}
+	
 	//create a user
 	@PostMapping
 	public Users createUser(@RequestBody Users u) {

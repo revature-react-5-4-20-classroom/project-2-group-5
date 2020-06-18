@@ -4,6 +4,7 @@ import { Nav, Navbar, NavItem, Button } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import { CreatePostForm } from './createPostForm';
 import { PostContainer } from './postsContainer';
+import { SearchPage } from './pages/Search';
 
 export class PostMultiRoute extends React.Component<any, any> {
   constructor(props: any) {
@@ -29,12 +30,12 @@ export class PostMultiRoute extends React.Component<any, any> {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to='/Posts/postid' hidden={!this.props.loggedInUser}>
+              <NavLink to='/posts/postid' hidden={!this.props.loggedInUser}>
                 <Button> Post Id</Button>
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to='/posts/userId' hidden={!this.props.loggedInUser}>
+              <NavLink to='/posts/user' hidden={!this.props.loggedInUser}>
                 <Button> User Id</Button>
               </NavLink>
             </NavItem>
@@ -49,7 +50,7 @@ export class PostMultiRoute extends React.Component<any, any> {
           </Nav>
         </Navbar>
         <Switch>
-          <Route path={`${this.props.path}`}>
+          <Route exact path={`${this.props.path}`}>
             {this.props.loggedInUser ? (
               <CreatePostForm
                 path={`${this.props.path}`}
@@ -60,12 +61,13 @@ export class PostMultiRoute extends React.Component<any, any> {
             )}
           </Route>
 
-          <Route path={`${this.props.path}/userId`}>
+          <Route path={`${this.props.path}/user`}>
             {this.props.loggedInUser ? (
-              <PostContainer
-                path={`${this.props.path}/userId`}
+              /*<PostContainer
+                path={`${this.props.path}/user`}
                 loggedInUser={this.props.loggedInUser}
-              />
+              />*/
+              <SearchPage path={`${this.props.path}/user`} />
             ) : (
               <h4>Please Login</h4>
             )}

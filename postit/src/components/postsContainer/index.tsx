@@ -21,8 +21,12 @@ import { Commnets } from "../comments";
 // data from grabbing the first few newest posts from DB.  Will need to be fed
 // in what type of data from page component (subscriber posts, newest posts, search result posts);
 
-export class PostContainer extends React.Component<any, any> {
-  constructor(props: any) {
+interface IPostContainerProps{
+  posts: Post[];
+}
+
+export class PostContainer extends React.Component<IPostContainerProps, any> {
+  constructor(props: IPostContainerProps) {
     super(props);
     this.state = {
       postId: "any",
@@ -52,10 +56,10 @@ export class PostContainer extends React.Component<any, any> {
       <Container style={{ textAlign: "left" }}>
         <h3>Discover: </h3>
         <Card className="card mb-3 ">
-          {this.props.postObject.map((obj: any, index: number) => {
+          {this.props.posts.map((obj) => {
             return (
-              <>
-                <Row className="">
+              <div key={`pKey${obj.postId}`}>
+                <Row className=""   >
                   <Col md={2}>
                     <CardImg src={img} alt="profile pic" />
                   </Col>
@@ -88,7 +92,7 @@ export class PostContainer extends React.Component<any, any> {
                     </CardBody>
                   </Col>
                 </Row>
-              </>
+              </div>
             );
           })}
         </Card>

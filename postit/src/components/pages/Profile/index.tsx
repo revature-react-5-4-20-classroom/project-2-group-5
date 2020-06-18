@@ -6,25 +6,33 @@ import { getUsersById, updateUser } from "../../../apis/user";
 import img from "./1.png";
 import { SubscriberCard } from "../../subscriberCard/index";
 import { getPostsByUserId } from "../../../apis/posts";
-import ReactS3Uploader from "react-s3-uploader";
-import { connect } from "react-redux";
-import { UserState } from "../../../redux/user/userReducer";
+import ReactS3Uploader from 'react-s3-uploader';
+import { Post } from "../../../models/post";
 import { User } from "../../../models/user";
+import { UserState } from "../../../redux/user/userReducer";
+import { connect } from "react-redux";
 // import { Pic } from "../../../fileUpdoad";
-class UserProfileComponent extends React.Component<any, any> {
+
+interface IUserProfileState{
+    response: User;
+    posts: Post[];
+    data: boolean;
+}
+
+export class UserProfileComponent extends React.Component<any, IUserProfileState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      response: "any",
-      posts: "any",
+      response: new User(0, "", "", ""),
+      posts: [],
       data: false,
     };
   }
 
   componentDidMount = async () => {
     this.setState({
-      response: await getUsersById(this.state.currUser.userId),
-      posts: await getPostsByUserId(this.state.currUser.userId),
+      response: await getUsersById(this.state.response.userId),
+      posts: await getPostsByUserId(this.state.response.userId),
 
       data: true,
     });
@@ -33,11 +41,12 @@ class UserProfileComponent extends React.Component<any, any> {
   changePic = async (e: any) => {
     e.preventDefault();
     const updateUserObj = new User(
-      this.state.currUser.userId,
-      this.state.currUser.username,
-      this.state.currUser.alias,
-      this.state.role,
-      this.state.password.e.currentTarget.value
+      this.state.response.userId,
+      this.state.response.username,
+      this.state.response.alias,
+      this.state.response.role,
+      this.state.response.password,
+      e.currentTarget.value
     );
     this.setState({
       response:await updateUser(updateUserObj)
@@ -69,7 +78,7 @@ class UserProfileComponent extends React.Component<any, any> {
           </Col>
           <Col md={7}>
             {this.state.data ? (
-              <PostContainer postObject={this.state.posts}></PostContainer>
+              <PostContainer posts={this.state.posts}></PostContainer>
             ) : (
               <Spinner></Spinner>
             )}

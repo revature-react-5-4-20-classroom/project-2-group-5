@@ -55,7 +55,7 @@ class PrivateRoutesComponent extends React.Component<any, any> {
         </Route>
         <Route path='/messages'>
           {this.props.isAuthenticated === true ? (
-            <MessagesPage path='/messages' />
+            <MessagesPage path='/messages' userId={this.props.currUser.userId} />
           ) : (
             <Redirect to='/' />
           )}

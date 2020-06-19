@@ -60,11 +60,9 @@ export class HomeComponent extends React.Component<any, IHomeState> {
     let postsArr = await getAllPosts();
     let start = postsArr.length - 4;
     let end = postsArr.length;
+    console.log('new posts', postsArr);
     this.setState({
       allPosts: postsArr.slice(start, end),
-    });
-    console.log(postsArr.slice(start, end));
-    this.setState({
       shouldUpdate: true,
     });
     // this.shouldComponentUpdate(this.props, this.state);
@@ -76,10 +74,7 @@ export class HomeComponent extends React.Component<any, IHomeState> {
     let start = postsArr.length - 4;
     let end = postsArr.length;
     this.setState({
-      allPosts: postsArr.slice(start, end),
-    });
-    console.log(postsArr.slice(start, end));
-    this.setState({
+      subPosts: postsArr.slice(start, end),
       shouldUpdate: true,
     });
     // this.shouldComponentUpdate(this.props, this.state);
@@ -96,7 +91,11 @@ export class HomeComponent extends React.Component<any, IHomeState> {
         </Row>
         <Row className='h-45'>
           <Col xs={8} className='offset-2 center-div'>
-            <PostContainer posts={this.state.subPosts}></PostContainer>
+            {this.state.subPosts ? (
+              <PostContainer posts={this.state.subPosts}></PostContainer>
+            ) : (
+              <h3>No one you're subscribed to is posting!</h3>
+            )}
           </Col>
         </Row>
         <Row className='title-row h-5'>
@@ -106,7 +105,11 @@ export class HomeComponent extends React.Component<any, IHomeState> {
         </Row>
         <Row className='h-45'>
           <Col xs={8} className='offset-2 center-div'>
-            <PostContainer posts={this.state.allPosts}></PostContainer>
+            {this.state.subPosts ? (
+              <PostContainer posts={this.state.allPosts}></PostContainer>
+            ) : (
+              <h3>No one you're subscribed to is posting!</h3>
+            )}
           </Col>
         </Row>
       </Container>

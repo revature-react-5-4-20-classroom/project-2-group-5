@@ -11,7 +11,7 @@ import {
   Row,
   Col,
 } from 'reactstrap';
-import pic from '../../img/profileplaceholder.jpg';
+import somepic from '../../img/profileplaceholder.jpg';
 import { Subscription } from '../../models/subscription';
 import { updateSubscriptions } from '../../apis/subscriptions';
 
@@ -55,7 +55,7 @@ export class SubscriberCard extends React.Component<ISubscriberCardProps, any> {
                     className='profile-pic'
                     width='65%'
                     alt='Card image cap'
-                    src={pic}
+                    src={somepic}
                   />
                   <CardText>{this.props.subscription.subscriberName}</CardText>
                 </CardBody>
@@ -92,7 +92,7 @@ export class SubscriberCard extends React.Component<ISubscriberCardProps, any> {
                     className='profile-pic'
                     width='65%'
                     alt='Card image cap'
-                    src={pic}
+                    src={somepic}
                   />
                   <CardText>{this.props.subscription.subscribeeName}</CardText>
                 </CardBody>

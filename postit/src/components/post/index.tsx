@@ -11,7 +11,7 @@ import {
 } from 'reactstrap';
 import { Comments } from '../comments';
 import './style.css';
-import img from './1.png';
+import img from './2.png';
 import { Post } from '../../models/post';
 
 // Component that gives stucture to every post.  Will have profile pic {conditionally rendered},
@@ -42,12 +42,26 @@ export class PostComponent extends React.Component<IPostComponentProps, any> {
         {/* <div key={`pKey${obj.postId}`}> */}
         <Row className=''>
           <Col md={4}>
-            <img src={img} alt='profile pic' className='profile-pic' />
+            <Row>
+              <Col xs={12} className='center-div'>
+                <img src={img} alt='profile pic' className='post-profile-pic' />
+              </Col>
+            </Row>
+
+            <Row>
+              <Col xs={12}>
+                <CardTitle className='center-div'>
+                  <strong>{this.props.post.username}</strong>
+                </CardTitle>
+              </Col>
+            </Row>
           </Col>
           <Col md={8}>
             <CardBody className=''>
               {/* //need to change post class in models because backend sends whole user object */}
-              <CardTitle>{this.props.post.title}</CardTitle>
+              <CardTitle>
+                <strong>Post Title: {this.props.post.title}</strong>
+              </CardTitle>
               <CardText>{this.props.post.content}</CardText>
               <CardText className='card-text'>
                 <small className=''>

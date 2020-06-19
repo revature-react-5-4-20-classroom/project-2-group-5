@@ -23,7 +23,7 @@ public class Posts {
   private Integer postId;
   @JoinColumn(name = "author")
   @ManyToOne(fetch = FetchType.EAGER)
-  @JsonIgnoreProperties({"posts", "subscribee", "subscriber"})
+  @JsonIgnoreProperties({"posts", "subscribee", "subscriber", "password", "alias", "role"})
   private Users author;
   @Column(name = "date_posted")
   private Integer datePosted;

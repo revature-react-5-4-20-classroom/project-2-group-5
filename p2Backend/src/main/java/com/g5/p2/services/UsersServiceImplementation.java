@@ -93,10 +93,10 @@ public class UsersServiceImplementation implements UsersService {
   //u is the active user to check if they are blocked, users is the list of users that will end up returning
   //if the subscriber matches the user, and their subscription lists them as blocked, remove them from the list
   public List<Users> checkBlocked(Users u, List<Users> users){
-    for (int i=0; i < u.getSubscribee().size(); i++) {
+    for (int i=0; i < u.getSubscriber().size(); i++) {
       for(int j=0; j < users.size(); j++) {
-        if((u.getSubscribee().get(i).getSubscriber().getUserId() == users.get(j).getUserId())) {
-          if(u.getSubscribee().get(i).isBlocked()) {
+        if((u.getSubscriber().get(i).getSubscribee().getUserId() == users.get(j).getUserId())) {
+          if(u.getSubscriber().get(i).isBlocked()) {
             users.remove(j);
             j--;
           }

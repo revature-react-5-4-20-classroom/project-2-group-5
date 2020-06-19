@@ -21,11 +21,11 @@ public class Messages {
     private Integer messageId;
     @JoinColumn(name = "author")
     @ManyToOne(fetch = FetchType.EAGER)
-    @JsonIgnoreProperties({"writtenMessages", "password", "alias", "role", "posts", "subscriber", "subscribee"})
+    @JsonIgnoreProperties({"writtenMessages", "password", "alias", "role", "posts"})
     private Users author;
     @JoinColumn(name = "receiver")
     @ManyToOne(fetch = FetchType.EAGER)
-    @JsonIgnoreProperties({"receivedMessages", "password", "alias", "role", "posts", "subscriber", "subscribee"})
+    @JsonIgnoreProperties({"receivedMessages", "password", "alias", "role", "posts"})
     private Users receiver;
     @Column(name = "content")
     private String content; 

@@ -45,7 +45,7 @@ class CommnetsComponents extends React.Component<any, any> {
     const newComment = new Comment(
       0,
       this.props.id,
-      this.state.currUser.userId,
+      this.props.currUser.userId,
       // this.state.currUser.userId,
       this.state.content
     );
@@ -58,6 +58,7 @@ class CommnetsComponents extends React.Component<any, any> {
 
     this.setState({
       comment: await createComment(newComment),
+      
     });
   };
   getComment = async () => {

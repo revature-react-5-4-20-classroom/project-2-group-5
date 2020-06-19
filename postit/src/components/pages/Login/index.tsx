@@ -24,7 +24,7 @@ export class LoginPage extends React.Component<any, any> {
             <Row className='flex-container'>
               <p className='sub-text'>
                 Don't have an account? <br />
-                Sign Up <a href='/'>here</a>!
+                Sign Up <a href='/signup'>here</a>!
               </p>
             </Row>
           </Col>

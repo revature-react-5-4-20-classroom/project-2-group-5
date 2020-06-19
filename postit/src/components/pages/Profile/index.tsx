@@ -9,6 +9,8 @@ import { getPostsByUserId } from '../../../apis/posts';
 import ReactS3Uploader from 'react-s3-uploader';
 import { Post } from '../../../models/post';
 import { User } from '../../../models/user';
+import { UserState } from '../../../redux/user/userReducer';
+import { connect } from 'react-redux';
 // import { Pic } from "../../../fileUpdoad";
 
 interface IUserProfileState {
@@ -17,7 +19,7 @@ interface IUserProfileState {
   data: boolean;
 }
 
-export class UserProfile extends React.Component<any, IUserProfileState> {
+class UserProfileComponent extends React.Component<any, IUserProfileState> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -29,24 +31,34 @@ export class UserProfile extends React.Component<any, IUserProfileState> {
 
   componentDidMount = async () => {
     this.setState({
-      posts: await getPostsByUserId(1),
-      response: await getUsersById(1),
+      response: await getUsersById(this.props.currUser.userId),
+      posts: await getPostsByUserId(this.props.currUser.userId),
+
       data: true,
     });
   };
 
-  getUser = async () => {};
+  // changePic = async (e: any) => {
+  //   e.preventDefault();
+  //   const updateUserObj = new User(
+  //     this.state.response.userId,
+  //     this.state.response.username,
+  //     this.state.response.alias,
+  //     this.state.response.role,
+  //     this.state.response.password,
+  //     e.currentTarget.value
+  //   );
+  //   this.setState({
+  //     response:await updateUser(updateUserObj)
+  //   })
+  // };
 
   render() {
     return (
-      <Container className='center'>
+      <Container className='center' style={{ overflowY: 'auto' }}>
         <Row>
           <Col md={2}>
             <img src={img} />
-            <label htmlFor=''>change profile pic</label>
-            {/* <Pic></Pic> */}
-            {/* <input type="s" onChange={this.changePic}></input> */}
-            {/* <ReactS3Uploader></ReactS3Uploader> */}
           </Col>
           <Col md={10}>
             <h1>{this.state.response.username} </h1>
@@ -78,3 +90,11 @@ export class UserProfile extends React.Component<any, IUserProfileState> {
     );
   }
 }
+
+const mapStateToProps = (state: UserState) => {
+  return {
+    ...state,
+  };
+};
+
+export const UserProfile = connect(mapStateToProps)(UserProfileComponent);

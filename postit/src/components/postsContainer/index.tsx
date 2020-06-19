@@ -1,7 +1,20 @@
 import React from "react";
 import { Post } from "../../models/post";
 import img from "./1.png";
-import { Container, Row, Card, Col, CardImg, CardBody, CardTitle } from "reactstrap";
+import {
+  Container,
+  Row,
+  Card,
+  Col,
+  CardImg,
+  CardBody,
+  CardTitle,
+  Button,
+  CardText,
+} from "reactstrap";
+import { getAllCommentsByPostId } from "../../apis/comments";
+import { Commnets } from "../comments";
+// import { Commnets } from "";
 // Component that will loop-render a certain amount of './post' components using
 // data from grabbing the first few newest posts from DB.  Will need to be fed
 // in what type of data from page component (subscriber posts, newest posts, search result posts);
@@ -13,34 +26,67 @@ interface IPostContainerProps{
 export class PostContainer extends React.Component<IPostContainerProps, any> {
   constructor(props: IPostContainerProps) {
     super(props);
+    this.state = {
+      postId: "any",
+      cFlag: false,
+      
+    };
   }
   componentDidMount = async () => {
     //await getPostsById(this.props.userId);
   };
   getPostsById = async () => {};
 
+  // newComment = async (id: number) => {
+  //   const newComment = new Comment();
+  //   this.setState({});
+  // };
+  showComment = async (id: number) => {
+    this.setState({
+      postId: id,
+      cFlag:(this.state.cFlag)?false:true
+     
+    });
+  };
+
   render() {
     return (
-      <Container style={{textAlign:"left"}}>
-        <h3 >Discover: </h3>
-        <Card className="card mb-3 ">
+      <Container style={{ textAlign: "left"  }}>
+        <h3>Discover: </h3>
+        <Card className="card mb-3 " style={{overflowY:"auto" , height: "40vw" ,overflowX: "hidden"}}>
           {this.props.posts.map((obj) => {
             return (
               <div key={`pKey${obj.postId}`}>
                 <Row className=""   >
                   <Col md={2}>
-                    <CardImg src={img}  alt="profile pic" />
+                    <CardImg src={img} alt="profile pic" />
                   </Col>
                   <Col md={6}>
                     <CardBody className="">
                       {/* //need to change post class in models because backend sends whole user object */}
-                      <CardTitle>{obj.username}</CardTitle>
-                      <p className="card-text">{obj.content}</p>
-                      <p className="card-text">
-                        <small className="text-muted float-md-right">
-                          check comments here
+                      <CardTitle>
+                        <h4>{obj.username}</h4>
+                      </CardTitle>
+                      <CardText>{obj.content}</CardText>
+                      <CardText className="card-text">
+                        <small className="">
+                          <Button
+                            onClick={(e) => {
+                              this.showComment(obj.postId);
+                            }}
+                          >
+                            {" "}
+                            comments
+                          </Button>
                         </small>
-                      </p>
+                      </CardText>
+                      <Card >
+                        {this.state.cFlag && this.state.postId == obj.postId ? (
+                          <Commnets id={this.state.postId} />
+                        ) : (
+                          <></>
+                        )}
+                      </Card>
                     </CardBody>
                   </Col>
                 </Row>

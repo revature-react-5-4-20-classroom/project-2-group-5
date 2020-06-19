@@ -36,6 +36,7 @@ export async function updateUser(u: User): Promise<User> {
     password: u.password,
     alias: u.alias,
     role: u.role,
+    image:u.profilePic,
   });
   const { userId, username, alias, role, password } = response.data;
   return new User(userId, username, alias, role, password);

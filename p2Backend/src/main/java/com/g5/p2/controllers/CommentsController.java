@@ -35,7 +35,7 @@ public class CommentsController {
   public Comments createComment(@RequestBody LinkedHashMap<String, Object> c) {
       try {
           Comments convert = new Comments((Integer)c.get("commentId"),(String)c.get("content"));
-          return commentsService.create(convert, (Integer)c.get("postId"),(Integer)c.get("userId"));
+          return commentsService.create(convert, (Integer)c.get("postId"),(Integer)c.get("author"));
       }
       catch(Exception e) {
           e.printStackTrace();

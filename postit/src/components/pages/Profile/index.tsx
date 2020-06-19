@@ -1,12 +1,6 @@
 //will use subscriptionById and postsById
 import React from 'react';
-import { PostContainer } from '../../postsContainer';
 import { Container, Row, Col, Spinner } from 'reactstrap';
-import { getUsersById } from '../../../apis/user';
-import img from './1.png';
-import { SubscriberCard } from '../../subscriberCard/index';
-import { getPostsByUserId } from '../../../apis/posts';
-import ReactS3Uploader from 'react-s3-uploader';
 import { Post } from '../../../models/post';
 import { User } from '../../../models/user';
 import { UserState } from '../../../redux/user/userReducer';

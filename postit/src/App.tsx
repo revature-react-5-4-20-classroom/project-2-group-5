@@ -1,17 +1,8 @@
-import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from 'react-router-dom';
+import React from 'react';
 import './App.css';
-import { Navigation } from './components/navbar';
-import { PrivateRoutes } from './components/privateRoutes';
 import { Provider } from 'react-redux';
 import { store } from './redux/user/userStore';
-import { LoginPage } from './components/pages/Login';
-import { SignupPage } from './components/pages/Signup';
+import { ParentPage } from './components/parentPage';
 
 class App extends React.Component<any, any> {
   constructor(props: any) {
@@ -21,31 +12,7 @@ class App extends React.Component<any, any> {
   render() {
     return (
       <Provider store={store}>
-        <div className='App'>
-          <Router>
-            <Navigation />
-            <Switch>
-              <Route
-                path='/login'
-                render={(props: any) => {
-                  return <LoginPage {...props} path='/login' />;
-                }}
-              />
-              <Route
-                path='/signup'
-                render={(props: any) => {
-                  return <SignupPage {...props} path='/signup' />;
-                }}
-              />
-              <Route path='/logout'>
-                <Redirect to='/signup' />
-              </Route>
-              <Route>
-                <PrivateRoutes />
-              </Route>
-            </Switch>
-          </Router>
-        </div>
+        <ParentPage  />      
       </Provider>
     );
   }

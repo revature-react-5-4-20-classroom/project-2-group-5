@@ -2,17 +2,12 @@ import React from 'react';
 import './style.css';
 import {
   Card,
-  CardImg,
   CardBody,
-  CardTitle,
-  CardSubtitle,
-  CardText,
   Button,
   Row,
   Col,
 } from 'reactstrap';
 import pic from '../../img/profileplaceholder.jpg';
-import { User } from '../../models/user';
 
 export class MessageListCard extends React.Component<any, any> {
   selectUser = async (event: any) => {

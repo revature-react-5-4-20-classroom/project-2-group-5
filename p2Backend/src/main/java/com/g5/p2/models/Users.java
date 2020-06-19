@@ -1,6 +1,5 @@
 package com.g5.p2.models;
 
-
 import java.util.List;
 
 import javax.persistence.Column;
@@ -8,16 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
 @Entity
-@Table(name = "users")
+@Table(name = "test")
 public class Users {
-	
+
 	@Id
 	@Column(name = "user_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,30 +30,63 @@ public class Users {
 	@Column(name = "role")
 	private String role;
 	@OneToMany(mappedBy = "author")
-	@JsonIgnoreProperties({"author", "comments"})
+	@JsonIgnoreProperties({ "author", "comments" })
 	private List<Posts> posts;
 	@OneToMany(mappedBy = "subscribee")
-    @JsonIgnoreProperties({"subscriber", "posts", "subscribee"})
+	@JsonIgnoreProperties({ "subscriber", "posts", "subscribee" })
 	private List<Subscriptions> subscribee;
 	@OneToMany(mappedBy = "subscriber")
-    @JsonIgnoreProperties({"subscriber", "posts", "subscribee"})
+	@JsonIgnoreProperties({ "subscriber", "posts", "subscribee" })
 	private List<Subscriptions> subscriber;
-	
 
-  public Users() {
+	@Column(name = "picture_name")
+	private String pictureName;
+
+	@Column(name = "picture_type")
+	private String pictureType;
+
+	@Lob
+	@Column(name = "pic")
+	private byte[] pic;
+
+	public String getPictureName() {
+		return pictureName;
+	}
+
+	public void setPictureName(String pictureName) {
+		this.pictureName = pictureName;
+	}
+
+	public String getPictureType() {
+		return pictureType;
+	}
+
+	public void setPictureType(String pictureType) {
+		this.pictureType = pictureType;
+	}
+
+	public byte[] getPic() {
+		return pic;
+	}
+
+	public void setPic(byte[] pic) {
+		this.pic = pic;
+	}
+
+	public Users() {
 		super();
 	}
-	
+
 //	public Users(String username, String password) { -- working login route
 //	  this();
 //	  this.username = username;
 //	  this.password = password;
 //	} 
-	
+
 	public Users(Integer userId, String username, String password, String role) {
 		this(userId, username, password, "", role);
 	}
-	
+
 	public Users(Integer userId, String username, String password, String alias, String role) {
 		super();
 		this.userId = userId;
@@ -62,6 +94,19 @@ public class Users {
 		this.password = password;
 		this.alias = alias;
 		this.role = role;
+	}
+
+	public Users(String username, String password, String alias, String role, String pictureName, String pictureType,
+			byte[] pic) {
+		super();
+
+		this.username = username;
+		this.password = password;
+		this.alias = alias;
+		this.role = role;
+		this.pictureName = pictureName;
+		this.pictureType = pictureType;
+		this.pic = pic;
 	}
 
 	public Integer getUserId() {
@@ -103,7 +148,7 @@ public class Users {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
+
 	public List<Posts> getPosts() {
 		return posts;
 	}
@@ -111,20 +156,20 @@ public class Users {
 	public void setPosts(List<Posts> posts) {
 		this.posts = posts;
 	}
-	
+
 	public List<Subscriptions> getSubscribee() {
-	    return subscribee;
+		return subscribee;
 	}
 
 	public void setSubscribee(List<Subscriptions> subscribee) {
-	    this.subscribee = subscribee;
+		this.subscribee = subscribee;
 	}
 
 	public List<Subscriptions> getSubscriber() {
-	    return subscriber;
+		return subscriber;
 	}
 
 	public void setSubscriber(List<Subscriptions> subscriber) {
-	    this.subscriber = subscriber;
+		this.subscriber = subscriber;
 	}
 }

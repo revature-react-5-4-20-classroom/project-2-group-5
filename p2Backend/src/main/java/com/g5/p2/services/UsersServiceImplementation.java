@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.g5.p2.exceptions.UserNotFoundException;
 import com.g5.p2.models.Users;
@@ -81,5 +82,25 @@ public class UsersServiceImplementation implements UsersService {
       return false;
     }
   }
+  
+  @Override
+  public Users saveFile(MultipartFile file) {
+	  String docname=file.getOriginalFilename();
+	  try {
+		  
+		  Users user= new Users("username1513","password15","alias15","role15",docname,file.getContentType(),file.getBytes());
+		  user.setUserId(usersRepository.findAll().get(usersRepository.findAll().size() - 1).getUserId() + 1);
+		  return usersRepository.save(user);
+	  }
+	  catch (Exception e) {
+		  e.printStackTrace();
+	  }
+	  return null;	  
+  }
 
+  @Override
+  public Optional<Users> getfile(Integer fileId) {
+	  return usersRepository.findById(fileId);
+  }
+  
 }

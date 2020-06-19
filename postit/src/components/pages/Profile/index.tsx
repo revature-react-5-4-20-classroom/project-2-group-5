@@ -1,7 +1,7 @@
 //will use subscriptionById and postsById
 import React from 'react';
 import { PostContainer } from '../../postsContainer';
-import { Container, Row, Col, Spinner } from 'reactstrap';
+import { Container, Row, Col, Spinner, Button } from 'reactstrap';
 import { getUsersById } from '../../../apis/user';
 import img from './1.png';
 import { SubscriberCard } from '../../subscriberCard/index';
@@ -18,6 +18,8 @@ interface IUserProfileState {
   response: User;
   posts: Post[];
   data: boolean;
+  isSubscribed: boolean;
+  currProfile: number;
 }
 
 class UserProfileComponent extends React.Component<any, IUserProfileState> {
@@ -27,6 +29,8 @@ class UserProfileComponent extends React.Component<any, IUserProfileState> {
       response: new User(0, '', '', ''),
       posts: [],
       data: false,
+      isSubscribed: false,
+      currProfile: 0,
     };
   }
 
@@ -59,9 +63,38 @@ class UserProfileComponent extends React.Component<any, IUserProfileState> {
     return (
       <Container className='main-container' style={{ overflowY: 'auto' }}>
         <Row>
-          <h1>hi from profile</h1>
           <Col xs={8} className='offset-2 center-div'>
-            <Container className='profile-container'></Container>
+            <Container className='profile-container'>
+              <Row>
+                <Col xs={3}>
+                  <img
+                    src={img}
+                    alt='profile pic'
+                    className='post-profile-pic'
+                  />
+                </Col>
+                <Col xs={9}>
+                  <h1>USERNAME</h1>
+                  {/* {this.state.currProfile !== this.props.currUser.userId? (
+                    {this.state.isSubscribed ? (
+                      <Button>Unsubscribe</Button>
+                    ) : (
+                      <Button>Subscribe</Button>
+                    )}
+                  ) : (
+                    <> </>
+                  )} */}
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={3}>
+                  <div className='profile-subs-div'></div>
+                </Col>
+                <Col xs={9}>
+                  <div className='profile-posts-div'></div>
+                </Col>
+              </Row>
+            </Container>
           </Col>
         </Row>
       </Container>

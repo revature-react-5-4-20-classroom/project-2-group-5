@@ -8,33 +8,6 @@ export class MessageRow extends React.Component<any, any> {
     return (
       <>
         {this.props.sent ? 
-
-          <Row>
-          <Col xs={12}>
-            <Card className='message-card'>
-              <Row className='card-row'>
-                <Col className='message-column' xs={10}>
-                  <CardText className='right-justified'>
-                    {this.props.message.content}
-                  </CardText>
-                </Col>
-                <Col xs={2}>
-                  <CardBody>
-                    <img
-                      className='profile-pic'
-                      width='65%'
-                      alt='Card image cap'
-                      src={pic /* this.props.user.pic */}
-                    />
-                  </CardBody>
-                </Col>
-              </Row>
-            </Card>
-          </Col>
-          </Row>
-
-        :
-
           <Row>
             <Col xs={12}>
               <Card className='message-card'>
@@ -57,6 +30,30 @@ export class MessageRow extends React.Component<any, any> {
                 </Row>
               </Card>
             </Col>
+          </Row>
+        : 
+          <Row>
+          <Col xs={12}>
+            <Card className='message-card'>
+              <Row className='card-row'>
+                <Col className='message-column' xs={10}>
+                  <CardText className='right-justified'>
+                    {this.props.message.content}
+                  </CardText>
+                </Col>
+                <Col xs={2}>
+                  <CardBody>
+                    <img
+                      className='profile-pic'
+                      width='65%'
+                      alt='Card image cap'
+                      src={pic /* this.props.user.pic */}
+                    />
+                  </CardBody>
+                </Col>
+              </Row>
+            </Card>
+          </Col>
           </Row>
         }
       </>

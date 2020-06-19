@@ -3,11 +3,10 @@ import { Row, Col, Container } from 'reactstrap';
 import './style.css';
 import { MessageListContainer } from '../../messageListContainer';
 import { MessageDisplayContainer } from '../../messageDisplayContainer';
-import { CreateMessageForm } from '../../createMessageForm';
 import { User } from '../../../models/user';
 import { Message } from '../../../models/message';
 import { getMessagesByUserId, getMessagesByAuthord } from '../../../apis/messages';
-import { getUsersById, getUsersLikeUsername } from '../../../apis/user';
+import { getUsersById} from '../../../apis/user';
 import { setTimeout } from 'timers';
 
 interface IMessagePageState {
@@ -15,6 +14,7 @@ interface IMessagePageState {
   selectedUser: User;
   conversation: Message[];
   recursiveAccess: number[];
+  newConversation: boolean;
 }
 
 export class MessagesPage extends React.Component<any, IMessagePageState> {
@@ -24,7 +24,8 @@ export class MessagesPage extends React.Component<any, IMessagePageState> {
       userCards: [],
       selectedUser: new User(0, "", "", ""),
       conversation: [],
-      recursiveAccess: []
+      recursiveAccess: [],
+      newConversation: false
     }
   }
 
@@ -68,15 +69,23 @@ export class MessagesPage extends React.Component<any, IMessagePageState> {
   //lol this feels so hacky
   async recursiveFetch(u: User, accessIndex: number){
     let messages: Message[] = await getMessagesByAuthord(this.props.userId, u.userId);
+    if(this.state.newConversation && messages.length > 0){
+      this.setState({newConversation: false});
+      this.fetchUserCards();
+    }
     //messages = this.sortMessages(messages);
     this.setState({conversation: messages});
-    console.log(messages);
+    //console.log(messages);
     setTimeout(()=>{
-      console.log(accessIndex, this.state.recursiveAccess.length)
+      //console.log(accessIndex, this.state.recursiveAccess.length)
       if(this.state.recursiveAccess.length-1 == accessIndex){
         this.recursiveFetch(u, accessIndex);
       }
     }, 500);
+  }
+
+  newConversation(){
+    this.setState({newConversation: true});
   }
 
   //possibly not needed
@@ -120,7 +129,7 @@ export class MessagesPage extends React.Component<any, IMessagePageState> {
           </Col>
 
           <Col className='content-panel' xs={8}>
-            <MessageDisplayContainer user={this.state.selectedUser} conversation={this.state.conversation}/>
+            <MessageDisplayContainer userId={this.props.userId} toUser={this.state.selectedUser} conversation={this.state.conversation} setSelectedUser={(user:User)=>{this.setSelectedUser(user)}} newConversation={()=>{this.newConversation()}}/>
             {/* <CreateMessageForm /> */}
           </Col>
         </Row>

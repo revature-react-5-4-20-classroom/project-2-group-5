@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Container,
   Row,
@@ -13,28 +13,28 @@ import {
   Button,
   InputGroup,
   InputGroupAddon,
-} from "reactstrap";
-import { getAllCommentsByPostId, createComment } from "../../apis/comments";
-import { UserState } from "../../redux/user/userReducer";
-import { connect } from "react-redux";
-import { Comment } from "../../models/comment";
+} from 'reactstrap';
+import { getAllCommentsByPostId, createComment } from '../../apis/comments';
+import { UserState } from '../../redux/user/userReducer';
+import { connect } from 'react-redux';
+import { Comment } from '../../models/comment';
 // Component that will loop-render a certain amount of './post' components using
 // data from grabbing the first few newest posts from DB.  Will need to be fed
 // in what type of data from page component (subscriber posts, newest posts, search result posts);
 
-class CommnetsComponents extends React.Component<any, any> {
+class CommentsComponents extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      comments: "any",
+      comments: 'any',
       cFlag: false,
-      content: "",
+      content: '',
     };
   }
 
   componentDidMount = async () => {
     this.setState({
-      comments: await getAllCommentsByPostId(this.props.id),
+      comments: await getAllCommentsByPostId(this.props.postId),
       cFlag: true,
     });
   };
@@ -44,9 +44,8 @@ class CommnetsComponents extends React.Component<any, any> {
 
     const newComment = new Comment(
       0,
-      this.props.id,
+      this.props.postId,
       this.props.currUser.userId,
-      // this.state.currUser.userId,
       this.state.content
     );
     console.log(
@@ -58,12 +57,11 @@ class CommnetsComponents extends React.Component<any, any> {
 
     this.setState({
       comment: await createComment(newComment),
-      
     });
   };
   getComment = async () => {
     this.setState({
-      comments: await getAllCommentsByPostId(this.props.id),
+      comments: await getAllCommentsByPostId(this.props.postId),
       cFlag: true,
     });
   };
@@ -78,40 +76,42 @@ class CommnetsComponents extends React.Component<any, any> {
       <Container>
         <Row>
           <Col>
-        {this.state.cFlag ? (
-          <>
-            {this.state.comments.length != 0 ? (
-              <ul>
-                {this.state.comments.map((obj: any, index: number) => {
-                  return <li>{obj.content}</li>;
-                })}
-              </ul>
+            {this.state.cFlag ? (
+              <>
+                {this.state.comments.length != 0 ? (
+                  <ul>
+                    {this.state.comments.map((obj: any, index: number) => {
+                      return <li>{obj.content}</li>;
+                    })}
+                  </ul>
+                ) : (
+                  <h3>no comments to show</h3>
+                )}
+              </>
             ) : (
-              <h3>no comments to show</h3>
+              <Spinner></Spinner>
             )}
-          </>
-        ) : (
-          <Spinner></Spinner>
-        )}
-        </Col>
+          </Col>
         </Row>
         <Row>
           <Col md={12}>
-        <div style={{ display: this.props.isAuthenticated ? "block" : "none" }}>
-          <InputGroup>
-            <Input
-            width="100%"
-              type="text"
-              placeholder="comment here"
-              name="content"
-              onChange={this.bindInputChangeToState}
-            ></Input>
-            <InputGroupAddon addonType="append">
-              <Button onClick={this.newComment}>post</Button>
-            </InputGroupAddon>
-          </InputGroup>
-        </div>
-        </Col>
+            <div
+              style={{ display: this.props.isAuthenticated ? 'block' : 'none' }}
+            >
+              <InputGroup>
+                <Input
+                  width='100%'
+                  type='text'
+                  placeholder='comment here'
+                  name='content'
+                  onChange={this.bindInputChangeToState}
+                ></Input>
+                <InputGroupAddon addonType='append'>
+                  <Button onClick={this.newComment}>post</Button>
+                </InputGroupAddon>
+              </InputGroup>
+            </div>
+          </Col>
         </Row>
       </Container>
     );
@@ -123,4 +123,4 @@ const mapStateToProps = (state: UserState) => {
   };
 };
 
-export const Commnets = connect(mapStateToProps)(CommnetsComponents);
+export const Comments = connect(mapStateToProps)(CommentsComponents);

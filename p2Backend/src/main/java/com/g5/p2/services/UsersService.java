@@ -6,13 +6,13 @@ import com.g5.p2.models.Users;
 
 public interface UsersService {
 
-	List<Users> getAll();
+	List<Users> getAll(Users u);
 	
 //	Users login(String username, String password); - working on login route
 	
 	Users getById(Integer userId);
 	
-	Users[] getLikeUsername(String username);
+	List<Users> getLikeUsername(String username, Users session);
 	
 	Users create(Users u);
 	

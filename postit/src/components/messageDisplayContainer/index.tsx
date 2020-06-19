@@ -117,7 +117,7 @@ export class MessageDisplayContainer extends React.Component<any, IMessageDispla
             <Row className='h-5'>
               <Col xs={12} className='center-div'>
                 <InputGroup className='input-box' >
-                  <Input placeholder='username' onChange={this.handleSendMessage} type={"text"}  disabled={this.props.toUser.userId == 0}/>
+                  <Input placeholder='message' onChange={this.handleSendMessage} type={"text"}  disabled={this.props.toUser.userId == 0}/>
                   <InputGroupAddon addonType='append'>
                     <Button onClick={this.sendMessage} disabled={this.props.toUser.userId == 0}>Send</Button>
                   </InputGroupAddon>

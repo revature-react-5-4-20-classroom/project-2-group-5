@@ -1,8 +1,9 @@
-import axios from 'axios';
-import { Subscription } from '../models/subscription';
-import { User } from '../models/user';
+import axios from "axios";
+import { Subscription } from "../models/subscription";
+import { backendUrl } from "./backendUrl";
 const subscriberClient = axios.create({
-  baseURL: 'http://3.133.86.196:8081',
+  baseURL: backendUrl,
+
   withCredentials: true,
 });
 

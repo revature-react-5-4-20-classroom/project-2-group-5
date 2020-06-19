@@ -1,7 +1,7 @@
 package com.g5.p2.controllers;
 
 import java.util.List;
-
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,8 +27,8 @@ public class UsersController {
 	
 	//get all users
 	@GetMapping
-	public List<Users> getUser() {
-		return usersService.getAll();
+	public List<Users> getUser(HttpSession s) {
+		return usersService.getAll((Users)s.getAttribute("user"));
 	}
 	
 	//get users by id
@@ -46,8 +46,8 @@ public class UsersController {
 	
 	//get users by username
 	@GetMapping("/username/{username}")
-	public Users[] getUserLikeUsername(@PathVariable String username) {
-	  return usersService.getLikeUsername(username);
+	public List<Users> getUserLikeUsername(@PathVariable String username, HttpSession s) {
+	  return usersService.getLikeUsername(username, (Users)s.getAttribute("user"));
 	}
 	
 	//create a user

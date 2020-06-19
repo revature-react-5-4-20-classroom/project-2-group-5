@@ -34,7 +34,7 @@ export class NavigationComponent extends React.Component<any, any> {
                 color='secondary'
                 hidden={this.props.isAuthenticated === false}
                 className='nav-link'
-                to='/users'
+                to='/profile'
               >
                 Profile
               </NavLink>

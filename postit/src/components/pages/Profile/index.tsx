@@ -30,6 +30,14 @@ class UserProfileComponent extends React.Component<any, IUserProfileState> {
     };
   }
 
+  // componentDidMount = async () => { OLD PROFILE COMPONENT DID MOUNT
+  //   this.setState({
+  //     response: await getUsersById(this.props.currUser.userId),
+  //     posts: await getPostsByUserId(this.props.currUser.userId),
+  //     data: true,
+  //   });
+  // };
+
   // changePic = async (e: any) => {
   //   e.preventDefault();
   //   const updateUserObj = new User(
@@ -44,6 +52,8 @@ class UserProfileComponent extends React.Component<any, IUserProfileState> {
   //     response:await updateUser(updateUserObj)
   //   })
   // };
+
+  updateUser = (id: number) => {};
 
   render() {
     return (

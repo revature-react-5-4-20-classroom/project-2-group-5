@@ -113,6 +113,14 @@ export class HomeComponent extends React.Component<any, IHomeState> {
           </Col>
         </Row>
       </Container>
+      // <> old container
+      //   {this.state.data ? (
+      //     <PostContainer posts={this.state.response}></PostContainer>
+      //   ) : (
+      //     <Spinner></Spinner>
+      //   )}
+      //   <CreatePostForm/>
+      // </>
     );
   }
 }

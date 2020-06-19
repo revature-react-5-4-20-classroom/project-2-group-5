@@ -89,7 +89,7 @@ export async function getPostsByUserId(userid: number): Promise<Post[]> {
 
 //new post
 export async function addNewPost(p: Post): Promise<Post> {
-  const response = await postClient.post("/post", {
+  const response = await postClient.post("/posts", {
     postId: p.postId,
     author: p.author,
     datePosted: p.datePosted,
@@ -109,7 +109,7 @@ export async function addNewPost(p: Post): Promise<Post> {
 }
 
 export async function UpdatePost(p: Post): Promise<Post> {
-  const response = await postClient.patch("/post", {
+  const response = await postClient.patch("/posts", {
     post_id: p.postId,
     author: p.author,
     datePosted: p.datePosted,

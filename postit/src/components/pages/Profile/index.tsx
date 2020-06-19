@@ -12,10 +12,13 @@ import { User } from '../../../models/user';
 import { UserState } from '../../../redux/user/userReducer';
 import { connect } from 'react-redux';
 import './style.css';
+import { SubscribersContainer } from '../../subscribersContainer';
+import { Subscription } from '../../../models/subscription';
 // import { Pic } from "../../../fileUpdoad";
 
 interface IUserProfileState {
-  response: User;
+  reqUser: User | null;
+  subscribers: Subscription[];
   posts: Post[];
   data: boolean;
   isSubscribed: boolean;
@@ -26,7 +29,8 @@ class UserProfileComponent extends React.Component<any, IUserProfileState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      response: new User(0, '', '', ''),
+      reqUser: null,
+      subscribers: [],
       posts: [],
       data: false,
       isSubscribed: false,
@@ -34,13 +38,20 @@ class UserProfileComponent extends React.Component<any, IUserProfileState> {
     };
   }
 
-  // componentDidMount = async () => { OLD PROFILE COMPONENT DID MOUNT
-  //   this.setState({
-  //     response: await getUsersById(this.props.currUser.userId),
-  //     posts: await getPostsByUserId(this.props.currUser.userId),
-  //     data: true,
-  //   });
-  // };
+  componentDidMount = async () => {
+    this.getUser(this.props.currUser.userId);
+  };
+
+  getUser = async (userId: number) => {
+    let requestedUser = await getUsersById(userId);
+    console.log('req user from profile page: ', requestedUser);
+    return requestedUser;
+    this.setState({
+      reqUser: requestedUser.fetchedUser,
+      subscribers: requestedUser.fetchedSubscribers,
+      posts: requestedUser.fetchedPosts,
+    });
+  };
 
   // changePic = async (e: any) => {
   //   e.preventDefault();
@@ -75,23 +86,32 @@ class UserProfileComponent extends React.Component<any, IUserProfileState> {
                 </Col>
                 <Col xs={9}>
                   <h1>USERNAME</h1>
-                  {/* {this.state.currProfile !== this.props.currUser.userId? (
-                    {this.state.isSubscribed ? (
-                      <Button>Unsubscribe</Button>
-                    ) : (
-                      <Button>Subscribe</Button>
-                    )}
+                  {this.state.currProfile !== this.props.currUser.userId ? (
+                    [
+                      this.state.isSubscribed ? (
+                        <Button>Unsubscribe</Button>
+                      ) : (
+                        <Button>Subscribe</Button>
+                      ),
+                    ]
                   ) : (
                     <> </>
-                  )} */}
+                  )}
                 </Col>
               </Row>
               <Row>
                 <Col xs={3}>
-                  <div className='profile-subs-div'></div>
+                  <div className='profile-subs-div'>
+                    {/* <SubscribersContainer 
+                      subsArray={this.state.subscribers} 
+                      type={'subscriber'} 
+                      /> */}
+                  </div>
                 </Col>
                 <Col xs={9}>
-                  <div className='profile-posts-div'></div>
+                  <div className='profile-posts-div'>
+                    {/* <PostContainer posts={posts} /> */}
+                  </div>
                 </Col>
               </Row>
             </Container>

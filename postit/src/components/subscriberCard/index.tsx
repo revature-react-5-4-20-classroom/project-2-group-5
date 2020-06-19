@@ -44,6 +44,7 @@ export class SubscriberCard extends React.Component<ISubscriberCardProps, any> {
   };
 
   render() {
+    console.log('from subscard', this.props.subscription);
     return (
       <>
         {this.props.type === 'subscribee' ? (

@@ -32,9 +32,9 @@ class PrivateRoutesComponent extends React.Component<any, any> {
             <Redirect to='/' />
           )}
         </Route>
-        <Route path='/users'>
+        <Route path='/profile'>
           {this.props.isAuthenticated === true ? (
-            <UserProfile path='/users' />
+            <UserProfile path='/profile' />
           ) : (
             <Redirect to='/' />
           )}

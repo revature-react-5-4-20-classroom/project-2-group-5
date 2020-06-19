@@ -1,7 +1,7 @@
 //will use subscriptionById and postsById
 import React from "react";
 import { PostContainer } from "../../postsContainer";
-import { Container, Row, Col, Spinner, Input } from "reactstrap";
+import { Container, Row, Col, Spinner, Input, Button } from "reactstrap";
 import { getUsersById } from "../../../apis/user";
 import img from "./1.png";
 import { SubscriberCard } from "../../subscriberCard/index";
@@ -10,8 +10,15 @@ import ReactS3Uploader from "react-s3-uploader";
 import { connect } from "react-redux";
 import { UserState } from "../../../redux/user/userReducer";
 import { User } from "../../../models/user";
+import { Post } from "../../../models/post";
 // import { Pic } from "../../../fileUpdoad";
-class UserProfileComponent extends React.Component<any, any> {
+interface IUserProfileState {
+  response: User;
+  posts: Post[];
+  data: boolean;
+}
+
+class UserProfileComponent extends React.Component<any, IUserProfileState> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -25,7 +32,6 @@ class UserProfileComponent extends React.Component<any, any> {
     this.setState({
       response: await getUsersById(this.props.currUser.userId),
       posts: await getPostsByUserId(this.props.currUser.userId),
-      
       data: true,
     });
   };
@@ -45,17 +51,21 @@ class UserProfileComponent extends React.Component<any, any> {
   //   })
   // };
 
+  updateUser=(id:number)=>{
+
+  }
+
   render() {
     return (
-      <Container className="center" style={{overflowY:"auto"}}>
+      <Container className="center" style={{ overflowY: "auto" }}>
         <Row>
           <Col md={2}>
             <img src={img} />
-            
           </Col>
           <Col md={10}>
             <h1>{this.state.response.username} </h1>
             <h2>i don't know what to display</h2>
+            <Button>Edit</Button>
           </Col>
         </Row>
         <Row>
@@ -86,9 +96,8 @@ class UserProfileComponent extends React.Component<any, any> {
 
 const mapStateToProps = (state: UserState) => {
   return {
-    ...state
-  }
-}
-
+    ...state,
+  };
+};
 
 export const UserProfile = connect(mapStateToProps)(UserProfileComponent);

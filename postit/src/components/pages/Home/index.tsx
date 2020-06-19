@@ -12,6 +12,7 @@ import {
 } from 'reactstrap';
 import { PostContainer } from '../../postsContainer';
 import { Post } from '../../../models/post';
+import { CreatePostForm } from '../../createPostForm';
 // User's logged in homepage.  Will need subscPosts container and newestPosts container
 
 interface IHomeState {
@@ -52,6 +53,7 @@ export class Home extends React.Component<any, IHomeState> {
         ) : (
           <Spinner></Spinner>
         )}
+        <CreatePostForm/>
       </>
     );
   }

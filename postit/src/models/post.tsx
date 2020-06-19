@@ -2,14 +2,14 @@ export class Post {
   postId: number;
   author: number;
   username: String;
-  datePosted: Date;
+  datePosted: number;
   title: String;
   content: String;
   constructor(
     postId: number,
     author: number,
     username: String,
-    datePosted: Date,
+    datePosted: number,
     title: String,
     content: String
   ) {

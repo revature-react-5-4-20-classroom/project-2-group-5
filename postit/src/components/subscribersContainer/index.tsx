@@ -20,23 +20,21 @@ export class SubscribersContainer extends React.Component<
   }
   render() {
     return (
-      <>
-        <div className='subscriber-container'>
-          {this.props.subsArray &&
-            this.props.subsArray.map((u: Subscription) => {
-              return (
-                <SubscriberCard
-                  unsubscribe={this.props.unsubscribe}
-                  unblockUser={this.props.unblockUser}
-                  blockUser={this.props.blockUser}
-                  key={u.subscriptionId}
-                  type={this.props.type}
-                  subscription={u}
-                />
-              );
-            })}
-        </div>
-      </>
+      <div className='posts-container'>
+        {this.props.subsArray &&
+          this.props.subsArray.map((u: Subscription) => {
+            return (
+              <SubscriberCard
+                unsubscribe={this.props.unsubscribe}
+                unblockUser={this.props.unblockUser}
+                blockUser={this.props.blockUser}
+                key={u.subscriptionId}
+                type={this.props.type}
+                subscription={u}
+              />
+            );
+          })}
+      </div>
     );
   }
 }

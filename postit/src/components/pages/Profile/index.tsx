@@ -11,6 +11,7 @@ import { Post } from '../../../models/post';
 import { User } from '../../../models/user';
 import { UserState } from '../../../redux/user/userReducer';
 import { connect } from 'react-redux';
+import './style.css';
 // import { Pic } from "../../../fileUpdoad";
 
 interface IUserProfileState {
@@ -29,15 +30,6 @@ class UserProfileComponent extends React.Component<any, IUserProfileState> {
     };
   }
 
-  componentDidMount = async () => {
-    this.setState({
-      response: await getUsersById(this.props.currUser.userId),
-      posts: await getPostsByUserId(this.props.currUser.userId),
-
-      data: true,
-    });
-  };
-
   // changePic = async (e: any) => {
   //   e.preventDefault();
   //   const updateUserObj = new User(
@@ -55,37 +47,13 @@ class UserProfileComponent extends React.Component<any, IUserProfileState> {
 
   render() {
     return (
-      <Container className='center' style={{ overflowY: 'auto' }}>
+      <Container className='main-container' style={{ overflowY: 'auto' }}>
         <Row>
-          <Col md={2}>
-            <img src={img} />
-          </Col>
-          <Col md={10}>
-            <h1>{this.state.response.username} </h1>
-            <h2>i don't know what to display</h2>
+          <h1>hi from profile</h1>
+          <Col xs={8} className='offset-2 center-div'>
+            <Container className='profile-container'></Container>
           </Col>
         </Row>
-        <Row>
-          <Col md={5}>
-            <Container>
-              {/* <SubscriberCard />
-              <SubscriberCard />
-              <SubscriberCard />
-              <SubscriberCard />
-              <SubscriberCard /> */}
-            </Container>
-          </Col>
-          <Col md={7}>
-            {this.state.data ? (
-              <PostContainer posts={this.state.posts}></PostContainer>
-            ) : (
-              <Spinner></Spinner>
-            )}
-          </Col>
-        </Row>
-
-        {/* pass user ingormation as props */}
-        {/* <PostContainer></PostContainer> */}
       </Container>
     );
   }

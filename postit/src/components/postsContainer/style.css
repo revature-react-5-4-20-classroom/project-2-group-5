@@ -1,0 +1,10 @@
+.posts-container {
+  text-align: left;
+  border: 1px solid black;
+  height: 250px;
+  max-width: 100% !important;
+  flex: 1;
+  /* margin-top: 1vh; */
+  overflow-y: auto !important;
+  overflow-x: hidden;
+}

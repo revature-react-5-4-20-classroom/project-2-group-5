@@ -19,8 +19,12 @@ public class UsersServiceImplementation implements UsersService {
   UsersRepository usersRepository;
 
   @Override
-  public List<Users> getAll() {
-    return usersRepository.findAll();
+  public List<Users> getAll(Users session) {
+    List<Users> users = usersRepository.findAll();
+    
+    users = checkBlocked(session, users);
+    
+    return users;
   }
 
   @Override
@@ -34,8 +38,12 @@ public class UsersServiceImplementation implements UsersService {
   }
   
   @Override
-  public Users[] getLikeUsername(String username) {
-    return usersRepository.findLikeUsername(username + "%");
+  public List<Users> getLikeUsername(String username, Users session) {
+    List<Users> users = usersRepository.findLikeUsername(username + "%");
+    
+    users = checkBlocked(session, users);
+    
+    return users;
   }
 
   @Override
@@ -81,5 +89,22 @@ public class UsersServiceImplementation implements UsersService {
       return false;
     }
   }
-
+  
+  //u is the active user to check if they are blocked, users is the list of users that will end up returning
+  //if the subscriber matches the user, and their subscription lists them as blocked, remove them from the list
+  public List<Users> checkBlocked(Users u, List<Users> users){
+    for (int i=0; i < u.getSubscribee().size(); i++) {
+      for(int j=0; j < users.size(); j++) {
+        if((u.getSubscribee().get(i).getSubscriber().getUserId() == users.get(j).getUserId())) {
+          if(u.getSubscribee().get(i).isBlocked()) {
+            users.remove(j);
+            j--;
+          }
+          break;
+        }
+      }
+   }
+    return users;
+  }
+ 
 }

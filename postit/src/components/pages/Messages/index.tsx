@@ -35,6 +35,7 @@ export class MessagesPage extends React.Component<any, IMessagePageState> {
 
   //need to fetch users that have messages with the signed in user
   async fetchUserCards(){
+    this.setState({userCards: []});
     let allMessages : Message[] = await getMessagesByUserId(this.props.userId);
     let users : number[] = []; 
     allMessages.forEach((m)=>{
@@ -73,6 +74,9 @@ export class MessagesPage extends React.Component<any, IMessagePageState> {
       this.setState({newConversation: false});
       this.fetchUserCards();
     }
+    else if(messages.length == 0){
+      this.setState({newConversation: true});
+    }
     //messages = this.sortMessages(messages);
     this.setState({conversation: messages});
     //console.log(messages);
@@ -82,10 +86,6 @@ export class MessagesPage extends React.Component<any, IMessagePageState> {
         this.recursiveFetch(u, accessIndex);
       }
     }, 500);
-  }
-
-  newConversation(){
-    this.setState({newConversation: true});
   }
 
   //possibly not needed
@@ -129,7 +129,7 @@ export class MessagesPage extends React.Component<any, IMessagePageState> {
           </Col>
 
           <Col className='content-panel' xs={8}>
-            <MessageDisplayContainer userId={this.props.userId} toUser={this.state.selectedUser} conversation={this.state.conversation} setSelectedUser={(user:User)=>{this.setSelectedUser(user)}} newConversation={()=>{this.newConversation()}}/>
+            <MessageDisplayContainer userId={this.props.userId} toUser={this.state.selectedUser} conversation={this.state.conversation} setSelectedUser={(user:User)=>{this.setSelectedUser(user)}} />
             {/* <CreateMessageForm /> */}
           </Col>
         </Row>

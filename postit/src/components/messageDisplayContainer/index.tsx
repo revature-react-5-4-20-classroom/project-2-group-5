@@ -89,7 +89,6 @@ export class MessageDisplayContainer extends React.Component<any, IMessageDispla
   setSelectedUser(user: User){
     this.setState({newMessage: false});
     this.props.setSelectedUser(user);
-    this.props.newConversation();
   }
 
   render() {

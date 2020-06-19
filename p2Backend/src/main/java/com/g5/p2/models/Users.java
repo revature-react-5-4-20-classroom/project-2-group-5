@@ -31,7 +31,7 @@ public class Users {
 	@Column(name = "role")
 	private String role;
 	@OneToMany(mappedBy = "author")
-	@JsonIgnoreProperties({"author", "comments"})
+	@JsonIgnoreProperties({"comments"})
 	private List<Posts> posts;
 	@OneToMany(mappedBy = "subscribee")
     @JsonIgnoreProperties({"posts"})

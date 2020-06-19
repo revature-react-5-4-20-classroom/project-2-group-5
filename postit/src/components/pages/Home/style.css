@@ -1,0 +1,11 @@
+.main-container {
+  height: calc(100% - 56px);
+  max-width: 100% !important;
+}
+
+.home-post-container {
+}
+
+.title-row {
+  padding: 15px;
+}

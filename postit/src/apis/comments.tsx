@@ -1,14 +1,14 @@
-import axios from "axios";
-import { Comment } from "../models/comment";
+import axios from 'axios';
+import { Comment } from '../models/comment';
 
 const commentClient = axios.create({
   // baseURL: "http://localhost:8081",
-  baseURL: "http://3.133.86.196:8081",
+  baseURL: 'http://3.133.86.196:8081',
   withCredentials: true,
 });
 
 export async function getAllCommentsByPostId(id: number): Promise<Comment[]> {
-  const response = await commentClient.get("/comments/" + id);
+  const response = await commentClient.get('/comments/' + id);
   return response.data.map((commentObj: any) => {
     // const pId=commentObj.post.postId;
     // const uId= commentObj.author.userId;
@@ -22,20 +22,14 @@ export async function getAllCommentsByPostId(id: number): Promise<Comment[]> {
   });
 }
 
-export async function createComment(c: Comment): Promise<Comment[]> {
-  const response = await commentClient.post("/comments", {
+export async function createComment(c: Comment): Promise<Comment> {
+  const response = await commentClient.post('/comments', {
     ommentId: 0,
     postId: c.postId,
     author: c.author,
     content: c.content,
   });
-  return response.data.map((commentObj: any) => {
-    const { commentId, content } = commentObj;
-    return new Comment(
-      commentId,
-      commentObj.post.postId,
-      commentObj.author.userId,
-      content
-    );
-  });
+  const { commentId, post, author, content } = response.data;
+  let newComment = new Comment(commentId, post.postId, author.userId, content);
+  return newComment;
 }

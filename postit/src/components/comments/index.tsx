@@ -75,6 +75,8 @@ class CommnetsComponents extends React.Component<any, any> {
   render() {
     return (
       <Container>
+        <Row>
+          <Col>
         {this.state.cFlag ? (
           <>
             {this.state.comments.length != 0 ? (
@@ -90,11 +92,16 @@ class CommnetsComponents extends React.Component<any, any> {
         ) : (
           <Spinner></Spinner>
         )}
-        <div style={{ display: this.state.curUser ? "block" : "none" }}>
-          <InputGroup className="input-box">
+        </Col>
+        </Row>
+        <Row>
+          <Col md={12}>
+        <div style={{ display: this.props.isAuthenticated ? "block" : "none" }}>
+          <InputGroup>
             <Input
+            width="100%"
               type="text"
-              placeholder="commnet here"
+              placeholder="comment here"
               name="content"
               onChange={this.bindInputChangeToState}
             ></Input>
@@ -103,6 +110,8 @@ class CommnetsComponents extends React.Component<any, any> {
             </InputGroupAddon>
           </InputGroup>
         </div>
+        </Col>
+        </Row>
       </Container>
     );
   }

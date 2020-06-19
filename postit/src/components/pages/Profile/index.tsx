@@ -9,6 +9,7 @@ import { getPostsByUserId } from "../../../apis/posts";
 import ReactS3Uploader from "react-s3-uploader";
 import { connect } from "react-redux";
 import { UserState } from "../../../redux/user/userReducer";
+import { User } from "../../../models/user";
 // import { Pic } from "../../../fileUpdoad";
 class UserProfileComponent extends React.Component<any, any> {
   constructor(props: any) {
@@ -22,27 +23,27 @@ class UserProfileComponent extends React.Component<any, any> {
 
   componentDidMount = async () => {
     this.setState({
-      response: await getUsersById(this.state.currUser.userId),
-      posts: await getPostsByUserId(this.state.currUser.userId),
+      response: await getUsersById(this.props.currUser.userId),
+      posts: await getPostsByUserId(this.props.currUser.userId),
       
       data: true,
     });
   };
 
-  changePic = async (e: any) => {
-    e.preventDefault();
-    const updateUserObj = new User(
-      this.state.response.userId,
-      this.state.response.username,
-      this.state.response.alias,
-      this.state.response.role,
-      this.state.response.password,
-      e.currentTarget.value
-    );
-    this.setState({
-      response:await updateUser(updateUserObj)
-    })
-  };
+  // changePic = async (e: any) => {
+  //   e.preventDefault();
+  //   const updateUserObj = new User(
+  //     this.state.response.userId,
+  //     this.state.response.username,
+  //     this.state.response.alias,
+  //     this.state.response.role,
+  //     this.state.response.password,
+  //     e.currentTarget.value
+  //   );
+  //   this.setState({
+  //     response:await updateUser(updateUserObj)
+  //   })
+  // };
 
   render() {
     return (
@@ -50,7 +51,7 @@ class UserProfileComponent extends React.Component<any, any> {
         <Row>
           <Col md={2}>
             <img src={img} />
-            <Input type="file" onChange={this.changePic}/>
+            
           </Col>
           <Col md={10}>
             <h1>{this.state.response.username} </h1>

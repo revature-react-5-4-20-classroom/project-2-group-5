@@ -9,8 +9,6 @@ import {
   CardImg,
   CardBody,
   CardTitle,
-  Label,
-  Input,
   Button,
   CardText,
 } from "reactstrap";
@@ -53,9 +51,9 @@ export class PostContainer extends React.Component<IPostContainerProps, any> {
 
   render() {
     return (
-      <Container style={{ textAlign: "left" }}>
+      <Container style={{ textAlign: "left"  }}>
         <h3>Discover: </h3>
-        <Card className="card mb-3 ">
+        <Card className="card mb-3 " style={{overflowY:"auto" , height: "40vw" ,overflowX: "hidden"}}>
           {this.props.posts.map((obj) => {
             return (
               <div key={`pKey${obj.postId}`}>

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Subscription } from '../models/subscription';
+import { User } from '../models/user';
 const subscriberClient = axios.create({
   baseURL: 'http://3.133.86.196:8081',
   withCredentials: true,
@@ -24,12 +25,16 @@ export async function getAllsubscribee(id: number): Promise<Subscription[]> {
     '/subscriptions/subscribee/' + id
   );
   return response.data.map((subscriptionObj: any) => {
-    const { subscription_id, blocked } = subscriptionObj;
+    const { subscriptionId, subscriber, subscribee, blocked } = subscriptionObj;
     return new Subscription(
-      subscription_id,
+      subscriptionId,
+      subscriber,
+      subscribee,
+      blocked,
+      subscriptionObj.subscriber.username,
       subscriptionObj.subscriber.userId,
-      subscriptionObj.subscribee.userId,
-      blocked
+      subscriptionObj.subscribee.username,
+      subscriptionObj.subscribee.userId
     );
   });
 }
@@ -40,13 +45,17 @@ export async function getAllsubscriber(id: number): Promise<Subscription[]> {
     '/subscriptions/subscriber/' + id
   );
   return response.data.map((subscriptionObj: any) => {
-    const {
-      subscription_id,
+    const { subscriptionId, subscriber, subscribee, blocked } = subscriptionObj;
+    return new Subscription(
+      subscriptionId,
       subscriber,
       subscribee,
       blocked,
-    } = subscriptionObj;
-    return new Subscription(subscription_id, subscriber, subscribee, blocked);
+      subscriptionObj.subscriber.username,
+      subscriptionObj.subscriber.userId,
+      subscriptionObj.subscribee.username,
+      subscriptionObj.subscribee.userId
+    );
   });
 }
 
@@ -70,10 +79,10 @@ export async function deleteSubscriptions(
 ): Promise<Subscription> {
   const response = await subscriberClient.delete('/subscriptions', {
     data: {
-      subscription_id: s.subscriptionId,
-      //   subscriber: s.subscriber,
-      //   subscribee: s.subscribee,
-      //   blocked: s.blocked,
+      subscriptionId: s.subscriptionId,
+      subscribee: s.subscribee,
+      subscriber: s.subscriber,
+      blocked: s.blocked,
     },
     headers: {
       Authorization: '***',
@@ -84,13 +93,12 @@ export async function deleteSubscriptions(
 }
 
 export async function updateSubscriptions(
-  uid: number,
   s: Subscription
 ): Promise<Subscription> {
-  const response = await subscriberClient.patch('/subscriptions/' + uid, {
-    subscription_id: s.subscriptionId,
-    subscriber: s.subscriber,
+  const response = await subscriberClient.patch('/subscriptions', {
+    subscriptionId: s.subscriptionId,
     subscribee: s.subscribee,
+    subscriber: s.subscriber,
     blocked: s.blocked,
   });
   const { subscription_id, subscriber, subscribee, blocked } = response.data;

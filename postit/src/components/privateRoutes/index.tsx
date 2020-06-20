@@ -8,6 +8,7 @@ import { Home } from '../pages/Home';
 import { UserProfile } from '../pages/Profile';
 import { SearchPage } from '../pages/Search';
 
+
 class PrivateRoutesComponent extends React.Component<any, any> {
   constructor(props: any) {
     super(props);

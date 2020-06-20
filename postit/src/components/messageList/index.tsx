@@ -1,13 +1,8 @@
 import React from 'react';
 import './style.css';
-import {
-  Card,
-  CardBody,
-  Button,
-  Row,
-  Col,
-} from 'reactstrap';
+import { Card, CardBody, Button, Row, Col } from 'reactstrap';
 import pic from '../../img/profileplaceholder.jpg';
+import { Link } from 'react-router-dom';
 
 export class MessageListCard extends React.Component<any, any> {
   selectUser = async (event: any) => {
@@ -20,11 +15,13 @@ export class MessageListCard extends React.Component<any, any> {
         <Row className='card-row'>
           <Col xs={2}>
             <CardBody>
-              <img
-                className='profile-pic'
-                alt='Card image cap'
-                src={pic /* this.props.user.pic*/}
-              />
+              <Link to={`/profile/${this.props.user.userId}`}>
+                <img
+                  className='profile-pic'
+                  alt='Card image cap'
+                  src={pic /* this.props.user.pic*/}
+                />
+              </Link>
             </CardBody>
           </Col>
           <Col xs={8}>

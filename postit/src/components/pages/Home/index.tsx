@@ -18,6 +18,7 @@ import { getAllPosts, getAllSubscibersPosts } from '../../../apis/posts';
 import { UserState } from '../../../redux/user/userReducer';
 import { connect } from 'react-redux';
 import './style.css';
+import { UpdateUserInfo } from '../../updateUserInfo';
 
 interface IHomeState {
   response: Post[];

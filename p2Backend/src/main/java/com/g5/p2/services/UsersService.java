@@ -29,7 +29,7 @@ public interface UsersService {
 	
 	Users findOneUser(String username, String password);
 	
-	Users saveFile(MultipartFile file);
+	Users saveFile(MultipartFile file,Integer id);
 	
 	Optional<Users> getfile(Integer fileId);
 	

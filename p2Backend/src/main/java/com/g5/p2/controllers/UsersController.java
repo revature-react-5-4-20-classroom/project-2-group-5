@@ -91,12 +91,12 @@ public class UsersController {
 		return "doc";
 	}
 
-	@PostMapping(path="/upload", consumes = "multipart/form-data")
-	public ResponseEntity<?> saveEnvironmentConfig( MultipartHttpServletRequest request  ) {
+	@PostMapping(path="/upload/{userid}", consumes = "multipart/form-data")
+	public ResponseEntity<?> saveEnvironmentConfig( MultipartHttpServletRequest request ,@PathVariable Integer userid ) {
 		//System.out.println(request.getContentType());
 		MultipartFile file = request.getFile("file");
-		usersService.saveFile(file);
-		return ResponseEntity.ok().body(null);
+		usersService.saveFile(file,userid);
+		return ResponseEntity.ok().body("picture uploaded");
 	
 
 //	public String uploadImage(@RequestParam("files")  MultipartHttpServletRequest request) {
@@ -116,8 +116,8 @@ public class UsersController {
 	}
 
 	//delete user
-	@DeleteMapping
-	public boolean deleteUser(@RequestBody Integer userId) {
+	@DeleteMapping("{userId}")
+	public boolean deleteUser(@PathVariable Integer userId) {
 	  try {
         return usersService.delete(userId);
     }

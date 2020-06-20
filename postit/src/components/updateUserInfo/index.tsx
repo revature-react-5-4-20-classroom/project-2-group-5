@@ -1,6 +1,6 @@
-import React from "react";
-import { User } from "../../models/user";
-import img from "./1.png";
+import React from 'react';
+import { User } from '../../models/user';
+import img from './1.png';
 import {
   Container,
   Row,
@@ -10,11 +10,16 @@ import {
   Label,
   Input,
   Button,
-} from "reactstrap";
-import { UserState } from "../../redux/user/userReducer";
-import { connect } from "react-redux";
-import { Redirect } from "react-router";
-import { addNewUser } from "../../apis/user";
+} from 'reactstrap';
+import { UserState } from '../../redux/user/userReducer';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
+import {
+  updateUser,
+  uploadfrofilePic,
+  getImage,
+  deleteUser,
+} from '../../apis/user';
 
 class UpdateUserInfoComponent extends React.Component<any, any> {
   constructor(props: any) {
@@ -23,9 +28,10 @@ class UpdateUserInfoComponent extends React.Component<any, any> {
       userId: this.props.currUser.userId,
       username: this.props.currUser.username,
       alias: this.props.currUser.alias,
-      reole: this.props.currUser.role,
-      password: this.props.currUser.password,
-      response: "Any",
+      role: this.props.currUser.role,
+      password: this.props.currUser.role,
+      response: 'Any',
+      profilePic: img,
     };
   }
   bindInputChangeToState = (changeEvent: any) => {
@@ -36,63 +42,113 @@ class UpdateUserInfoComponent extends React.Component<any, any> {
   };
   updateInfo = async (e: any) => {
     e.preventDefault();
-    const newUser = new User(
-      this.state.userId,
-      this.state.username,
-      this.state.alias,
-      this.state.role,
-      this.state.password
-    );
+    try {
+      const newUser = new User(
+        this.state.userId,
+        this.state.username,
+        this.state.alias,
+        'this.state.role,',
+        this.state.password
+      );
+      console.log(
+        this.state.userId,
+        this.state.username,
+        this.state.alias,
+        'this.state.role,',
+        this.state.password
+      );
+
+      this.setState({
+        response: await updateUser(newUser),
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  changeProfilepic = async (e: any) => {
+    e.preventDefault();
     this.setState({
-      response: await addNewUser(newUser),
+      message: await uploadfrofilePic(
+        this.props.currUser.userId,
+        e.currentTarget.value
+      ),
+      profilePic: await getImage(this.props.currUser.userId),
     });
   };
-
+  deleteUseracc = async (e: any) => {
+    e.preventDefault();
+    this.setState({
+      response: await deleteUser(this.props.currUser.userId)
+    });
+  };
   render() {
     return (
       <Col md={{ size: 8, offset: 2 }}>
-        <Form className="center">
-          {/* <img src={img}></img> */}
+        <img src={img}></img>
+        <br />
+        <Input type='file' onChange={this.changeProfilepic}></Input>
+        <Form className='center'>
           <FormGroup>
-            <Label for="username">Username:</Label>
+            <Label for='username'>Username:</Label>
             <Input
               onChange={this.bindInputChangeToState}
               value={this.state.username}
-              type="text"
-              name="username"
-              id="username"
-              placeholder="Username"
+              type='text'
+              name='username'
+              id='username'
+              placeholder='Username'
               required
             />
           </FormGroup>
           <FormGroup>
-            <Label for="username">Alias:</Label>
+            <Label for='username'>Alias:</Label>
             <Input
               onChange={this.bindInputChangeToState}
-              value={this.state.username}
-              type="text"
-              name="username"
-              id="username"
-              placeholder="Username"
+              value={this.state.alias}
+              type='text'
+              name='alias'
+              id='alias'
+              placeholder='Alias'
               required
             />
           </FormGroup>
           <FormGroup>
-            <Label for="password">Password:</Label>
+            <Label for='text'>Password:</Label>
 
             <Input
               onChange={this.bindInputChangeToState}
               value={this.state.password}
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Password"
+              type='text'
+              name='password'
+              id='password'
+              placeholder='Password'
               required
             />
           </FormGroup>
 
-          <Button color="secondary" onClick={this.updateInfo}>
+          <FormGroup
+          // style={{
+          //   display: this.props.currUser.role == 'admin' ? 'block' : 'none',
+          // }}
+          >
+            <Label for='role'>Role:</Label>
+
+            <Input
+              onChange={this.bindInputChangeToState}
+              value={this.state.role}
+              type='text'
+              name='role'
+              id='role'
+              placeholder='Role'
+              required
+            />
+          </FormGroup>
+
+          <Button color='secondary' onClick={this.updateInfo}>
             Update
+          </Button>
+          <Button color='secondary' onClick={this.deleteUseracc}>
+            delete
           </Button>
         </Form>
       </Col>
@@ -108,7 +164,6 @@ const mapStateToProps = (state: UserState) => {
 
 export const UpdateUserInfo = connect(mapStateToProps)(UpdateUserInfoComponent);
 
-
 // delete user
 // constructor(props: any) {
 //     super(props);
@@ -118,10 +173,10 @@ export const UpdateUserInfo = connect(mapStateToProps)(UpdateUserInfoComponent);
 //       alias: this.props.currUser.alias,
 //       reole: this.props.currUser.role,
 //       password: this.props.currUser.password,
-//       response: "Any",
+//       response: 'Any',
 //     };
 //   }
-  
+
 //   deleteUser = async (e: any) => {
 //     e.preventDefault();
 //     const newUser = new User(

@@ -66,12 +66,12 @@ export async function getUsersLikeUsername(uname: String): Promise<User[]> {
 
 export async function updateUser(u: User): Promise<User> {
   const response = await userClient.patch('/users', {
-    user_id: u.userId,
+    userId: u.userId,
     username: u.username,
     password: u.password,
     alias: u.alias,
     role: u.role,
-    image: u.profilePic,
+    // image: u.profilePic,
   });
   const { userId, username, alias, role, password } = response.data;
   return new User(userId, username, alias, role, password);
@@ -87,4 +87,30 @@ export async function addNewUser(u: User): Promise<User> {
   });
   const { userId, username, alias, role, password } = response.data;
   return new User(userId, username, alias, role, password);
+}
+export async function deleteUser(id: number): Promise<String> {
+  try{
+  const response = await userClient.delete('/users/'+id)
+  console.log('response',response);
+   return 'user is deleted';}
+   catch(e){
+     console.log(e);
+     
+     throw e;
+   }
+}
+
+export async function uploadfrofilePic(
+  userId: number,
+  pic: File
+): Promise<any> {
+  const response = await userClient.post('/users/upload' + userId, {
+    file: pic,
+  });
+  return response;
+}
+
+export async function getImage(userId: number): Promise<any> {
+  const response = await userClient.get('/users/showFile' + userId);
+  return response;
 }

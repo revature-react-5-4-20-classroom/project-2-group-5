@@ -1,19 +1,5 @@
 import React from 'react';
 import { Post } from '../../models/post';
-import img from './1.png';
-import {
-  Container,
-  Row,
-  Card,
-  Col,
-  CardImg,
-  CardBody,
-  CardTitle,
-  Button,
-  CardText,
-} from 'reactstrap';
-import { getAllCommentsByPostId } from '../../apis/comments';
-import { Comments } from '../comments';
 import { PostComponent } from '../post';
 import './style.css';
 

@@ -66,8 +66,8 @@ public class MessagesController {
           continue;
         }
         for (int j=0; j < messages.get(i).getAuthor().getSubscriber().size(); j++) {
-          if(messages.get(i).getAuthor().getSubscribee().get(j).getSubscribee().getUserId() == userId) {
-            if(messages.get(i).getAuthor().getSubscribee().get(j).isBlocked()){
+          if(messages.get(i).getAuthor().getSubscriber().get(j).getSubscribee().getUserId() == userId) {
+            if(messages.get(i).getAuthor().getSubscriber().get(j).isBlocked()){
               messages.remove(i);
               i--;
               break;
@@ -91,8 +91,8 @@ public class MessagesController {
           continue;
         }
         for (int j=0; j < messages.get(i).getReceiver().getSubscriber().size(); j++) {
-          if(messages.get(i).getReceiver().getSubscribee().get(j).getSubscribee().getUserId() == userId) {
-            if(messages.get(i).getReceiver().getSubscribee().get(j).isBlocked()){
+          if(messages.get(i).getReceiver().getSubscriber().get(j).getSubscribee().getUserId() == userId) {
+            if(messages.get(i).getReceiver().getSubscriber().get(j).isBlocked()){
               messages.remove(i);
               i--;
               break;

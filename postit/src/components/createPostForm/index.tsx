@@ -5,10 +5,7 @@ import {
   Label,
   Input,
   Button,
-  InputGroup,
-  Row,
   Col,
-  Container,
 } from "reactstrap";
 import { Post } from "../../models/post";
 import { addNewPost } from "../../apis/posts";

@@ -4,10 +4,16 @@ import { NavLink, Link } from 'react-router-dom';
 import { UserState } from '../../redux/user/userReducer';
 import { logoutUser } from '../../redux/user/userActionMappers';
 import { connect } from 'react-redux';
+import { logout } from '../../apis/login';
 
 export class NavigationComponent extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
+  }
+
+  logout = async (event: any)=>{
+    logout();
+    this.props.logoutUser(); 
   }
 
   render() {
@@ -100,7 +106,7 @@ export class NavigationComponent extends React.Component<any, any> {
                 hidden={this.props.isAuthenticated === false}
                 className='nav-link'
                 to='/logout'
-                onClick={this.props.logoutUser}
+                onClick={this.logout}
               >
                 logout
               </NavLink>

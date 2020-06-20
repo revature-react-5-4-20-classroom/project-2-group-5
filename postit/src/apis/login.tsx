@@ -27,3 +27,18 @@ export async function login(un: string, pw: string): Promise<User> {
     }
   }
 }
+
+export async function credentials(): Promise<User> {
+  try {
+    const response = await loginClient.get('/credentials');
+    const { userId, username, alias, password, role } = response.data;
+    //console.log("server responce api " + userId);
+    return new User(userId, username, alias, role, password);
+  } catch (e) {
+    return new User(0, "", "", "",);
+  }
+}
+
+export async function logout(): Promise<boolean>{
+  return await loginClient.get('/logout');
+}

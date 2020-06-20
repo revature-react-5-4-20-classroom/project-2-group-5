@@ -33,7 +33,7 @@ public class GeneralController {
 	  return (Users)s.getAttribute("user");
 	}
 	
-	@PostMapping("/logout")
+	@GetMapping("/logout")
     public boolean attemptLogin(HttpSession s) {
       if((Users)s.getAttribute("user") != null) {
         s.setAttribute("user", null);

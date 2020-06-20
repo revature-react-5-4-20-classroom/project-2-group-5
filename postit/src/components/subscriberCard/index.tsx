@@ -36,7 +36,7 @@ export class SubscriberCard extends React.Component<ISubscriberCardProps, any> {
   render() {
     return (
       <>
-        {this.props.blockUser !== null ? (
+        {this.props.unsubscribe !== null ? (
           // ---------------------SUBSCRIBERS PAGE -------------------------------
           [
             this.props.type === 'subscribee' ? (

@@ -165,18 +165,31 @@ class UserProfileComponent extends React.Component<
               <Row>
                 <Col xs={3}>
                   <div className='profile-subs-div'>
-                    <SubscribersContainer
-                      subsArray={this.state.subscribers}
-                      type={'subscribee'}
-                      blockUser={null}
-                      unblockUser={null}
-                      unsubscribe={null}
-                    />
+                    {this.state.subscribers.length > 0 ? (
+                      <SubscribersContainer
+                        subsArray={this.state.subscribers}
+                        type={'subscribee'}
+                        blockUser={null}
+                        unblockUser={null}
+                        unsubscribe={null}
+                      />
+                    ) : (
+                      <h5>
+                        {this.state.reqUser?.username} has no subscribers, yet!
+                        Why not subscribe?
+                      </h5>
+                    )}
                   </div>
                 </Col>
                 <Col xs={9}>
                   <div className='profile-posts-div'>
-                    <PostContainer posts={this.state.posts} />
+                    {this.state.posts.length > 0 ? (
+                      <PostContainer posts={this.state.posts} />
+                    ) : (
+                      <h5>
+                        {this.state.reqUser?.username} hasn't posted anything.
+                      </h5>
+                    )}
                   </div>
                 </Col>
               </Row>

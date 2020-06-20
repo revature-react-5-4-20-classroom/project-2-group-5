@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 import { Card, CardBody, CardText, Button, Row, Col } from 'reactstrap';
-import somepic from '../../img/profileplaceholder.jpg';
+import somePic from '../../img/profileplaceholder.jpg';
 import { Subscription } from '../../models/subscription';
 import { Link } from 'react-router-dom';
 
@@ -46,7 +46,7 @@ export class SubscriberCard extends React.Component<ISubscriberCardProps, any> {
                       className='profile-pic'
                       width='65%'
                       alt='Card image cap'
-                      src={somepic}
+                      src={somePic}
                     />
                   </Link>
                   <CardText>{this.props.subscription.subscriberName}</CardText>
@@ -91,7 +91,7 @@ export class SubscriberCard extends React.Component<ISubscriberCardProps, any> {
                       className='profile-pic'
                       width='65%'
                       alt='Card image cap'
-                      src={somepic}
+                      src={somePic}
                     />
                   </Link>
                   <CardText>{this.props.subscription.subscribeeName}</CardText>

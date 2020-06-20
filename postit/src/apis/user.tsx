@@ -25,31 +25,31 @@ export async function getUsersById(id: number): Promise<any> {
     const { userId, username, alias, role, password } = response.data;
     let fetchedUser: User = new User(userId, username, alias, role, password);
     let fetchedSubscribers: Subscription[] = response.data.subscribee.map(
-      (s: Subscription) => {
+      (s: any) => {
+        const { subscriptionId, subscriber, subscribee, blocked } = s;
         return new Subscription(
-          s.subscriptionId,
-          s.subscriber,
-          s.subscribee,
-          s.blocked,
-          s.subscriberName,
-          s.subscriberId,
-          s.subscribeeName,
-          s.subscribeeId
+          subscriptionId,
+          subscriber,
+          subscribee,
+          blocked,
+          s.subscriber.username,
+          s.subscriber.userId,
+          s.subscribee.username,
+          s.subscribee.userId
         );
       }
     );
-    let fetchedPosts: Post[] = response.data.posts.map((p: Post) => {
+    let fetchedPosts: Post[] = response.data.posts.map((p: any) => {
       return new Post(
         p.postId,
-        p.author,
-        p.username,
+        p.author.userId,
+        p.author.username,
         p.datePosted,
         p.title,
         p.content
       );
     });
     let userObject = { fetchedUser, fetchedSubscribers, fetchedPosts };
-    console.log('USEROBJECT', userObject);
     return userObject;
   } catch (e) {
     console.log(e);

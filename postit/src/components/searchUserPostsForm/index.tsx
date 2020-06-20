@@ -1,7 +1,6 @@
 //will use postById
 import React from 'react';
-import { UserProfile } from '../pages/Profile';
-import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { Form, FormGroup, Input, Button } from 'reactstrap';
 import { findByLabelText } from '@testing-library/react';
 
 // Container that has Form with 'User Post Search' text or something,
@@ -17,13 +16,13 @@ export class Search extends React.Component<any, any> {
 
   search = async (event: any) => {
     this.props.search();
-  }
+  };
 
   render() {
     return (
       <div className='center'>
         <h3>User Post Search</h3>
-        <Form className='center' >
+        <Form className='center'>
           <FormGroup>
             <Input
               onChange={this.setUsername}
@@ -35,10 +34,11 @@ export class Search extends React.Component<any, any> {
             />
           </FormGroup>
           <FormGroup>
-            <Button color='secondary' onClick={this.search}>Search</Button>
+            <Button color='secondary' onClick={this.search}>
+              Search
+            </Button>
           </FormGroup>
         </Form>
-
       </div>
     );
   }

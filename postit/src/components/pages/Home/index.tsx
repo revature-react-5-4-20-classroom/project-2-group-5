@@ -1,13 +1,5 @@
 import React from 'react';
-import img from './1.png';
 import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardText,
-  CardTitle,
-  Table,
-  Spinner,
   Container,
   Row,
   Col,

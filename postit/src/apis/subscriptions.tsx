@@ -1,6 +1,6 @@
-import axios from "axios";
-import { Subscription } from "../models/subscription";
-import { backendUrl } from "./backendUrl";
+import axios from 'axios';
+import { Subscription } from '../models/subscription';
+import { backendUrl } from './backendUrl';
 const subscriberClient = axios.create({
   baseURL: backendUrl,
 
@@ -10,13 +10,8 @@ const subscriberClient = axios.create({
 export async function getAllsubscription(): Promise<Subscription[]> {
   const response = await subscriberClient.get('/subscriptions');
   return response.data.map((subscriptionObj: any) => {
-    const {
-      subscription_id,
-      subscriber,
-      subscribee,
-      blocked,
-    } = subscriptionObj;
-    return new Subscription(subscription_id, subscriber, subscribee, blocked);
+    const { subscriptionId, subscriber, subscribee, blocked } = subscriptionObj;
+    return new Subscription(subscriptionId, subscriber, subscribee, blocked);
   });
 }
 
@@ -61,18 +56,17 @@ export async function getAllsubscriber(id: number): Promise<Subscription[]> {
 }
 
 export async function createSubscriptions(
-  uid: number,
   s: Subscription
 ): Promise<Subscription> {
-  const response = await subscriberClient.post('/subscriptions/' + uid, {
-    subscription_id: 0,
+  const response = await subscriberClient.post('/subscriptions', {
+    subscriptionId: 0,
     subscriber: s.subscriber,
     subscribee: s.subscribee,
     blocked: s.blocked,
   });
 
-  const { subscription_id, subscriber, subscribee, blocked } = response.data;
-  return new Subscription(subscription_id, subscriber, subscribee, blocked);
+  const { subscriptionId, subscriber, subscribee, blocked } = response.data;
+  return new Subscription(subscriptionId, subscriber, subscribee, blocked);
 }
 
 export async function deleteSubscriptions(

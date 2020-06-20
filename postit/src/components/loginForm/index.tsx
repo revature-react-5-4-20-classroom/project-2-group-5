@@ -1,9 +1,6 @@
 import React from 'react';
 import { User } from '../../models/user';
-import { login } from '../../apis/login';
 import {
-  Container,
-  Row,
   Col,
   Form,
   FormGroup,
@@ -14,7 +11,6 @@ import {
 import { UserState } from '../../redux/user/userReducer';
 import { loginUser } from '../../redux/user/userActionMappers';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router';
 
 // Component that has form that takes username/password and has login button
 

@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { User } from '../models/user';
 import { backendUrl } from './backendUrl';
+import { Subscription } from '../models/subscription';
+import { Post } from '../models/post';
 
 const userClient = axios.create({
   baseURL: backendUrl,
@@ -16,10 +18,42 @@ export async function getAllUsers(): Promise<User[]> {
   });
 }
 
-export async function getUsersById(id: number): Promise<User> {
-  const response = await userClient.get('/users/' + id);
-  const { userId, username, alias, role, password } = response.data;
-  return new User(userId, username, alias, role, password);
+export async function getUsersById(id: number): Promise<any> {
+  try {
+    const response = await userClient.get('/users/' + id);
+    console.log('GETUSER API', response);
+    const { userId, username, alias, role, password } = response.data;
+    let fetchedUser: User = new User(userId, username, alias, role, password);
+    let fetchedSubscribers: Subscription[] = response.data.subscribee.map(
+      (s: any) => {
+        const { subscriptionId, subscriber, subscribee, blocked } = s;
+        return new Subscription(
+          subscriptionId,
+          subscriber,
+          subscribee,
+          blocked,
+          s.subscriber.username,
+          s.subscriber.userId,
+          s.subscribee.username,
+          s.subscribee.userId
+        );
+      }
+    );
+    let fetchedPosts: Post[] = response.data.posts.map((p: any) => {
+      return new Post(
+        p.postId,
+        p.author.userId,
+        p.author.username,
+        p.datePosted,
+        p.title,
+        p.content
+      );
+    });
+    let userObject = { fetchedUser, fetchedSubscribers, fetchedPosts };
+    return userObject;
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 export async function getUsersLikeUsername(uname: String): Promise<User[]> {
@@ -37,7 +71,7 @@ export async function updateUser(u: User): Promise<User> {
     password: u.password,
     alias: u.alias,
     role: u.role,
-    image:u.profilePic,
+    image: u.profilePic,
   });
   const { userId, username, alias, role, password } = response.data;
   return new User(userId, username, alias, role, password);

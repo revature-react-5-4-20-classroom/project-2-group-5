@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { SubscribersPage } from '../pages/Subscribers';
 import { MessagesPage } from '../pages/Messages';
 import { Home } from '../pages/Home';
-import { UserProfile } from '../pages/Profile';
+import UserProfile from '../pages/Profile';
 import { SearchPage } from '../pages/Search';
 
 
@@ -31,9 +31,29 @@ class PrivateRoutesComponent extends React.Component<any, any> {
             <Redirect to='/' />
           )}
         </Route>
+        <Route
+          path='/profile/:userId'
+          render={(match: any) => {
+            console.log('MATCH', match);
+            return (
+              <>
+                {this.props.isAuthenticated === true ? (
+                  [
+                    <UserProfile
+                      reqUserId={match.match.params.userId}
+                      path={`/profile/${match.match.params.userId}`}
+                    />,
+                  ]
+                ) : (
+                  <Redirect to='/' />
+                )}
+              </>
+            );
+          }}
+        />
         <Route path='/profile'>
           {this.props.isAuthenticated === true ? (
-            <UserProfile path='/profile' />
+            <UserProfile reqUserId={null} path='/profile' />
           ) : (
             <Redirect to='/' />
           )}
@@ -54,7 +74,10 @@ class PrivateRoutesComponent extends React.Component<any, any> {
         </Route>
         <Route path='/messages'>
           {this.props.isAuthenticated === true ? (
-            <MessagesPage path='/messages' userId={this.props.currUser.userId} />
+            <MessagesPage
+              path='/messages'
+              userId={this.props.currUser.userId}
+            />
           ) : (
             <Redirect to='/' />
           )}

@@ -33,8 +33,8 @@ public class Users {
 	private String pictureName;
 	@Column(name = "picture_type")
 	private String pictureType;
-	@Column(name = "pic")
-	private String pic;
+	@Lob
+	private byte[] pic;
 	@OneToMany(mappedBy = "author")
 	@JsonIgnoreProperties({"comments"})
 	private List<Posts> posts;
@@ -72,7 +72,7 @@ public class Users {
 	
 
 	public Users(Integer userId, String username, String password, String alias, String role,
-      String pictureName, String pictureType, String pic) {
+      String pictureName, String pictureType, byte[] pic) {
       super();
       this.userId = userId;
       this.username = username;
@@ -140,11 +140,11 @@ public class Users {
       this.pictureType = pictureType;
     }
   
-    public String getPic() {
+    public byte[] getPic() {
       return pic;
     }
   
-    public void setPic(String pic) {
+    public void setPic(byte[] pic) {
       this.pic = pic;
     }
   

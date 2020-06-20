@@ -9,12 +9,12 @@ import com.g5.p2.models.Users;
 
 @Repository
 public interface UsersRepository extends JpaRepository<Users, Integer> {
-	Users findByUserId(Integer userId);
-	
-	@Query(value = "SELECT * FROM users WHERE username LIKE :username", nativeQuery=true)
-	List<Users> findLikeUsername(String username);
+  Users findByUserId(Integer userId);
 
-	Users findByUsername(String username);
+  @Query(value = "SELECT * FROM users WHERE username LIKE :username", nativeQuery = true)
+  List<Users> findLikeUsername(String username);
 
-	Users findByUsernameAndPassword(String username, String password);
+  Users findByUsername(String username);
+
+  Users findByUsernameAndPassword(String username, String password);
 }

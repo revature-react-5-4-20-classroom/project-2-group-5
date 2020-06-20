@@ -16,126 +16,129 @@ import com.g5.p2.repositories.UsersRepository;
 @Primary
 public class UsersServiceImplementation implements UsersService {
 
-	@Autowired
-	UsersRepository usersRepository;
+  @Autowired
+  UsersRepository usersRepository;
 
-	@Override
-	public List<Users> getAll(Users session) {
-		List<Users> users = usersRepository.findAll();
+  @Override
+  public List<Users> getAll(Users session) {
+    List<Users> users = usersRepository.findAll();
 
-		if (session != null) {
-			users = checkBlocked(session, users);
-		}
+    if (session != null) {
+      users = checkBlocked(session, users);
+    }
 
-		return users;
-	}
+    return users;
+  }
 
-	@Override
-	public Users getById(Integer userId) {
-		Optional<Users> u = usersRepository.findById(userId);
-		if (u.isPresent()) {
-			return u.get();
-		} else {
-			throw new UserNotFoundException();
-		}
-	}
+  @Override
+  public Users getById(Integer userId) {
+    Optional<Users> u = usersRepository.findById(userId);
+    if (u.isPresent()) {
+      return u.get();
+    } else {
+      throw new UserNotFoundException();
+    }
+  }
 
-	@Override
-	public List<Users> getLikeUsername(String username, Users session) {
-		List<Users> users = usersRepository.findLikeUsername(username + "%");
+  @Override
+  public List<Users> getLikeUsername(String username, Users session) {
+    List<Users> users = usersRepository.findLikeUsername(username + "%");
 
-		if (session != null) {
-			users = checkBlocked(session, users);
-		}
+    if (session != null) {
+      users = checkBlocked(session, users);
+    }
 
-		return users;
-	}
+    return users;
+  }
 
-	@Override
-	public Users create(Users u) {
-		u.setUserId(usersRepository.findAll().get(usersRepository.findAll().size() - 1).getUserId() + 1);
-		return usersRepository.save(u);
-	}
+  @Override
+  public Users create(Users u) {
+    u.setUserId(
+        usersRepository.findAll().get(usersRepository.findAll().size() - 1).getUserId() + 1);
+    return usersRepository.save(u);
+  }
 
-	@Override
-	public Users update(Users u) {
+  @Override
+  public Users update(Users u) {
 
-		Optional<Users> existingUser = usersRepository.findById(u.getUserId());
-		if (existingUser.isPresent()) {
-			return usersRepository.save(u);
-		} else {
-			throw new UserNotFoundException();
-		}
-	}
+    Optional<Users> existingUser = usersRepository.findById(u.getUserId());
+    if (existingUser.isPresent()) {
+      return usersRepository.save(u);
+    } else {
+      throw new UserNotFoundException();
+    }
+  }
 
-	@Override
-	public Users createOrUpdate(Users u) {
-		return usersRepository.save(u);
-	}
+  @Override
+  public Users createOrUpdate(Users u) {
+    return usersRepository.save(u);
+  }
 
-	@Override
-	public Users findOneUser(String username) {
-		return usersRepository.findByUsername(username);
-	}
+  @Override
+  public Users findOneUser(String username) {
+    return usersRepository.findByUsername(username);
+  }
 
-	@Override
-	public Users findOneUser(String username, String password) {
-		return usersRepository.findByUsernameAndPassword(username, password);
-	}
+  @Override
+  public Users findOneUser(String username, String password) {
+    return usersRepository.findByUsernameAndPassword(username, password);
+  }
 
-	@Override
-	public boolean delete(Integer userId) {
-		Optional<Users> existingUser = usersRepository.findById(userId);
-		if (existingUser.isPresent()) {
-			usersRepository.deleteById(userId);
-			return true;
-		} else {
-			return false;
-		}
-	}
+  @Override
+  public boolean delete(Integer userId) {
+    Optional<Users> existingUser = usersRepository.findById(userId);
+    if (existingUser.isPresent()) {
+      usersRepository.deleteById(userId);
+      return true;
+    } else {
+      return false;
+    }
+  }
 
-	// u is the active user to check if they are blocked, users is the list of users
-	// that will end up returning
-	// if the subscriber matches the user, and their subscription lists them as
-	// blocked, remove them from the list
-	public List<Users> checkBlocked(Users u, List<Users> users) {
-		for (int i = 0; i < u.getSubscriber().size(); i++) {
-			for (int j = 0; j < users.size(); j++) {
-				if ((u.getSubscriber().get(i).getSubscribee().getUserId() == users.get(j).getUserId())) {
-					if (u.getSubscriber().get(i).isBlocked()) {
-						users.remove(j);
-						j--;
-					}
-					break;
-				}
-			}
-		}
-		return users;
-	}
+  // u is the active user to check if they are blocked, users is the list of users
+  // that will end up returning
+  // if the subscriber matches the user, and their subscription lists them as
+  // blocked, remove them from the list
+  public List<Users> checkBlocked(Users u, List<Users> users) {
+    for (int i = 0; i < u.getSubscriber().size(); i++) {
+      for (int j = 0; j < users.size(); j++) {
+        if ((u.getSubscriber().get(i).getSubscribee().getUserId() == users.get(j).getUserId())) {
+          if (u.getSubscriber().get(i).isBlocked()) {
+            users.remove(j);
+            j--;
+          }
+          break;
+        }
+      }
+    }
+    return users;
+  }
 
-	@Override
-	public Users saveFile(MultipartFile file, Integer id) {
-		String docname = file.getOriginalFilename();
-		try {
-			Users user = this.getById(id);
-			user.setPictureName(docname);
-			user.setPictureType(file.getContentType());
-			user.setPic(file.getBytes());
+  @Override
+  public Users saveFile(MultipartFile file, Integer id) {
+    String docname = file.getOriginalFilename();
+    try {
+      Users user = this.getById(id);
+      user.setPictureName(docname);
+      user.setPictureType(file.getContentType());
+      user.setPic(file.getBytes());
 
-//			Users user = new Users("username1513", "password15", "alias15", "role15", docname, file.getContentType(),
-//					file.getBytes());
-//			user.setUserId(usersRepository.findAll().get(usersRepository.findAll().size() - 1).getUserId() + 1);
-			return usersRepository.save(user);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+      // Users user = new Users("username1513", "password15", "alias15", "role15", docname,
+      // file.getContentType(),
+      // file.getBytes());
+      // user.setUserId(usersRepository.findAll().get(usersRepository.findAll().size() -
+      // 1).getUserId() + 1);
+      return usersRepository.save(user);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
 
-	// getting image by user id
-	@Override
-	public Optional<Users> getfile(Integer fileId) {
-		return usersRepository.findById(fileId);
-	}
+  // getting image by user id
+  @Override
+  public Optional<Users> getfile(Integer fileId) {
+    return usersRepository.findById(fileId);
+  }
 
 }

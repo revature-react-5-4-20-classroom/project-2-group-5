@@ -139,22 +139,36 @@ class UserProfileComponent extends React.Component<
         <Row>
           <Col xs={8} className='offset-2 center-div'>
             <Container className='profile-container'>
-              <Row>
-                <Col xs={3}>
+              <Row className='profile-info-row'>
+                <Col xs={4} className=' center-div'>
                   <img
                     src={img}
                     alt='profile pic'
-                    className='post-profile-pic'
+                    className='profile-profile-pic'
                   />
                 </Col>
-                <Col xs={9}>
-                  <h1>{this.state.reqUser?.username}</h1>
+                <Col xs={8}>
+                  <h1 className='profile-username'>
+                    <u>{this.state.reqUser?.username}'s profile</u>
+                  </h1>
                   {this.state.currProfile !== this.props.currUser!.userId ? (
                     [
                       this.state.isSubscribed ? (
-                        <Button onClick={this.unsubscribe}>Unsubscribe</Button>
+                        <Button
+                          color='danger'
+                          className='profile-subbing'
+                          onClick={this.unsubscribe}
+                        >
+                          <span className='button-text'>Unsubscribe</span>
+                        </Button>
                       ) : (
-                        <Button onClick={this.subscribe}>Subscribe</Button>
+                        <Button
+                          color='success'
+                          className='profile-subbing'
+                          onClick={this.subscribe}
+                        >
+                          <span className='button-text'>Subscribe</span>
+                        </Button>
                       ),
                     ]
                   ) : (
@@ -162,7 +176,7 @@ class UserProfileComponent extends React.Component<
                   )}
                 </Col>
               </Row>
-              <Row>
+              <Row className='profile-container-row'>
                 <Col xs={3}>
                   <div className='profile-subs-div'>
                     {this.state.subscribers.length > 0 ? (

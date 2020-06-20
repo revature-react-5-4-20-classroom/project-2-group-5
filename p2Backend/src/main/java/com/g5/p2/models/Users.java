@@ -1,6 +1,5 @@
 package com.g5.p2.models;
 
-
 import java.util.List;
 
 import javax.persistence.Column;
@@ -8,11 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 
 @Entity
 @Table(name = "users")
@@ -30,6 +29,12 @@ public class Users {
 	private String alias;
 	@Column(name = "role")
 	private String role;
+	@Column(name = "picture_name")
+	private String pictureName;
+	@Column(name = "picture_type")
+	private String pictureType;
+	@Lob
+	private byte[] pic;
 	@OneToMany(mappedBy = "author")
 	@JsonIgnoreProperties({"comments"})
 	private List<Posts> posts;
@@ -63,8 +68,23 @@ public class Users {
 		this.alias = alias;
 		this.role = role;
 	}
+	
+	
 
-	public Integer getUserId() {
+	public Users(Integer userId, String username, String password, String alias, String role,
+      String pictureName, String pictureType, byte[] pic) {
+      super();
+      this.userId = userId;
+      this.username = username;
+      this.password = password;
+      this.alias = alias;
+      this.role = role;
+      this.pictureName = pictureName;
+      this.pictureType = pictureType;
+      this.pic = pic;
+    }
+
+    public Integer getUserId() {
 		return userId;
 	}
 
@@ -104,7 +124,31 @@ public class Users {
 		this.role = role;
 	}
 	
-	public List<Posts> getPosts() {
+	public String getPictureName() {
+      return pictureName;
+    }
+  
+    public void setPictureName(String pictureName) {
+      this.pictureName = pictureName;
+    }
+  
+    public String getPictureType() {
+      return pictureType;
+    }
+  
+    public void setPictureType(String pictureType) {
+      this.pictureType = pictureType;
+    }
+  
+    public byte[] getPic() {
+      return pic;
+    }
+  
+    public void setPic(byte[] pic) {
+      this.pic = pic;
+    }
+  
+    public List<Posts> getPosts() {
 		return posts;
 	}
 

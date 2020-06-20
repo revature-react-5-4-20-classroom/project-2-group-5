@@ -3,7 +3,7 @@ package com.g5.p2.services;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -18,6 +18,7 @@ import com.g5.p2.repositories.UsersRepository;
 
 @Service
 @Primary
+@Transactional
 public class PostsServiceImplementation implements PostsService {
 	
 	@Autowired

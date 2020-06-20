@@ -25,6 +25,7 @@ public class GeneralController {
 	public Users attemptLogin(@RequestBody LinkedHashMap<String, String> c, HttpSession s) {
 	  Users u = usersService.findOneUser(c.get("username"), c.get("password"));
 	  s.setAttribute("user", u);
+	  System.out.println(u.getPic());
 	  return u;
 	}
 	
@@ -37,6 +38,7 @@ public class GeneralController {
     public boolean attemptLogin(HttpSession s) {
       if((Users)s.getAttribute("user") != null) {
         s.setAttribute("user", null);
+        s.invalidate();
         return true;
       }
       else {

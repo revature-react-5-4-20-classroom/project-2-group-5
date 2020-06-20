@@ -6,9 +6,9 @@ import { Subscription } from '../../models/subscription';
 interface ISubscribersContainerProps {
   subsArray: Subscription[];
   type: string;
-  blockUser: (subs: Subscription) => void;
-  unblockUser: (subs: Subscription) => void;
-  unsubscribe: (subs: Subscription) => void;
+  blockUser: ((subs: Subscription) => void) | null;
+  unblockUser: ((subs: Subscription) => void) | null;
+  unsubscribe: ((subs: Subscription) => void) | null;
 }
 
 export class SubscribersContainer extends React.Component<

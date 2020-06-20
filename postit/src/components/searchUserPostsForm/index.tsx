@@ -16,13 +16,13 @@ export class Search extends React.Component<any, any> {
   search = async (event: any) => {
     event.preventDefault();
     this.props.search();
-  }
+  };
 
   render() {
     return (
       <div className='center'>
         <h3>User Post Search</h3>
-        <Form className='center'  onSubmit={this.search}>
+        <Form className='center' onSubmit={this.search}>
           <FormGroup>
             <Input
               onChange={this.setUsername}
@@ -37,7 +37,6 @@ export class Search extends React.Component<any, any> {
             <Button color='secondary'>Search</Button>
           </FormGroup>
         </Form>
-
       </div>
     );
   }

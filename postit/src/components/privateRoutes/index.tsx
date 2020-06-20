@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { SubscribersPage } from '../pages/Subscribers';
 import { MessagesPage } from '../pages/Messages';
 import { Home } from '../pages/Home';
-import { UserProfile } from '../pages/Profile';
+import UserProfile from '../pages/Profile';
 import { SearchPage } from '../pages/Search';
 
 class PrivateRoutesComponent extends React.Component<any, any> {
@@ -53,7 +53,10 @@ class PrivateRoutesComponent extends React.Component<any, any> {
         </Route>
         <Route path='/messages'>
           {this.props.isAuthenticated === true ? (
-            <MessagesPage path='/messages' userId={this.props.currUser.userId} />
+            <MessagesPage
+              path='/messages'
+              userId={this.props.currUser.userId}
+            />
           ) : (
             <Redirect to='/' />
           )}

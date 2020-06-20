@@ -1,18 +1,22 @@
 package com.g5.p2.controllers;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import javax.annotation.Resource;
 import javax.servlet.MultipartConfigElement;
 
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpStatus;
+
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,15 +38,13 @@ import com.google.common.net.HttpHeaders;
 @RestController
 public class UsersController {
 
-	  
-
 	@Autowired
 	UsersServiceImplementation usersService;
 
 	// get all users
 	@GetMapping
-	public List<Users> getUser() {
-		return usersService.getAll();
+	public List<Users> getUser(HttpSession s) {
+		return usersService.getAll((Users)s.getAttribute("user"));
 	}
 
 	// get users by id
@@ -59,9 +61,11 @@ public class UsersController {
 
 	// get users by username
 	@GetMapping("/username/{username}")
-	public Users[] getUserLikeUsername(@PathVariable String username) {
-		return usersService.getLikeUsername(username);
-	}
+//	public Users[] getUserLikeUsername(@PathVariable String username) {
+//		return usersService.getLikeUsername(username);
+	public List<Users> getUserLikeUsername(@PathVariable String username, HttpSession s) {
+	  return usersService.getLikeUsername(username, (Users)s.getAttribute("user"));
+}
 
 	// create a user
 	@PostMapping
@@ -89,11 +93,12 @@ public class UsersController {
 
 	@PostMapping(path="/upload", consumes = "multipart/form-data")
 	public ResponseEntity<?> saveEnvironmentConfig( MultipartHttpServletRequest request  ) {
-		System.out.println(request.getContentType());
+		//System.out.println(request.getContentType());
 		MultipartFile file = request.getFile("file");
 		usersService.saveFile(file);
 		return ResponseEntity.ok().body(null);
 	
+
 //	public String uploadImage(@RequestParam("files")  MultipartHttpServletRequest request) {
 //		MultipartFile mPF = request.getFile(files);
 //		System.out.println("vlsigje");
@@ -109,4 +114,17 @@ public class UsersController {
 				.body(new ByteArrayResource(users.getPic()));
 
 	}
+
+	//delete user
+	@DeleteMapping
+	public boolean deleteUser(@RequestBody Integer userId) {
+	  try {
+        return usersService.delete(userId);
+    }
+    catch(UserNotFoundException e) {
+        e.printStackTrace();
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not Found", e);
+    }
+}
+
 }

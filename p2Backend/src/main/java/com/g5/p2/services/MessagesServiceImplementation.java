@@ -44,12 +44,7 @@ public class MessagesServiceImplementation implements MessagesService {
   
   @Override
   public List<Messages> getByAuthorAndUser(Integer authorId, Integer userId) {
-    Optional<Users> author = usersRepository.findById(authorId);
-    Optional<Users> currUser = usersRepository.findById(userId);
-    List<Messages> authToUserMessages = messagesRepository.findByAuthorAndReceiver(author.get(), currUser.get());
-    List<Messages> userToAuthMessages = messagesRepository.findByAuthorAndReceiver(currUser.get(), author.get());
-    authToUserMessages.addAll(userToAuthMessages);
-    return authToUserMessages; // think this had (User userid too?)
+    return messagesRepository.findByAuthorAndReceiver(usersRepository.findByUserId(authorId), usersRepository.findByUserId(userId));
   }
 
 

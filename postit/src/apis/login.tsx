@@ -1,10 +1,11 @@
 import axios from 'axios';
 
 import { User } from '../models/user';
+import { backendUrl } from './backendUrl';
 // import { FailedLoginErro/r } from "../errors/DisplayErrorMessage";
 
 const loginClient = axios.create({
-  baseURL: 'http://3.133.86.196:8081',
+  baseURL: backendUrl,
   // If you don't have the following line, your login won't work!
   withCredentials: true,
 });

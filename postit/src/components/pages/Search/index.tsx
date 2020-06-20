@@ -9,7 +9,7 @@ import { PostContainer } from '../../postsContainer';
 import './style.css';
 
 interface ISearchPageState {
-  searchedUsername: String;
+  searchedUsername: string;
   searchResults: Post[];
 }
 
@@ -22,11 +22,11 @@ export class SearchPage extends React.Component<any, ISearchPageState> {
     };
   }
 
-  setSearchedUsername(username: String) {
+  setSearchedUsername(username: string) {
     this.setState({ searchedUsername: username });
   }
 
-  getSearchedUsername(): String {
+  getSearchedUsername(): string {
     return this.state.searchedUsername;
   }
 
@@ -53,7 +53,7 @@ export class SearchPage extends React.Component<any, ISearchPageState> {
         <Row style={{height:80 + "vh"}}>
           <Col className='title-row message-panel' xs={4}>
               <Search
-                setSearchedUsername={(username: String) => {
+                setSearchedUsername={(username: string) => {
                   this.setSearchedUsername(username);
                 }}
                 getSearchedUsername={(): String => {

@@ -1,9 +1,10 @@
 import axios from "axios";
 import { promises } from "fs";
 import { Message } from "../models/message";
+import { backendUrl } from "./backendUrl";
 
 const messageClient = axios.create({
-  baseURL: "http://3.133.86.196:8081",
+  baseURL: backendUrl,
   withCredentials: true,
 });
 
@@ -50,15 +51,15 @@ export async function newMessage(msg: Message): Promise<Message> {
     receiver: msg.receiverId,
     content: msg.content,
   });
-  return response.data.map((msgObj: any) => {
-    const { messageId, content } = msgObj;
-    return new Message(
-      messageId,
-      msgObj.author.userId,
-      msgObj.author.username,
-      msgObj.receiver.userId,
-      msgObj.receiver.username,
-      content
-    );
-  });
+  const { messageId, author, receiver, content } = response.data;
+  return new Message(
+    messageId,
+    author.userId,
+    author.username,
+    receiver.userId,
+    receiver.username,
+    content
+  );
+
+
 }

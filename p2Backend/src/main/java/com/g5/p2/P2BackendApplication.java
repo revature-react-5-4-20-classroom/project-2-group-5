@@ -37,9 +37,6 @@ public class P2BackendApplication {
 			}
 		};
 	}
-	
-	
-	
 
 	/**
 	 * Swagger "Docket" Bean for all the controllers in our project

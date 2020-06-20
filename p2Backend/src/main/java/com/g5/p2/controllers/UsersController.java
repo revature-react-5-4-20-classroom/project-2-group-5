@@ -2,20 +2,13 @@ package com.g5.p2.controllers;
 
 import java.util.List;
 
-import java.util.Optional;
-
-import javax.annotation.Resource;
-import javax.servlet.MultipartConfigElement;
-
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpStatus;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -44,7 +37,7 @@ public class UsersController {
 	// get all users
 	@GetMapping
 	public List<Users> getUser(HttpSession s) {
-		return usersService.getAll((Users)s.getAttribute("user"));
+		return usersService.getAll((Users) s.getAttribute("user"));
 	}
 
 	// get users by id
@@ -64,8 +57,8 @@ public class UsersController {
 //	public Users[] getUserLikeUsername(@PathVariable String username) {
 //		return usersService.getLikeUsername(username);
 	public List<Users> getUserLikeUsername(@PathVariable String username, HttpSession s) {
-	  return usersService.getLikeUsername(username, (Users)s.getAttribute("user"));
-}
+		return usersService.getLikeUsername(username, (Users) s.getAttribute("user"));
+	}
 
 	// create a user
 	@PostMapping
@@ -84,20 +77,12 @@ public class UsersController {
 		}
 	}
 
-	@GetMapping("/check")
-	public String get(Model model) {
-		Optional<Users> docs = usersService.getfile(5);
-		model.addAttribute("file", docs);
-		return "doc";
-	}
-
-	@PostMapping(path="/upload/{userid}", consumes = "multipart/form-data")
-	public ResponseEntity<?> saveEnvironmentConfig( MultipartHttpServletRequest request ,@PathVariable Integer userid ) {
-		//System.out.println(request.getContentType());
+	@PostMapping(path = "/upload/{userid}", consumes = "multipart/form-data")
+	public ResponseEntity<?> saveEnvironmentConfig(MultipartHttpServletRequest request, @PathVariable Integer userid) {
+		// System.out.println(request.getContentType());
 		MultipartFile file = request.getFile("file");
-		usersService.saveFile(file,userid);
+		usersService.saveFile(file, userid);
 		return ResponseEntity.ok().body("picture uploaded");
-	
 
 //	public String uploadImage(@RequestParam("files")  MultipartHttpServletRequest request) {
 //		MultipartFile mPF = request.getFile(files);
@@ -115,16 +100,15 @@ public class UsersController {
 
 	}
 
-	//delete user
+	// delete user
 	@DeleteMapping("{userId}")
 	public boolean deleteUser(@PathVariable Integer userId) {
-	  try {
-        return usersService.delete(userId);
-    }
-    catch(UserNotFoundException e) {
-        e.printStackTrace();
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not Found", e);
-    }
-}
+		try {
+			return usersService.delete(userId);
+		} catch (UserNotFoundException e) {
+			e.printStackTrace();
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not Found", e);
+		}
+	}
 
 }

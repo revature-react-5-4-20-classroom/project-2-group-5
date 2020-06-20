@@ -30,13 +30,13 @@ public class Users {
 	@Column(name = "role")
 	private String role;
 	@OneToMany(mappedBy = "author")
-	@JsonIgnoreProperties({"comments"})
+	@JsonIgnoreProperties({ "comments" })
 	private List<Posts> posts;
 	@OneToMany(mappedBy = "subscribee")
-    @JsonIgnoreProperties({"posts"})
+	@JsonIgnoreProperties({ "posts" })
 	private List<Subscriptions> subscribee;
 	@OneToMany(mappedBy = "subscriber")
-    @JsonIgnoreProperties({"posts"})
+	@JsonIgnoreProperties({ "posts" })
 	private List<Subscriptions> subscriber;
 
 	@Column(name = "picture_name")

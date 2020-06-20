@@ -22,7 +22,9 @@ public class UsersServiceImplementation implements UsersService {
   public List<Users> getAll(Users session) {
     List<Users> users = usersRepository.findAll();
     
-    users = checkBlocked(session, users);
+    if(session != null) {
+      users = checkBlocked(session, users);
+    }
     
     return users;
   }
@@ -41,7 +43,9 @@ public class UsersServiceImplementation implements UsersService {
   public List<Users> getLikeUsername(String username, Users session) {
     List<Users> users = usersRepository.findLikeUsername(username + "%");
     
-    users = checkBlocked(session, users);
+    if(session != null) {
+      users = checkBlocked(session, users);
+    }
     
     return users;
   }

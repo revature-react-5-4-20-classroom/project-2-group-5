@@ -2,10 +2,7 @@ import React from 'react';
 import './style.css';
 import {
   Card,
-  CardImg,
   CardBody,
-  CardTitle,
-  CardSubtitle,
   CardText,
   Button,
   Row,
@@ -13,7 +10,6 @@ import {
 } from 'reactstrap';
 import somepic from '../../img/profileplaceholder.jpg';
 import { Subscription } from '../../models/subscription';
-import { updateSubscriptions } from '../../apis/subscriptions';
 
 interface ISubscriberCardProps {
   subscription: Subscription;

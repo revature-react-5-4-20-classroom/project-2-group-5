@@ -7,7 +7,6 @@ import {
   Container,
   InputGroup,
   InputGroupAddon,
-  InputGroupText,
   Input,
   Form,
   FormGroup,
@@ -16,8 +15,7 @@ import { MessageRow } from '../message';
 import { User } from '../../models/user';
 import { Message } from '../../models/message';
 import { newMessage } from '../../apis/messages';
-import { Search } from '../searchUserPostsForm';
-import { getUsersLikeUsername, getUsersById } from '../../apis/user';
+import { getUsersLikeUsername } from '../../apis/user';
 import { MessageListContainer } from '../messageListContainer';
 
 // interface IMessageDisplayContainerProps{
@@ -68,7 +66,8 @@ export class MessageDisplayContainer extends React.Component<any, IMessageDispla
     this.setState({ searchedUsername: event.currentTarget.value });
   }
 
-  search = async ()=>{
+  search = async (event : any)=>{
+    event.preventDefault();
     if (this.state.searchedUsername != '') {
       let results: User[] = await getUsersLikeUsername(
         this.state.searchedUsername
@@ -140,7 +139,7 @@ export class MessageDisplayContainer extends React.Component<any, IMessageDispla
                 <Row style={{height:80 + "vh"}}>
                   <Col className='title-row message-panel' xs={4}>
                     <h3>User Search</h3>
-                    <Form className='center' >
+                    <Form className='center'  onSubmit={this.search}>
                       <FormGroup>
                         <Input
                           onChange={this.setSearchedUsername}
@@ -152,7 +151,7 @@ export class MessageDisplayContainer extends React.Component<any, IMessageDispla
                         />
                       </FormGroup>
                       <FormGroup>
-                        <Button color='secondary' onClick={this.search}>Search</Button>
+                        <Button color='secondary'>Search</Button>
                       </FormGroup>
                     </Form>
                   </Col>

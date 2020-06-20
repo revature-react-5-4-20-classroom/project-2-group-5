@@ -6,8 +6,6 @@ import { SubscribersPage } from '../pages/Subscribers';
 import { MessagesPage } from '../pages/Messages';
 import { Home } from '../pages/Home';
 import { UserProfile } from '../pages/Profile';
-import { CreatePostForm } from '../createPostForm';
-import { PostContainer } from '../postsContainer';
 import { SearchPage } from '../pages/Search';
 
 class PrivateRoutesComponent extends React.Component<any, any> {

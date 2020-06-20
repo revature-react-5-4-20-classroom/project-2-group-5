@@ -2,12 +2,7 @@ import React from 'react';
 import {
   Container,
   Row,
-  Card,
   Col,
-  CardImg,
-  CardBody,
-  CardTitle,
-  Label,
   Input,
   Spinner,
   Button,

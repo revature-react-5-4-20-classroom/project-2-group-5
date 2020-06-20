@@ -23,7 +23,7 @@ import {
 
 interface IUserProfileProps {
   currUser: User | null;
-  reqUserId: number | null;
+  // reqUserId: number | null;
   path: any;
 }
 
@@ -50,18 +50,20 @@ class UserProfileComponent extends React.Component<
       data: false,
       isSubscribed: false,
       dbSubscriptionRow: null,
-      currProfile:
-        this.props.reqUserId !== null
-          ? this.props.reqUserId
-          : this.props.currUser!.userId,
+      currProfile: 0,
+      // this.props.reqUserId !== null
+      //   ? this.props.reqUserId
+      //   : this.props.currUser!.userId,
     };
   }
 
   componentDidMount = async () => {
+    console.log('this.props: ', this.props);
     let user = await this.getUser(
-      this.props.reqUserId !== null
-        ? this.props.reqUserId
-        : this.props.currUser!.userId
+      this.props.currUser!.userId
+      // this.props.reqUserId !== null
+      //   ? this.props.reqUserId
+      //   : this.props.currUser!.userId
     );
     let isSub = await this.isSubscribedCheck(user.fetchedUser.userId);
     if (isSub) {
@@ -81,6 +83,7 @@ class UserProfileComponent extends React.Component<
 
   getUser = async (userId: number) => {
     let requestedUser = await getUsersById(userId);
+    console.log('requestedUSER', requestedUser);
     return requestedUser;
   };
 

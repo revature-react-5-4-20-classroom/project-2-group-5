@@ -13,6 +13,8 @@ import { Comments } from '../comments';
 import './style.css';
 import img from './2.png';
 import { Post } from '../../models/post';
+import { Link } from 'react-router-dom';
+import UserProfile from '../pages/Profile';
 
 // Component that gives stucture to every post.  Will have profile pic {conditionally rendered},
 //  username, post title {conditionally rendered}, post/comment content, and total # of replies {condi-
@@ -44,6 +46,7 @@ export class PostComponent extends React.Component<IPostComponentProps, any> {
           <Col md={4}>
             <Row>
               <Col xs={12} className='center-div'>
+                {/* <Link to=''></Link> */}
                 <img src={img} alt='profile pic' className='post-profile-pic' />
               </Col>
             </Row>

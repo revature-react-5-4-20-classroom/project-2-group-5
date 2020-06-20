@@ -1,15 +1,9 @@
 import React from 'react';
 import './style.css';
-import {
-  Card,
-  CardBody,
-  CardText,
-  Button,
-  Row,
-  Col,
-} from 'reactstrap';
+import { Card, CardBody, CardText, Button, Row, Col } from 'reactstrap';
 import somepic from '../../img/profileplaceholder.jpg';
 import { Subscription } from '../../models/subscription';
+import { Link } from 'react-router-dom';
 
 interface ISubscriberCardProps {
   subscription: Subscription;
@@ -47,12 +41,14 @@ export class SubscriberCard extends React.Component<ISubscriberCardProps, any> {
             <Row className='card-row'>
               <Col xs={4}>
                 <CardBody>
-                  <img
-                    className='profile-pic'
-                    width='65%'
-                    alt='Card image cap'
-                    src={somepic}
-                  />
+                  <Link to={`/profile/${this.props.subscription.subscriberId}`}>
+                    <img
+                      className='profile-pic'
+                      width='65%'
+                      alt='Card image cap'
+                      src={somepic}
+                    />
+                  </Link>
                   <CardText>{this.props.subscription.subscriberName}</CardText>
                 </CardBody>
               </Col>
@@ -90,12 +86,14 @@ export class SubscriberCard extends React.Component<ISubscriberCardProps, any> {
             <Row className='card-row'>
               <Col xs={4}>
                 <CardBody>
-                  <img
-                    className='profile-pic'
-                    width='65%'
-                    alt='Card image cap'
-                    src={somepic}
-                  />
+                  <Link to={`/profile/${this.props.subscription.subscribeeId}`}>
+                    <img
+                      className='profile-pic'
+                      width='65%'
+                      alt='Card image cap'
+                      src={somepic}
+                    />
+                  </Link>
                   <CardText>{this.props.subscription.subscribeeName}</CardText>
                 </CardBody>
               </Col>

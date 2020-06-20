@@ -1,11 +1,9 @@
 //will use subscriptionById and postsById
 import React from 'react';
 import { PostContainer } from '../../postsContainer';
-import { Container, Row, Col, Spinner, Button } from 'reactstrap';
+import { Container, Row, Col, Button } from 'reactstrap';
 import { getUsersById } from '../../../apis/user';
 import img from './1.png';
-import { SubscriberCard } from '../../subscriberCard/index';
-import { getPostsByUserId } from '../../../apis/posts';
 import ReactS3Uploader from 'react-s3-uploader';
 import { Post } from '../../../models/post';
 import { User } from '../../../models/user';
@@ -19,11 +17,10 @@ import {
   getAllsubscription,
   createSubscriptions,
 } from '../../../apis/subscriptions';
-// import { Pic } from "../../../fileUpdoad";
 
 interface IUserProfileProps {
   currUser: User | null;
-  // reqUserId: number | null;
+  reqUserId: number | null;
   path: any;
 }
 
@@ -50,21 +47,17 @@ class UserProfileComponent extends React.Component<
       data: false,
       isSubscribed: false,
       dbSubscriptionRow: null,
-      currProfile: 0,
-      // this.props.reqUserId !== null
-      //   ? this.props.reqUserId
-      //   : this.props.currUser!.userId,
+      currProfile:
+        this.props.reqUserId !== null
+          ? this.props.reqUserId
+          : this.props.currUser!.userId,
     };
   }
 
   componentDidMount = async () => {
-    console.log('this.props: ', this.props);
-    let user = await this.getUser(
-      this.props.currUser!.userId
-      // this.props.reqUserId !== null
-      //   ? this.props.reqUserId
-      //   : this.props.currUser!.userId
-    );
+    console.log('this.props.reqUserId', this.props.reqUserId);
+    console.log('state', this.props.currUser!.userId);
+    let user = await this.getUser(this.state.currProfile);
     let isSub = await this.isSubscribedCheck(user.fetchedUser.userId);
     if (isSub) {
       this.setState({
@@ -83,7 +76,6 @@ class UserProfileComponent extends React.Component<
 
   getUser = async (userId: number) => {
     let requestedUser = await getUsersById(userId);
-    console.log('requestedUSER', requestedUser);
     return requestedUser;
   };
 
@@ -138,21 +130,6 @@ class UserProfileComponent extends React.Component<
     });
     // this.shouldComponentUpdate(this.props, this.state);
   };
-
-  // changePic = async (e: any) => {
-  //   e.preventDefault();
-  //   const updateUserObj = new User(
-  //     this.state.response.userId,
-  //     this.state.response.username,
-  //     this.state.response.alias,
-  //     this.state.response.role,
-  //     this.state.response.password,
-  //     e.currentTarget.value
-  //   );
-  //   this.setState({
-  //     response:await updateUser(updateUserObj)
-  //   })
-  // };
 
   updateUser = (id: number) => {};
 

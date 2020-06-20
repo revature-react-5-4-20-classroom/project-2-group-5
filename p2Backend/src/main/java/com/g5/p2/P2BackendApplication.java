@@ -1,8 +1,12 @@
 package com.g5.p2;
 
+import javax.servlet.MultipartConfigElement;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -27,9 +31,7 @@ public class P2BackendApplication {
     return new WebMvcConfigurer() {
       @Override
       public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-            .allowedOrigins("http://localhost:3000")
-            .allowCredentials(true)
+        registry.addMapping("/**").allowedOrigins("http://localhost:3000").allowCredentials(true)
             .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS");
 
       }
@@ -44,7 +46,5 @@ public class P2BackendApplication {
     return new Docket(DocumentationType.SWAGGER_2).select()
         .apis(RequestHandlerSelectors.basePackage("com.g5.p2")).build();
   }
-
-
 
 }

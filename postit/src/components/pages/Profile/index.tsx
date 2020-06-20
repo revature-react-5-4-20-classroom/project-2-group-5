@@ -177,8 +177,8 @@ class UserProfileComponent extends React.Component<
                 </Col>
               </Row>
               <Row className='profile-container-row'>
-                <Col xs={3}>
-                  <div className='profile-subs-div'>
+                <Col xs={4}>
+                  <div className='profile-subs-div center-div'>
                     {this.state.subscribers.length > 0 ? (
                       <SubscribersContainer
                         subsArray={this.state.subscribers}
@@ -195,7 +195,7 @@ class UserProfileComponent extends React.Component<
                     )}
                   </div>
                 </Col>
-                <Col xs={9}>
+                <Col xs={8}>
                   <div className='profile-posts-div'>
                     {this.state.posts.length > 0 ? (
                       <PostContainer posts={this.state.posts} />

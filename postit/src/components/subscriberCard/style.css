@@ -17,3 +17,25 @@
   border-bottom: grey !important;
   height: 125px;
 }
+
+.profile-card-row {
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-sub-card {
+  border-bottom: grey !important;
+  height: 125px;
+}
+
+.center-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.left-div {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}

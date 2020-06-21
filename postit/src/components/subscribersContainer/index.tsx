@@ -28,7 +28,7 @@ export class SubscribersContainer extends React.Component<
                 unsubscribe={this.props.unsubscribe}
                 unblockUser={this.props.unblockUser}
                 blockUser={this.props.blockUser}
-                key={u.subscriptionId}
+                key={"subCon" + u.subscriptionId}
                 type={this.props.type}
                 subscription={u}
               />

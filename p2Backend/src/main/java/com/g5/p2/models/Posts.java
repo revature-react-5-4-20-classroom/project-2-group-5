@@ -1,6 +1,7 @@
 package com.g5.p2.models;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,7 +32,7 @@ public class Posts {
   private String title;
   @Column(name = "content")
   private String content;
-  @OneToMany(mappedBy = "post")
+  @OneToMany(mappedBy = "post", cascade=CascadeType.ALL)
   @JsonIgnoreProperties({"post"})
   private List<Comments> comments;
 

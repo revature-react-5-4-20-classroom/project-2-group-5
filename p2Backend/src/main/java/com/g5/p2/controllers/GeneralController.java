@@ -25,7 +25,6 @@ public class GeneralController {
 	public Users attemptLogin(@RequestBody LinkedHashMap<String, String> c, HttpSession s) {
 	  Users u = usersService.findOneUser(c.get("username"), c.get("password"));
 	  s.setAttribute("user", u);
-	  System.out.println(u.getPic());
 	  return u;
 	}
 	

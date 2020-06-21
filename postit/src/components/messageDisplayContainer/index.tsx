@@ -4,7 +4,6 @@ import {
   Col,
   Row,
   Button,
-  Container,
   InputGroup,
   InputGroupAddon,
   Input,
@@ -16,7 +15,6 @@ import { User } from '../../models/user';
 import { Message } from '../../models/message';
 import { newMessage } from '../../apis/messages';
 import { getUsersLikeUsername } from '../../apis/user';
-import { MessageListContainer } from '../messageListContainer';
 import { MessageListCard } from '../messageList';
 
 // interface IMessageDisplayContainerProps{
@@ -204,7 +202,7 @@ export class MessageDisplayContainer extends React.Component<
                           user={card}
                           key={'mlcKey' + card.userId}
                           setSelectedUser={(user: User) => {
-                            this.props.setSelectedUser(user);
+                            this.setSelectedUser(user);
                           }}
                         />
                       );

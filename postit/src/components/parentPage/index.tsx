@@ -56,9 +56,11 @@ class ParentPageComponent extends React.Component<any, any> {
                     <Route path='/logout'>
                     <Redirect to='/login' />
                     </Route>
-                    <Route>
-                    <PrivateRoutes />
-                    </Route>
+                    <Route
+                    render={(props: any) => {
+                        return <PrivateRoutes {...props} />;
+                    }}
+                    />
                 </Switch>
                 </Router>
             </div>

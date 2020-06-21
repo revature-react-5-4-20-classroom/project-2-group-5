@@ -34,10 +34,8 @@ public class Users {
 	@JsonIgnoreProperties({"comments"})
 	private List<Posts> posts;
 	@OneToMany(mappedBy = "subscribee")
-    @JsonIgnoreProperties({"subscribee"})
 	private List<Subscriptions> subscribee;
 	@OneToMany(mappedBy = "subscriber")
-    @JsonIgnoreProperties({"subscriber"})
 	private List<Subscriptions> subscriber;
 	
 

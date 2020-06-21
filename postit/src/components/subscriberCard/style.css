@@ -15,7 +15,7 @@
 
 .subscriber-card {
   border-bottom: grey !important;
-  /* height: 125px; */
+  height: 125px;
 }
 
 .profile-card-row {
@@ -41,7 +41,7 @@
 }
 
 .unsub-button {
-  margin-top: 50px;
+  /* margin-top: 50px; */
   height: auto;
   width: 150px;
 }

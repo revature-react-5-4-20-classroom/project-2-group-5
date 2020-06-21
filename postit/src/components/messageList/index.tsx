@@ -25,8 +25,8 @@ export class MessageListCard extends React.Component<any, any> {
             </CardBody>
           </Col>
           <Col xs={8}>
-            <Button onClick={this.selectUser}>
-              <h5 className='remove-button'>{this.props.user.username}</h5>
+            <Button onClick={this.selectUser} className='name-button'>
+              <span className='button-text'>{this.props.user.username}</span>
             </Button>
           </Col>
         </Row>

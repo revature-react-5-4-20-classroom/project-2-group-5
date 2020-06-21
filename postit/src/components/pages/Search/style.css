@@ -9,19 +9,20 @@
   justify-content: center;
 }
 
-.title-row {
-  padding: 15px;
-}
-
-.message-panel {
-  border: 1px solid black;
-  min-width: 200px !important;
-}
-
 .content-panel {
   border: 1px solid black;
 }
 
 .title-row {
   padding: 15px;
+}
+
+.search-post-div {
+  width: 100%;
+  height: 85vh;
+}
+
+.search-posts-form {
+  width: 90%;
+  height: 30vh;
 }

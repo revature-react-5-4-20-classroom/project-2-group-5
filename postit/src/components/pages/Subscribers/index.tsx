@@ -141,22 +141,26 @@ export class SubscribersPageComponent extends React.Component<
         </Row>
         <Row className='h-95'>
           <Col className='center-div' xs={6}>
-            <SubscribersContainer
-              unsubscribe={this.unsubscribe}
-              unblockUser={this.unblockUser}
-              blockUser={this.blockUser}
-              type={'subscribee'}
-              subsArray={this.state.userSubscribersArray}
-            />
+            <div className='subscribers-cont'>
+              <SubscribersContainer
+                unsubscribe={this.unsubscribe}
+                unblockUser={this.unblockUser}
+                blockUser={this.blockUser}
+                type={'subscribee'}
+                subsArray={this.state.userSubscribersArray}
+              />
+            </div>
           </Col>
           <Col className='center-div' xs={6}>
-            <SubscribersContainer
-              unsubscribe={this.unsubscribe}
-              unblockUser={this.unblockUser}
-              blockUser={this.blockUser}
-              type={'subscriber'}
-              subsArray={this.state.userSubscriptionsArray}
-            />
+            <div className='subscribers-cont'>
+              <SubscribersContainer
+                unsubscribe={this.unsubscribe}
+                unblockUser={this.unblockUser}
+                blockUser={this.blockUser}
+                type={'subscriber'}
+                subsArray={this.state.userSubscriptionsArray}
+              />
+            </div>
           </Col>
         </Row>
       </Container>

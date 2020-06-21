@@ -27,7 +27,7 @@
   font-size: 1em;
 }
 
-.main-container {
+.landing-container {
   height: calc(100% - 56px);
   max-width: 100% !important;
 }

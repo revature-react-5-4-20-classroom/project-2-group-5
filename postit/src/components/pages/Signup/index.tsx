@@ -11,7 +11,7 @@ export class SignupPage extends React.Component<any, any> {
   }
   render() {
     return (
-      <Container className='main-container'>
+      <Container className='landing-container'>
         <Row className='h-100'>
           <Col className='left-panel' xs={8}></Col>
           <Col className='right-panel' xs={4}>

@@ -17,6 +17,7 @@ import { Message } from '../../models/message';
 import { newMessage } from '../../apis/messages';
 import { getUsersLikeUsername } from '../../apis/user';
 import { MessageListContainer } from '../messageListContainer';
+import { MessageListCard } from '../messageList';
 
 // interface IMessageDisplayContainerProps{
 //   toUser: User;
@@ -197,12 +198,17 @@ export class MessageDisplayContainer extends React.Component<
 
                 <Row>
                   <Col className='msg-search-results offset-2' xs={8}>
-                    <MessageListContainer
-                      userCards={this.state.searchResults}
-                      setSelectedUser={(user: User) => {
-                        this.setSelectedUser(user);
-                      }}
-                    />
+                    {this.state.searchResults.map((card: User) => {
+                      return (
+                        <MessageListCard
+                          user={card}
+                          key={'mlcKey' + card.userId}
+                          setSelectedUser={(user: User) => {
+                            this.props.setSelectedUser(user);
+                          }}
+                        />
+                      );
+                    })}
                   </Col>
                 </Row>
               </div>

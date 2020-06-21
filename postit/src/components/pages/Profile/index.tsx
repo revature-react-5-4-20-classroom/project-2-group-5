@@ -174,7 +174,7 @@ class UserProfileComponent extends React.Component<
                       ),
                     ]
                   ) : (
-                    <> </>
+                    <></>
                   )}
                 </Col>
               </Row>

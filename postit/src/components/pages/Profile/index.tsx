@@ -58,6 +58,8 @@ class UserProfileComponent extends React.Component<
     console.log('this.props.reqUserId', this.props.reqUserId);
     console.log('state', this.props.currUser!.userId);
     let user = await this.getUser(this.state.currProfile);
+    console.log(JSON.stringify(user));
+    console.log('hiiii');
     let isSub = await this.isSubscribedCheck(user.fetchedUser.userId);
     if (isSub) {
       this.setState({

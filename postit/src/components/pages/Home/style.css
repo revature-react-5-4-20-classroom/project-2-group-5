@@ -3,9 +3,11 @@
   max-width: 100% !important;
 }
 
-.home-post-container {
+.home-sub-div {
+  height: 35vh;
+  width: 100%;
 }
 
 .title-row {
-  padding: 15px;
+  margin: 10px 0px 10px 0px;
 }

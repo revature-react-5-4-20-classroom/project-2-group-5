@@ -50,6 +50,7 @@ export async function getUsersById(id: number): Promise<any> {
       );
     });
     let userObject = { fetchedUser, fetchedSubscribers, fetchedPosts };
+    console.log('userobj', userObject);
     return userObject;
   } catch (e) {
     console.log(e);
@@ -89,28 +90,28 @@ export async function addNewUser(u: User): Promise<User> {
   return new User(userId, username, alias, role, password);
 }
 export async function deleteUser(id: number): Promise<String> {
-  try{
-  const response = await userClient.delete('/users/'+id)
-  console.log('response',response);
-   return 'user is deleted';}
-   catch(e){
-     console.log(e);
-     
-     throw e;
-   }
+  try {
+    const response = await userClient.delete('/users/' + id);
+    console.log('response', response);
+    return 'user is deleted';
+  } catch (e) {
+    console.log(e);
+
+    throw e;
+  }
 }
 
 export async function uploadfrofilePic(
   userId: number,
   pic: File
 ): Promise<any> {
-  const response = await userClient.post('/users/upload' + userId, {
+  const response = await userClient.post('/pics/upload' + userId, {
     file: pic,
   });
   return response;
 }
 
 export async function getImage(userId: number): Promise<any> {
-  const response = await userClient.get('/users/showFile' + userId);
+  const response = await userClient.get('/pics/' + userId);
   return response;
 }

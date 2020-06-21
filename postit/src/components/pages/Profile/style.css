@@ -7,12 +7,54 @@
 .center-div {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .profile-container {
+  margin-top: 64px;
   width: 50vw;
   min-width: 600px;
   height: 50vh;
   min-height: 600px;
   border: 1px solid black;
 }
+
+.profile-profile-pic {
+  width: 100%;
+}
+
+.profile-info-row {
+  height: 50%;
+}
+
+.profile-container-row {
+  height: 50%;
+}
+
+.profile-username {
+  margin-top: 30px;
+  font-weight: bold;
+  font-size: 40px;
+}
+
+.profile-subbing {
+  margin-top: 50px;
+  height: auto;
+  width: 250px;
+}
+
+.button-text {
+  font-weight: bold;
+  font-size: 1em;
+  margin: 5px;
+}
+
+.profile-card-div {
+  height: 285px;
+  width: 100%;
+}
+/* 
+.profile-posts-div {
+  height: 285px;
+  width: 100%;
+} */

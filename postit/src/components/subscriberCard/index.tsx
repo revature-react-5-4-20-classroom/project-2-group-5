@@ -36,80 +36,126 @@ export class SubscriberCard extends React.Component<ISubscriberCardProps, any> {
   render() {
     return (
       <>
-        {this.props.type === 'subscribee' ? (
-          <Card className='subscriber-card'>
-            <Row className='card-row'>
-              <Col xs={4}>
-                <CardBody>
-                  <Link to={`/profile/${this.props.subscription.subscriberId}`}>
-                    <img
-                      className='profile-pic'
-                      width='65%'
-                      alt='Card image cap'
-                      src={somePic}
-                    />
-                  </Link>
-                  <CardText>{this.props.subscription.subscriberName}</CardText>
-                </CardBody>
-              </Col>
-              <Col className='button-column' xs={8}>
-                {this.props.unblockUser !== null ? (
-                  [
-                    this.props.subscription.blocked ? (
+        {this.props.unsubscribe !== null ? (
+          // ---------------------SUBSCRIBERS PAGE -------------------------------
+          [
+            this.props.type === 'subscribee' ? (
+              // SUBSCRIBERS CARD
+              <Card className='subscriber-card'>
+                <Row className='card-row'>
+                  <Col xs={4}>
+                    <CardBody>
+                      <Link
+                        to={`/profile/${this.props.subscription.subscriberId}`}
+                      >
+                        <img
+                          className='profile-pic'
+                          width='65%'
+                          alt='Card image cap'
+                          src={somePic}
+                        />
+                      </Link>
+                      <CardText>
+                        {this.props.subscription.subscriberName}
+                      </CardText>
+                    </CardBody>
+                  </Col>
+                  <Col className='button-column' xs={8}>
+                    {this.props.unblockUser !== null ? (
+                      [
+                        this.props.subscription.blocked ? (
+                          <Button
+                            color='warning'
+                            data-id={this.props.subscription.subscriberId}
+                            className='unsub-button'
+                            onClick={this.unblock}
+                          >
+                            <span className='button-text'>Unblock</span>
+                          </Button>
+                        ) : (
+                          <Button
+                            color='danger'
+                            data-id={this.props.subscription.subscriberId}
+                            className='unsub-button'
+                            onClick={this.block}
+                          >
+                            <span className='button-text'>Block</span>
+                          </Button>
+                        ),
+                      ]
+                    ) : (
+                      <></>
+                    )}
+                  </Col>
+                </Row>
+              </Card>
+            ) : (
+              // SUBSCRIBEES CARD
+              <Card className='subscriber-card'>
+                <Row className='card-row'>
+                  <Col xs={4}>
+                    <CardBody>
+                      <Link
+                        to={`/profile/${this.props.subscription.subscribeeId}`}
+                      >
+                        <img
+                          className='profile-pic'
+                          width='65%'
+                          alt='Card image cap'
+                          src={somePic}
+                        />
+                      </Link>
+                      <CardText>
+                        {this.props.subscription.subscribeeName}
+                      </CardText>
+                    </CardBody>
+                  </Col>
+                  <Col className='button-column' xs={8}>
+                    {this.props.unsubscribe !== null ? (
                       <Button
                         color='danger'
                         data-id={this.props.subscription.subscriberId}
-                        className='remove-button'
-                        onClick={this.unblock}
+                        className='unsub-button'
+                        onClick={this.unsub}
                       >
-                        Unblock
+                        <span className='button-text'>Unsubscribe</span>
                       </Button>
                     ) : (
-                      <Button
-                        color='danger'
-                        data-id={this.props.subscription.subscriberId}
-                        className='remove-button'
-                        onClick={this.block}
-                      >
-                        Block
-                      </Button>
-                    ),
-                  ]
-                ) : (
-                  <></>
-                )}
-              </Col>
-            </Row>
-          </Card>
+                      <> </>
+                    )}
+                  </Col>
+                </Row>
+              </Card>
+            ),
+          ]
         ) : (
-          <Card className='subscriber-card'>
-            <Row className='card-row'>
-              <Col xs={4}>
+          //----------------------PROFILE PAGE--------------------
+          <Card className='profile-sub-card'>
+            <Row className='profile-card-row'>
+              <Col xs={12}>
                 <CardBody>
-                  <Link to={`/profile/${this.props.subscription.subscribeeId}`}>
-                    <img
-                      className='profile-pic'
-                      width='65%'
-                      alt='Card image cap'
-                      src={somePic}
-                    />
-                  </Link>
-                  <CardText>{this.props.subscription.subscribeeName}</CardText>
+                  <Row>
+                    <Col className='center-div' xs={6}>
+                      <Link
+                        to={`/profile/${this.props.subscription.subscriberId}`}
+                      >
+                        <img
+                          className='profile-pic'
+                          width='65%'
+                          alt='Card image cap'
+                          src={somePic}
+                        />
+                      </Link>
+                    </Col>
+                    <Col className='left-div' xs={6}>
+                      <CardText>
+                        <strong>
+                          {this.props.subscription.subscriberName}
+                        </strong>
+                      </CardText>
+                    </Col>
+                  </Row>
                 </CardBody>
-              </Col>
-              <Col className='button-column' xs={8}>
-                {this.props.unsubscribe !== null ? (
-                  <Button
-                    color='danger'
-                    data-id={this.props.subscription.subscriberId}
-                    className='remove-button'
-                    onClick={this.unsub}
-                  >
-                    Unsubscribe
-                  </Button>
-                ) : (
-                  <> </>
-                )}
               </Col>
             </Row>
           </Card>

@@ -1,22 +1,25 @@
 //will use subscriptionById and postsById
-import React from 'react';
-import { PostContainer } from '../../postsContainer';
-import { Container, Row, Col, Button } from 'reactstrap';
-import { getUsersById } from '../../../apis/user';
-import img from './1.png';
-import ReactS3Uploader from 'react-s3-uploader';
-import { Post } from '../../../models/post';
-import { User } from '../../../models/user';
-import { UserState } from '../../../redux/user/userReducer';
-import { connect } from 'react-redux';
-import './style.css';
-import { SubscribersContainer } from '../../subscribersContainer';
-import { Subscription } from '../../../models/subscription';
+import React from "react";
+import { PostContainer } from "../../postsContainer";
+import { Container, Row, Col, Button } from "reactstrap";
+import { getUsersById } from "../../../apis/user";
+import img from "./1.png";
+import ReactS3Uploader from "react-s3-uploader";
+import { Post } from "../../../models/post";
+import { User } from "../../../models/user";
+import { UserState } from "../../../redux/user/userReducer";
+import { connect } from "react-redux";
+import "./style.css";
+import { SubscribersContainer } from "../../subscribersContainer";
+import { Subscription } from "../../../models/subscription";
 import {
   deleteSubscriptions,
   getAllsubscription,
   createSubscriptions,
-} from '../../../apis/subscriptions';
+} from "../../../apis/subscriptions";
+import { UpdateUserInfo } from "../../updateUserInfo";
+import { runInThisContext } from "vm";
+import { Link } from "react-router-dom";
 
 interface IUserProfileProps {
   currUser: User | null;
@@ -55,11 +58,11 @@ class UserProfileComponent extends React.Component<
   }
 
   componentDidMount = async () => {
-    console.log('this.props.reqUserId', this.props.reqUserId);
-    console.log('state', this.props.currUser!.userId);
+    console.log("this.props.reqUserId", this.props.reqUserId);
+    console.log("state", this.props.currUser!.userId);
     let user = await this.getUser(this.state.currProfile);
     console.log(JSON.stringify(user));
-    console.log('hiiii');
+    console.log("hiiii");
     let isSub = await this.isSubscribedCheck(user.fetchedUser.userId);
     if (isSub) {
       this.setState({
@@ -108,7 +111,7 @@ class UserProfileComponent extends React.Component<
       false
     );
     let newSubRow = await createSubscriptions(sub);
-    console.log('NEWSUBROW: ', newSubRow);
+    console.log("NEWSUBROW: ", newSubRow);
     this.setState({
       // shouldUpdate: true,
       isSubscribed: true,
@@ -137,54 +140,58 @@ class UserProfileComponent extends React.Component<
 
   render() {
     return (
-      <Container className='main-container' style={{ overflowY: 'auto' }}>
+      <Container className="main-container" style={{ overflowY: "auto" }}>
         <Row>
-          <Col xs={8} className='offset-2 center-div'>
-            <Container className='profile-container'>
-              <Row className='profile-info-row'>
-                <Col xs={4} className=' center-div'>
+          <Col xs={8} className="offset-2 center-div">
+            <Container className="profile-container">
+              <Row className="profile-info-row">
+                <Col xs={4} className=" center-div">
                   <img
                     src={img}
-                    alt='profile pic'
-                    className='profile-profile-pic'
+                    alt="profile pic"
+                    className="profile-profile-pic"
                   />
                 </Col>
                 <Col xs={8}>
-                  <h1 className='profile-username'>
+                  <h1 className="profile-username">
                     <u>{this.state.reqUser?.username}'s profile</u>
                   </h1>
                   {this.state.currProfile !== this.props.currUser!.userId ? (
                     [
                       this.state.isSubscribed ? (
                         <Button
-                          color='danger'
-                          className='profile-subbing'
+                          color="danger"
+                          className="profile-subbing"
                           onClick={this.unsubscribe}
                         >
-                          <span className='button-text'>Unsubscribe</span>
+                          <span className="button-text">Unsubscribe</span>
                         </Button>
                       ) : (
                         <Button
-                          color='success'
-                          className='profile-subbing'
+                          color="success"
+                          className="profile-subbing"
                           onClick={this.subscribe}
                         >
-                          <span className='button-text'>Subscribe</span>
+                          <span className="button-text">Subscribe</span>
                         </Button>
                       ),
                     ]
                   ) : (
-                    <> </>
+                    <Link to={`/update/`}>
+                      <Button>
+                        Update
+                      </Button>
+                    </Link>
                   )}
                 </Col>
               </Row>
-              <Row className='profile-container-row'>
+              <Row className="profile-container-row">
                 <Col xs={4}>
-                  <div className='profile-subs-div center-div'>
+                  <div className="profile-subs-div center-div">
                     {this.state.subscribers.length > 0 ? (
                       <SubscribersContainer
                         subsArray={this.state.subscribers}
-                        type={'subscribee'}
+                        type={"subscribee"}
                         blockUser={null}
                         unblockUser={null}
                         unsubscribe={null}
@@ -198,7 +205,7 @@ class UserProfileComponent extends React.Component<
                   </div>
                 </Col>
                 <Col xs={8}>
-                  <div className='profile-posts-div'>
+                  <div className="profile-posts-div">
                     {this.state.posts.length > 0 ? (
                       <PostContainer posts={this.state.posts} />
                     ) : (

@@ -1,8 +1,12 @@
-import axios from 'axios';
-import { User } from '../models/user';
-import { backendUrl } from './backendUrl';
-import { Subscription } from '../models/subscription';
-import { Post } from '../models/post';
+import axios from "axios";
+import { User } from "../models/user";
+import { backendUrl } from "./backendUrl";
+import { Subscription } from "../models/subscription";
+import { Post } from "../models/post";
+
+const headers = {
+  "Content-Type": "multipart/form-data",
+};
 
 const userClient = axios.create({
   baseURL: backendUrl,
@@ -11,7 +15,7 @@ const userClient = axios.create({
 });
 
 export async function getAllUsers(): Promise<User[]> {
-  const response = await userClient.get('/users');
+  const response = await userClient.get("/users");
   return response.data.map((userObj: any) => {
     const { userId, username, alias, role, password } = userObj;
     return new User(userId, username, alias, role, password);
@@ -20,8 +24,8 @@ export async function getAllUsers(): Promise<User[]> {
 
 export async function getUsersById(id: number): Promise<any> {
   try {
-    const response = await userClient.get('/users/' + id);
-    console.log('GETUSER API', response);
+    const response = await userClient.get("/users/" + id);
+    console.log("GETUSER API", response);
     const { userId, username, alias, role, password } = response.data;
     let fetchedUser: User = new User(userId, username, alias, role, password);
     let fetchedSubscribers: Subscription[] = response.data.subscribee.map(
@@ -50,7 +54,7 @@ export async function getUsersById(id: number): Promise<any> {
       );
     });
     let userObject = { fetchedUser, fetchedSubscribers, fetchedPosts };
-    console.log('userobj', userObject);
+    console.log("userobj", userObject);
     return userObject;
   } catch (e) {
     console.log(e);
@@ -58,7 +62,7 @@ export async function getUsersById(id: number): Promise<any> {
 }
 
 export async function getUsersLikeUsername(uname: String): Promise<User[]> {
-  const response = await userClient.get('/users/username/' + uname);
+  const response = await userClient.get("/users/username/" + uname);
   return response.data.map((userObj: any) => {
     const { userId, username, alias, role, password } = userObj;
     return new User(userId, username, alias, role, password);
@@ -66,7 +70,7 @@ export async function getUsersLikeUsername(uname: String): Promise<User[]> {
 }
 
 export async function updateUser(u: User): Promise<User> {
-  const response = await userClient.patch('/users', {
+  const response = await userClient.patch("/users", {
     userId: u.userId,
     username: u.username,
     password: u.password,
@@ -79,7 +83,7 @@ export async function updateUser(u: User): Promise<User> {
 }
 
 export async function addNewUser(u: User): Promise<User> {
-  const response = await userClient.post('/users', {
+  const response = await userClient.post("/users", {
     user_id: u.userId,
     username: u.username,
     password: u.password,
@@ -91,9 +95,9 @@ export async function addNewUser(u: User): Promise<User> {
 }
 export async function deleteUser(id: number): Promise<String> {
   try {
-    const response = await userClient.delete('/users/' + id);
-    console.log('response', response);
-    return 'user is deleted';
+    const response = await userClient.delete("/users/" + id);
+    console.log("response", response);
+    return "user is deleted";
   } catch (e) {
     console.log(e);
 
@@ -105,13 +109,25 @@ export async function uploadfrofilePic(
   userId: number,
   pic: File
 ): Promise<any> {
-  const response = await userClient.post('/pics/upload' + userId, {
-    file: pic,
-  });
+  console.log(pic);
+  
+  const response = await userClient.post(
+    "/pics/upload/" + userId,
+    { data: { file: pic } },
+    { headers: { "Content-Type": "multipart/form-data" } }
+  );
   return response;
 }
 
 export async function getImage(userId: number): Promise<any> {
-  const response = await userClient.get('/pics/' + userId);
-  return response;
+  const response = await userClient.get("/pics/" + userId);
+  // var b64Response = btoa(response.data);
+  // var src ='data:image/png;base64,'+b64Response;
+  // response => {
+    // var b64Response = response.blob();
+  //   this.imageData = 'data:image/png;base64,' + b64Response;
+  // }
+  // console.log("api",b64Response);
+  
+  return response.data;
 }

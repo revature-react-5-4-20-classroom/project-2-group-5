@@ -1,6 +1,6 @@
-import axios from "axios";
-import { Comment } from "../models/comment";
-import { backendUrl } from "./backendUrl";
+import axios from 'axios';
+import { Comment } from '../models/comment';
+import { backendUrl } from './backendUrl';
 
 const commentClient = axios.create({
   // baseURL: "http://localhost:8081",
@@ -15,11 +15,13 @@ export async function getAllCommentsByPostId(id: number): Promise<Comment[]> {
     // const pId=commentObj.post.postId;
     // const uId= commentObj.author.userId;
     const { commentId, content } = commentObj;
+    console.log('COMMENTOBJ ', commentObj);
     return new Comment(
       commentId,
       commentObj.post.postId,
       commentObj.author.userId,
-      content
+      content,
+      commentObj.author.username
     );
   });
 }

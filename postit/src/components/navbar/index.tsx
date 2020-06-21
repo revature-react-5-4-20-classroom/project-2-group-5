@@ -11,10 +11,10 @@ export class NavigationComponent extends React.Component<any, any> {
     super(props);
   }
 
-  logout = async (event: any)=>{
+  logout = async (event: any) => {
     logout();
-    this.props.logoutUser(); 
-  }
+    this.props.logoutUser();
+  };
 
   render() {
     return (
@@ -86,7 +86,7 @@ export class NavigationComponent extends React.Component<any, any> {
                 className='nav-link'
                 to='/login'
               >
-                login
+                Login
               </NavLink>
             </NavItem>
             <NavItem>
@@ -97,7 +97,7 @@ export class NavigationComponent extends React.Component<any, any> {
                 className='nav-link'
                 to='/signup'
               >
-                signup
+                Signup
               </NavLink>
             </NavItem>
             <NavItem>
@@ -108,7 +108,7 @@ export class NavigationComponent extends React.Component<any, any> {
                 to='/logout'
                 onClick={this.logout}
               >
-                logout
+                Logout
               </NavLink>
             </NavItem>
           </Nav>

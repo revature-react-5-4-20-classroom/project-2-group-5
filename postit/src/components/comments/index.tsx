@@ -24,6 +24,7 @@ class CommentsComponents extends React.Component<any, any> {
       comments: 'any',
       cFlag: false,
       content: '',
+      shouldUpdate: false,
     };
   }
 
@@ -33,33 +34,41 @@ class CommentsComponents extends React.Component<any, any> {
       cFlag: true,
     });
   };
+
+  shouldComponentUpdate(nextProps: any, nextState: any) {
+    if (this.state.shouldUpdate) {
+      this.setState({
+        shouldUpdate: false,
+      });
+      this.getComment();
+      console.log('comments updating.....');
+      return true;
+    }
+    return this.props !== nextProps || this.state !== nextState;
+  }
+
   newComment = async (e: any) => {
     e.preventDefault();
-    // if (e.keyCode == 13) {
-
     const newComment = new Comment(
       0,
       this.props.postId,
       this.props.currUser.userId,
       this.state.content
     );
-    console.log(
-      newComment.commentId,
-      newComment.content,
-      newComment.author,
-      newComment.postId
-    );
-
     this.setState({
       comment: await createComment(newComment),
+      shouldUpdate: true,
     });
+    this.shouldComponentUpdate(this.props, this.state);
   };
+
   getComment = async () => {
     this.setState({
       comments: await getAllCommentsByPostId(this.props.postId),
       cFlag: true,
     });
   };
+
   bindInputChangeToState = (changeEvent: any) => {
     //@ts-ignore
     this.setState({
@@ -76,11 +85,15 @@ class CommentsComponents extends React.Component<any, any> {
                 {this.state.comments.length != 0 ? (
                   <ul>
                     {this.state.comments.map((obj: any, index: number) => {
-                      return <li>{obj.content}</li>;
+                      return (
+                        <li key={obj.commentId}>
+                          <strong>{obj.username}</strong>: {obj.content}
+                        </li>
+                      );
                     })}
                   </ul>
                 ) : (
-                  <h3>no comments to show</h3>
+                  <h5>no comments to show</h5>
                 )}
               </>
             ) : (
@@ -102,7 +115,7 @@ class CommentsComponents extends React.Component<any, any> {
                   onChange={this.bindInputChangeToState}
                 ></Input>
                 <InputGroupAddon addonType='append'>
-                  <Button onClick={this.newComment}>post</Button>
+                  <Button onClick={this.newComment}>Post</Button>
                 </InputGroupAddon>
               </InputGroup>
             </div>

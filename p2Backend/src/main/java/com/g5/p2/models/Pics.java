@@ -2,15 +2,19 @@ package com.g5.p2.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "pics")
 public class Pics {
+
 
   @Id
   @Column(name = "pic_id")
@@ -22,7 +26,8 @@ public class Pics {
   private String pictureType;
   @Lob
   private byte[] pic;
-  
+
+
   public Pics() {
     super();
   }
@@ -66,7 +71,7 @@ public class Pics {
   public void setPic(byte[] pic) {
     this.pic = pic;
   }
-  
-  
-  
+
+
+
 }

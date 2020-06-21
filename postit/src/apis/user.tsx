@@ -105,13 +105,13 @@ export async function uploadfrofilePic(
   userId: number,
   pic: File
 ): Promise<any> {
-  const response = await userClient.post('/users/upload' + userId, {
+  const response = await userClient.post('/pics/upload' + userId, {
     file: pic,
   });
   return response;
 }
 
 export async function getImage(userId: number): Promise<any> {
-  const response = await userClient.get('/users/showFile' + userId);
+  const response = await userClient.get('/pics/' + userId);
   return response;
 }

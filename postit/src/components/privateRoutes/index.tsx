@@ -8,7 +8,7 @@ import { Home } from '../pages/Home';
 import UserProfile from '../pages/Profile';
 import { SearchPage } from '../pages/Search';
 import { UpdateUserInfo } from '../updateUserInfo';
-
+import { CreatePost } from '../pages/CreatePost';
 
 class PrivateRoutesComponent extends React.Component<any, any> {
   constructor(props: any) {
@@ -32,8 +32,15 @@ class PrivateRoutesComponent extends React.Component<any, any> {
             <Redirect to='/' />
           )}
         </Route>
-        <Route 
-          path={'/profile/redirect/:userId'} 
+        <Route path='/createpost'>
+          {this.props.isAuthenticated === true ? (
+            <CreatePost path='/createpost' />
+          ) : (
+            <Redirect to='/' />
+          )}
+        </Route>
+        <Route
+          path={'/profile/redirect/:userId'}
           render={(match: any) => {
             return (
               <>
@@ -51,18 +58,20 @@ class PrivateRoutesComponent extends React.Component<any, any> {
           render={(match: any) => {
             return (
               <>
-                {this.props.isAuthenticated === true ? 
-                <>
-                  {match.match.params.userId != this.props.currUser.userId ?
-                    ([<UserProfile
-                      reqUserId={match.match.params.userId}
-                      path={`/profile/${match.match.params.userId}`}
-                    />])
-                    :
+                {this.props.isAuthenticated === true ? (
+                  <>
+                    {match.match.params.userId != this.props.currUser.userId ? (
+                      [
+                        <UserProfile
+                          reqUserId={match.match.params.userId}
+                          path={`/profile/${match.match.params.userId}`}
+                        />,
+                      ]
+                    ) : (
                       <Redirect to='/profile' />
-                  }
-                </>  
-                 : (
+                    )}
+                  </>
+                ) : (
                   <Redirect to='/' />
                 )}
               </>
@@ -84,10 +93,12 @@ class PrivateRoutesComponent extends React.Component<any, any> {
           )}
         </Route>
         <Route path='/update'>
-          {this.props.isAuthenticated === true ? ( 
-            <UpdateUserInfo  path='/update'
-            userId={this.props.currUser.userId}/>
-           ) : (
+          {this.props.isAuthenticated === true ? (
+            <UpdateUserInfo
+              path='/update'
+              userId={this.props.currUser.userId}
+            />
+          ) : (
             <Redirect to='/' />
           )}
         </Route>
@@ -115,7 +126,6 @@ class PrivateRoutesComponent extends React.Component<any, any> {
             return <Redirect to='/' />;
           }}
         ></Route>
-       
       </Switch>
     );
   }

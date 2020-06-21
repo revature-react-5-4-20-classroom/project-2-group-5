@@ -1,7 +1,7 @@
 package com.g5.p2.models;
 
 import java.util.List;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,12 +30,12 @@ public class Users {
 	private String role;
 	@Column(name = "pic")
     private Integer pic;
-	@OneToMany(mappedBy = "author")
+	@OneToMany(mappedBy = "author" , cascade=CascadeType.ALL)
 	@JsonIgnoreProperties({"comments"})
 	private List<Posts> posts;
-	@OneToMany(mappedBy = "subscribee")
+	@OneToMany(mappedBy = "subscribee",cascade=CascadeType.ALL)
 	private List<Subscriptions> subscribee;
-	@OneToMany(mappedBy = "subscriber")
+	@OneToMany(mappedBy = "subscriber",cascade=CascadeType.ALL)
 	private List<Subscriptions> subscriber;
 	
 

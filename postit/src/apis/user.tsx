@@ -3,6 +3,7 @@ import { User } from "../models/user";
 import { backendUrl } from "./backendUrl";
 import { Subscription } from "../models/subscription";
 import { Post } from "../models/post";
+import { Form } from "reactstrap";
 
 const headers = {
   "Content-Type": "multipart/form-data",
@@ -107,27 +108,32 @@ export async function deleteUser(id: number): Promise<String> {
 
 export async function uploadfrofilePic(
   userId: number,
-  pic: File
+  file: FormData
 ): Promise<any> {
-  console.log(pic);
-  
+  console.log(file);
+
+  // var formdata = new FormData();
+  // formdata.append("file", pic);
+  // console.log(formdata);
+
+  // const response = await userClient.post("/pics/upload/" + userId, {file:pic}, {
+  //   headers: {
+  //     "Content-Type": "multipart/form-data",
+  //     boundary: "----------287032381131322",
+  //   },
+  // });
+
   const response = await userClient.post(
     "/pics/upload/" + userId,
-    { data: { file: pic } },
-    { headers: { "Content-Type": "multipart/form-data" } }
+    file,
+    // url:
+    // data: {file:formdata},
+    {
+      headers: {
+        "Content-Type": "multipart/form-data; boundary=--------------------------085119333813591241854351",
+        "Content-Disposition": "form-data;name=file;filename=file",
+      },
+    }
   );
   return response;
-}
-
-export async function getImage(userId: number): Promise<any> {
-  const response = await userClient.get("/pics/" + userId);
-  // var b64Response = btoa(response.data);
-  // var src ='data:image/png;base64,'+b64Response;
-  // response => {
-    // var b64Response = response.blob();
-  //   this.imageData = 'data:image/png;base64,' + b64Response;
-  // }
-  // console.log("api",b64Response);
-  
-  return response.data;
 }

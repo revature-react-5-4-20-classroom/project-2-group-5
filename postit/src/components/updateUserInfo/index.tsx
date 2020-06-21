@@ -17,9 +17,10 @@ import { Redirect } from "react-router";
 import {
   updateUser,
   uploadfrofilePic,
-  getImage,
   deleteUser,
+  getUsersById,
 } from "../../apis/user";
+import { Link } from "react-router-dom";
 
 class UpdateUserInfoComponent extends React.Component<any, any> {
   constructor(props: any) {
@@ -34,10 +35,18 @@ class UpdateUserInfoComponent extends React.Component<any, any> {
       profilePic: img,
     };
   }
+
+
   bindInputChangeToState = (changeEvent: any) => {
     //@ts-ignore
     this.setState({
       [changeEvent.currentTarget.name]: changeEvent.currentTarget.value,
+    });
+  };
+  bindInputChangeToState1 = (changeEvent: any) => {
+    //@ts-ignore
+    this.setState({
+      file: changeEvent.target.files[0],
     });
   };
   updateInfo = async (e: any) => {
@@ -50,14 +59,6 @@ class UpdateUserInfoComponent extends React.Component<any, any> {
         this.state.role,
         this.state.password
       );
-      console.log(
-        this.state.userId,
-        this.state.username,
-        this.state.alias,
-        this.state.role,
-        this.state.password
-      );
-
       this.setState({
         response: await updateUser(newUser),
       });
@@ -67,13 +68,19 @@ class UpdateUserInfoComponent extends React.Component<any, any> {
   };
   changeProfilepic = async (e: any) => {
     e.preventDefault();
+    // const formData = new FormData();
+    // formData.append("file" , this.state.file);
+
+    const formData = new FormData();
+
+    // Update the formData object
+    formData.append("myFile", this.state.file);
+
     this.setState({
-      message: await uploadfrofilePic(
-        this.props.currUser.userId,
-        e.currentTarget.value
-      ),
-      profilePic: await getImage(this.props.currUser.userId),
+      message: await uploadfrofilePic(this.props.currUser.userId, formData),
+      //profilePic: await getImage(this.props.currUser.userId),
     });
+    console.log("front end", this.state.file.name);
   };
   deleteUseracc = async (e: any) => {
     e.preventDefault();
@@ -82,51 +89,29 @@ class UpdateUserInfoComponent extends React.Component<any, any> {
     });
   };
 
-  getPic = async (e: any) => {
-    e.preventDefault();
-
-    const data: any = await getImage(5);
-
-    // convert to Base64
-    // var b64Response = btoa(data);
-
-    // create an image
-    // var outputImg = document.createElement('img');
-    // outputImg.src = 'data:image/png;base64,'+b64Response;
-    var b64Response = btoa(unescape(encodeURIComponent(data)));
-    // var b64Response = window.btoa(unescape(encodeURIComponent(data)));
-    // console.log(data);
-    // const urlCreator = window.URL || window.webkitURL;
-    var db2 = decodeURIComponent(escape(window.atob(b64Response)));
-    console.log(db2);
-
-   
-    var b64 = window.btoa(unescape(encodeURIComponent(data)));
-    console.log(b64);
-
-    var str2 = decodeURIComponent(escape(window.atob(b64)));
-    console.log("lskgerlg",str2);
-    console.log("laekglrkgnreb;rbmlks; tmyvoit",this.state.profilePic);
-    this.setState({
-      profilePic: `data:image/png;base64,${db2}`,
-      // data:image/jpeg;base64,${data}
-    });
-  };
-
   render() {
     return (
       <Col md={{ size: 8, offset: 2 }}>
-        <Button onClick={this.getPic}>pic</Button>
-        <img src={this.state.profilePic}></img>
+        <img src={`http://18.191.138.4:8081/pics/${this.state.userId}`}></img>
         <br />
-        <Input
-          type="file"
-          accept="image/*"
-          onChange={this.changeProfilepic}
-        ></Input>
+        <Form enctype="multipart/form-data">
+          <Input
+            type="file"
+            accept="image/*"
+            name="file"
+            id="name"
+            visbility="hidden"
+            onChange={this.bindInputChangeToState}
+          ></Input>
+        </Form>
+        <button onClick={this.changeProfilepic}>upload</button>
+        <br />
+        <br />
         <Form className="center">
           <FormGroup>
-            <Label for="username">Username:</Label>
+            <Label for="username" pp>
+              Username:
+            </Label>
             <Input
               onChange={this.bindInputChangeToState}
               value={this.state.username}
@@ -154,7 +139,6 @@ class UpdateUserInfoComponent extends React.Component<any, any> {
 
             <Input
               onChange={this.bindInputChangeToState}
-              value={this.state.password}
               type="text"
               name="password"
               id="password"
@@ -198,13 +182,21 @@ class UpdateUserInfoComponent extends React.Component<any, any> {
               required
             />
           </FormGroup>
-
-          <Button color="secondary" onClick={this.updateInfo}>
-            Update
-          </Button>
-          <Button color="secondary" onClick={this.deleteUseracc}>
-            delete
-          </Button>
+          <Row>
+            <Col>
+              {" "}
+              <Button color="secondary" onClick={this.updateInfo}>
+                Update
+              </Button>
+            </Col>
+            <Col>
+              <Link to="/signup">
+                <Button color="secondary" onClick={this.deleteUseracc}>
+                  delete
+                </Button>
+              </Link>
+            </Col>
+          </Row>
         </Form>
       </Col>
     );

@@ -15,7 +15,7 @@ export class MessageListCard extends React.Component<any, any> {
         <Row className='card-row'>
           <Col xs={2}>
             <CardBody>
-              <Link to={`/profile/${this.props.user.userId}`}>
+              <Link to={`/profile/redirect/${this.props.user.userId}`}>
                 <img
                   className='profile-pic'
                   alt='Card image cap'

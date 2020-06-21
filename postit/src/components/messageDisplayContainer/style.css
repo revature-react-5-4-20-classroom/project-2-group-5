@@ -7,10 +7,10 @@
   height: 71vh;
   max-width: 55vw !important;
   flex: 1;
-  margin-top: 1vh;
+  /* margin-top: 1vh; */
   overflow-y: auto;
   overflow-x: hidden;
-  margin: 0px 20px 0px 20px !important;
+  /* margin: 0px 20px 0px 20px !important; */
   padding-left: 0px !important;
   padding-right: 0px !important;
 }
@@ -24,6 +24,33 @@
   /* height: 4.5vh; */
   flex: 1;
   margin: 0px 20px 0px 20px !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+.message-title {
+  margin: 10px 0px 10px 0px;
+}
+
+.message-pg-btn {
+  height: auto;
+  width: 150px;
+}
+
+.search-msg-div {
+  width: 90%;
+  height: 70vh;
+}
+
+.msg-search-results {
+  border: 1px solid black;
+  height: 50vh;
+  max-width: 55vw !important;
+  flex: 1;
+  /* margin-top: 1vh; */
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* margin: 0px 20px 0px 20px !important; */
   padding-left: 0px !important;
   padding-right: 0px !important;
 }

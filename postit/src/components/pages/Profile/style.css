@@ -48,3 +48,13 @@
   font-size: 1em;
   margin: 5px;
 }
+
+.profile-card-div {
+  height: 285px;
+  width: 100%;
+}
+/* 
+.profile-posts-div {
+  height: 285px;
+  width: 100%;
+} */

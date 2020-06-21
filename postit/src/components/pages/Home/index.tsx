@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  Container,
-  Row,
-  Col,
-} from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import { PostContainer } from '../../postsContainer';
 import { Post } from '../../../models/post';
 import { getAllPosts, getAllSubscibersPosts } from '../../../apis/posts';
@@ -77,32 +73,36 @@ export class HomeComponent extends React.Component<any, IHomeState> {
     console.log('from home this.props: ', this.props && this.props);
     return (
       <Container className='main-container'>
-        <Row className='title-row h-5'>
+        <Row className=' h-5'>
           <Col xs={12}>
-            <h3>Subscribers</h3>
+            <h3 className='title-row'>Subscribers:</h3>
           </Col>
         </Row>
         <Row className='h-45'>
           <Col xs={8} className='offset-2 center-div'>
-            {this.state.subPosts ? (
-              <PostContainer posts={this.state.subPosts}></PostContainer>
-            ) : (
-              <h3>No one you're subscribed to is posting!</h3>
-            )}
+            <div className='home-sub-div'>
+              {this.state.subPosts ? (
+                <PostContainer posts={this.state.subPosts}></PostContainer>
+              ) : (
+                <h3>No one you're subscribed to is posting!</h3>
+              )}
+            </div>
           </Col>
         </Row>
-        <Row className='title-row h-5'>
+        <Row className='h-5'>
           <Col xs={12}>
-            <h3>Subscribers</h3>
+            <h3 className='title-row'>Discover New Posters:</h3>
           </Col>
         </Row>
         <Row className='h-45'>
           <Col xs={8} className='offset-2 center-div'>
-            {this.state.subPosts ? (
-              <PostContainer posts={this.state.allPosts}></PostContainer>
-            ) : (
-              <h3>No one you're subscribed to is posting!</h3>
-            )}
+            <div className='home-sub-div'>
+              {this.state.subPosts ? (
+                <PostContainer posts={this.state.allPosts}></PostContainer>
+              ) : (
+                <h3>No one you're subscribed to is posting!</h3>
+              )}
+            </div>
           </Col>
         </Row>
       </Container>

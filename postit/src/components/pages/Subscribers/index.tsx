@@ -131,32 +131,36 @@ export class SubscribersPageComponent extends React.Component<
   render() {
     return (
       <Container className='main-container'>
-        <Row className='title-row h-5'>
+        <Row className='h-5'>
           <Col xs={6}>
-            <h3>Subscribers</h3>
+            <h3 className='title-row'>Subscribers</h3>
           </Col>
           <Col xs={6}>
-            <h3>Subscribed To:</h3>
+            <h3 className='title-row'>Subscribed To:</h3>
           </Col>
         </Row>
         <Row className='h-95'>
           <Col className='center-div' xs={6}>
-            <SubscribersContainer
-              unsubscribe={this.unsubscribe}
-              unblockUser={this.unblockUser}
-              blockUser={this.blockUser}
-              type={'subscribee'}
-              subsArray={this.state.userSubscribersArray}
-            />
+            <div className='subscribers-cont'>
+              <SubscribersContainer
+                unsubscribe={this.unsubscribe}
+                unblockUser={this.unblockUser}
+                blockUser={this.blockUser}
+                type={'subscribee'}
+                subsArray={this.state.userSubscribersArray}
+              />
+            </div>
           </Col>
           <Col className='center-div' xs={6}>
-            <SubscribersContainer
-              unsubscribe={this.unsubscribe}
-              unblockUser={this.unblockUser}
-              blockUser={this.blockUser}
-              type={'subscriber'}
-              subsArray={this.state.userSubscriptionsArray}
-            />
+            <div className='subscribers-cont'>
+              <SubscribersContainer
+                unsubscribe={this.unsubscribe}
+                unblockUser={this.unblockUser}
+                blockUser={this.blockUser}
+                type={'subscriber'}
+                subsArray={this.state.userSubscriptionsArray}
+              />
+            </div>
           </Col>
         </Row>
       </Container>

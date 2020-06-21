@@ -123,13 +123,8 @@ export class MessagesPage extends React.Component<any, IMessagePageState> {
     return (
       <Container className='main-container'>
         <Row className='h-100'>
-          <Col className='title-row message-panel' xs={4}>
-            {/* <Row className='title-row'>
-              <Col> */}
-            <h3>Messages</h3>
-            {/* </Col>
-            </Row> */}
-
+          <Col className='' xs={4}>
+            <h3 className='messaage-title'>Messages</h3>
             <Row>
               <MessageListContainer
                 userCards={this.state.userCards}

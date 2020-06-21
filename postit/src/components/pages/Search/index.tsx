@@ -49,9 +49,10 @@ export class SearchPage extends React.Component<any, ISearchPageState> {
 
   render() {
     return (
-      <Container className='main-container' style={{height:80 + "vh"}}>
-        <Row style={{height:80 + "vh"}}>
-          <Col className='title-row message-panel' xs={4}>
+      <Container className='main-container'>
+        <Row className='h-100'>
+          <Col className='center-div' xs={4}>
+            <div className='search-posts-form'>
               <Search
                 setSearchedUsername={(username: string) => {
                   this.setSearchedUsername(username);
@@ -63,10 +64,13 @@ export class SearchPage extends React.Component<any, ISearchPageState> {
                   this.search();
                 }}
               />
+            </div>
           </Col>
 
-          <Col className='content-panel' xs={8} style={{height:80 + "vh", overflowY: "scroll"}}>
-            <PostContainer posts={this.state.searchResults} />
+          <Col className='content-panel center-div' xs={8}>
+            <div className='search-post-div'>
+              <PostContainer posts={this.state.searchResults} />
+            </div>
           </Col>
         </Row>
       </Container>
@@ -74,7 +78,6 @@ export class SearchPage extends React.Component<any, ISearchPageState> {
   }
 }
 
-
-//todo: 
+//todo:
 //  ajust left column to be centered correctly
 //  other things can be done if i discover why the submit function isnt awaiting properly, or add a new endpoint to make the multiple fetches redundant

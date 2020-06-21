@@ -11,6 +11,8 @@ import {
 } from '../../../apis/messages';
 import { getUsersById } from '../../../apis/user';
 import { setTimeout } from 'timers';
+import { UserState } from '../../../redux/user/userReducer';
+import { connect } from 'react-redux';
 
 interface IMessagePageState {
   userCards: User[];
@@ -20,7 +22,7 @@ interface IMessagePageState {
   newConversation: boolean;
 }
 
-export class MessagesPage extends React.Component<any, IMessagePageState> {
+class MessagesPageComponent extends React.Component<any, IMessagePageState> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -88,48 +90,18 @@ export class MessagesPage extends React.Component<any, IMessagePageState> {
     this.setState({ conversation: messages });
     //console.log(messages);
     setTimeout(() => {
-      //console.log(accessIndex, this.state.recursiveAccess.length)
-      if (this.state.recursiveAccess.length - 1 == accessIndex) {
+      if (this.state.recursiveAccess.length - 1 == accessIndex && this.props.history.location.pathname == "/messages") {
         this.recursiveFetch(u, accessIndex);
       }
     }, 500);
   }
 
-  //possibly not needed
-  // sortMessages(messages :Message[]): Message[]{
-  //   let out : Message[] = [];
-
-  //   for (let i:number = 0; i < messages.length; i++){
-  //     if(out.length === 0){
-  //       out.push(messages[i]);
-  //     }
-  //     else {
-  //       let added : boolean = false;
-  //       for(let j:number = 0; j < out.length; j++){
-  //         if(messages[i].messageId < out[j].messageId){
-  //           out.splice(j, 0, messages[i]);
-  //         }
-  //       }
-  //       if(!added){
-  //         out.push(messages[i]);
-  //       }
-  //     }
-  //   }
-
-  //   return out;
-  // }
-
   render() {
     return (
       <Container className='main-container'>
         <Row className='h-100'>
-          <Col className='title-row message-panel' xs={4}>
-            {/* <Row className='title-row'>
-              <Col> */}
-            <h3>Messages</h3>
-            {/* </Col>
-            </Row> */}
-
+          <Col className='' xs={4}>
+            <h3 className='messaage-title'>Messages</h3>
             <Row>
               <MessageListContainer
                 userCards={this.state.userCards}
@@ -156,3 +128,12 @@ export class MessagesPage extends React.Component<any, IMessagePageState> {
     );
   }
 }
+
+
+const mapStateToProps = (state: UserState) => {
+  return {
+    ...state,
+  };
+};
+
+export const MessagesPage = connect(mapStateToProps)(MessagesPageComponent);

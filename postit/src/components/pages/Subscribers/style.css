@@ -10,5 +10,10 @@
 }
 
 .title-row {
-  padding: 15px;
+  margin: 10px 0px 10px 0px;
+}
+
+.subscribers-cont {
+  height: 60vh;
+  width: 40vw;
 }

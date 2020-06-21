@@ -65,21 +65,21 @@ export class SubscriberCard extends React.Component<ISubscriberCardProps, any> {
                       [
                         this.props.subscription.blocked ? (
                           <Button
-                            color='danger'
+                            color='warning'
                             data-id={this.props.subscription.subscriberId}
-                            className='remove-button'
+                            className='unsub-button'
                             onClick={this.unblock}
                           >
-                            Unblock
+                            <span className='button-text'>Unblock</span>
                           </Button>
                         ) : (
                           <Button
                             color='danger'
                             data-id={this.props.subscription.subscriberId}
-                            className='remove-button'
+                            className='unsub-button'
                             onClick={this.block}
                           >
-                            Block
+                            <span className='button-text'>Block</span>
                           </Button>
                         ),
                       ]
@@ -115,10 +115,10 @@ export class SubscriberCard extends React.Component<ISubscriberCardProps, any> {
                       <Button
                         color='danger'
                         data-id={this.props.subscription.subscriberId}
-                        className='remove-button'
+                        className='unsub-button'
                         onClick={this.unsub}
                       >
-                        Unsubscribe
+                        <span className='button-text'>Unsubscribe</span>
                       </Button>
                     ) : (
                       <> </>

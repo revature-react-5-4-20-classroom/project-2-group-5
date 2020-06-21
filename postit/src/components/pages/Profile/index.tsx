@@ -58,11 +58,15 @@ class UserProfileComponent extends React.Component<
   }
 
   componentDidMount = async () => {
+<<<<<<< HEAD
     console.log("this.props.reqUserId", this.props.reqUserId);
     console.log("state", this.props.currUser!.userId);
     let user = await this.getUser(this.state.currProfile);
     console.log(JSON.stringify(user));
     console.log("hiiii");
+=======
+    let user = await this.getUser(this.state.currProfile);
+>>>>>>> origin
     let isSub = await this.isSubscribedCheck(user.fetchedUser.userId);
     if (isSub) {
       this.setState({
@@ -111,7 +115,10 @@ class UserProfileComponent extends React.Component<
       false
     );
     let newSubRow = await createSubscriptions(sub);
+<<<<<<< HEAD
     console.log("NEWSUBROW: ", newSubRow);
+=======
+>>>>>>> origin
     this.setState({
       // shouldUpdate: true,
       isSubscribed: true,
@@ -177,17 +184,25 @@ class UserProfileComponent extends React.Component<
                       ),
                     ]
                   ) : (
+<<<<<<< HEAD
                     <Link to={`/update/`}>
                       <Button>
                         Update
                       </Button>
                     </Link>
+=======
+                    <></>
+>>>>>>> origin
                   )}
                 </Col>
               </Row>
               <Row className="profile-container-row">
                 <Col xs={4}>
+<<<<<<< HEAD
                   <div className="profile-subs-div center-div">
+=======
+                  <div className='profile-card-div center-div'>
+>>>>>>> origin
                     {this.state.subscribers.length > 0 ? (
                       <SubscribersContainer
                         subsArray={this.state.subscribers}
@@ -205,7 +220,11 @@ class UserProfileComponent extends React.Component<
                   </div>
                 </Col>
                 <Col xs={8}>
+<<<<<<< HEAD
                   <div className="profile-posts-div">
+=======
+                  <div className='profile-card-div center-div'>
+>>>>>>> origin
                     {this.state.posts.length > 0 ? (
                       <PostContainer posts={this.state.posts} />
                     ) : (

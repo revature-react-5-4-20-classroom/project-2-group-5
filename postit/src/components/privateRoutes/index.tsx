@@ -86,6 +86,7 @@ class PrivateRoutesComponent extends React.Component<any, any> {
             <MessagesPage
               path='/messages'
               userId={this.props.currUser.userId}
+              history={this.props.history}
             />
           ) : (
             <Redirect to='/' />

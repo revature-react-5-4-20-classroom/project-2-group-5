@@ -2,10 +2,9 @@
   border-radius: 50%;
 }
 
-.remove-button {
-  width: 135px;
+.name-button {
   height: auto;
-  font-size: 1.5rem !important;
+  width: 150px;
 }
 
 .card-row {

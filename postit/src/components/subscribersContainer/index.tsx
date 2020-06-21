@@ -20,7 +20,7 @@ export class SubscribersContainer extends React.Component<
   }
   render() {
     return (
-      <div className='posts-container'>
+      <div className='subs-container'>
         {this.props.subsArray &&
           this.props.subsArray.map((u: Subscription) => {
             return (

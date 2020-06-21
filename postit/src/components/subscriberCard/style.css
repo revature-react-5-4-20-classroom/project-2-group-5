@@ -39,3 +39,9 @@
   justify-content: start;
   align-items: center;
 }
+
+.unsub-button {
+  /* margin-top: 50px; */
+  height: auto;
+  width: 150px;
+}

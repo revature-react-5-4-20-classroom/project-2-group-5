@@ -35,7 +35,7 @@ export class PostContainer extends React.Component<IPostContainerProps, any> {
     return (
       <div className='posts-container'>
         {this.props.posts.map((p) => {
-          return <PostComponent key={p.postId} post={p} />;
+          return <PostComponent key={"postCon" + p.postId} post={p} />;
         })}
       </div>
     );

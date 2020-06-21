@@ -45,7 +45,7 @@ export class PostComponent extends React.Component<IPostComponentProps, any> {
           <Col md={4}>
             <Row>
               <Col xs={12} className='center-div'>
-                <Link to={`/profile/${this.props.post.author}`}>
+                <Link to={`/profile/redirect/${this.props.post.author}`}>
                   <img
                     src={img}
                     alt='profile pic'

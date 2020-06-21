@@ -46,7 +46,7 @@ export class SubscriberCard extends React.Component<ISubscriberCardProps, any> {
                   <Col xs={4}>
                     <CardBody>
                       <Link
-                        to={`/profile/${this.props.subscription.subscriberId}`}
+                        to={`/profile/redirect/${this.props.subscription.subscriberId}`}
                       >
                         <img
                           className='profile-pic'
@@ -96,7 +96,7 @@ export class SubscriberCard extends React.Component<ISubscriberCardProps, any> {
                   <Col xs={4}>
                     <CardBody>
                       <Link
-                        to={`/profile/${this.props.subscription.subscribeeId}`}
+                        to={`/profile/redirect/${this.props.subscription.subscribeeId}`}
                       >
                         <img
                           className='profile-pic'
@@ -137,7 +137,7 @@ export class SubscriberCard extends React.Component<ISubscriberCardProps, any> {
                   <Row>
                     <Col className='center-div' xs={6}>
                       <Link
-                        to={`/profile/${this.props.subscription.subscriberId}`}
+                        to={`/profile/redirect/${this.props.subscription.subscriberId}`}
                       >
                         <img
                           className='profile-pic'

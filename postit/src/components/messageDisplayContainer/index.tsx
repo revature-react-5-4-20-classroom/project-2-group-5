@@ -104,6 +104,7 @@ export class MessageDisplayContainer extends React.Component<
       <>
         {!this.state.newMessage ? (
           <>
+            {/* ----------DIV TO SEE/SEND MESSAGES----------------- */}
             <Row className='h-5'>
               <Col xs={8}>
                 {this.props.toUser.username != '' ? (
@@ -117,7 +118,9 @@ export class MessageDisplayContainer extends React.Component<
                 )}
               </Col>
               <Col className='center-div' xs={4}>
-                <Button onClick={this.newMessage}>New Message</Button>
+                <Button className='message-pg-btn' onClick={this.newMessage}>
+                  New Message
+                </Button>
               </Col>
             </Row>
             <Row className='h-90 center-div'>
@@ -156,22 +159,24 @@ export class MessageDisplayContainer extends React.Component<
           </>
         ) : (
           <>
-            <Row className='title-row h-5'>
+            {/* ----------DIV TO SEARCH FOR PERSON TO SEND MESSAGE TO----------------- */}
+            <Row className='h-5'>
               <Col xs={8}>
-                <h3>Search a user to start a conversation</h3>
+                <h3 className='message-title'>
+                  Search a user to start a conversation
+                </h3>
               </Col>
-              <Col xs={4}>
-                <Button onClick={this.newMessage}>Back</Button>
+              <Col xs={4} className='center-div'>
+                <Button className='message-pg-btn' onClick={this.newMessage}>
+                  Back
+                </Button>
               </Col>
             </Row>
-            <Row className='h-90 center-div'>
-              <Container
-                className='main-container'
-                style={{ height: 80 + 'vh', margin: 20 }}
-              >
-                <Row style={{ height: 80 + 'vh' }}>
-                  <Col className='title-row message-panel' xs={4}>
-                    <h3>User Search</h3>
+            <Row className='h-95 center-div'>
+              <div className='search-msg-div'>
+                <Row>
+                  <Col xs={4} className='offset-4'>
+                    <h3 className='message-title'>User Search</h3>
                     <Form className='center' onSubmit={this.search}>
                       <FormGroup>
                         <Input
@@ -188,12 +193,10 @@ export class MessageDisplayContainer extends React.Component<
                       </FormGroup>
                     </Form>
                   </Col>
+                </Row>
 
-                  <Col
-                    className='content-panel'
-                    xs={8}
-                    style={{ height: 80 + 'vh', overflowY: 'scroll' }}
-                  >
+                <Row>
+                  <Col className='msg-search-results offset-2' xs={8}>
                     <MessageListContainer
                       userCards={this.state.searchResults}
                       setSelectedUser={(user: User) => {
@@ -202,7 +205,7 @@ export class MessageDisplayContainer extends React.Component<
                     />
                   </Col>
                 </Row>
-              </Container>
+              </div>
             </Row>
           </>
         )}

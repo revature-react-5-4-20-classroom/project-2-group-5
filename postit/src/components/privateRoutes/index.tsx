@@ -31,10 +31,23 @@ class PrivateRoutesComponent extends React.Component<any, any> {
             <Redirect to='/' />
           )}
         </Route>
+        <Route 
+          path={'/profile/redirect/:userId'} 
+          render={(match: any) => {
+            return (
+              <>
+                {this.props.isAuthenticated === true ? (
+                  <Redirect to={`/profile/${match.match.params.userId}`} />
+                ) : (
+                  <Redirect to='/' />
+                )}
+              </>
+            );
+          }}
+        />
         <Route
           path='/profile/:userId'
           render={(match: any) => {
-            console.log('MATCH', match);
             return (
               <>
                 {this.props.isAuthenticated === true ? (

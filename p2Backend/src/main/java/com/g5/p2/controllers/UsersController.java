@@ -77,32 +77,7 @@ public class UsersController {
     }
   }
 
-//  @PostMapping(path = "/upload/{userid}", consumes = "multipart/form-data")
-//  public ResponseEntity<?> saveEnvironmentConfig(MultipartHttpServletRequest request,
-//      @PathVariable Integer userid) {
-//    // System.out.println(request.getContentType());
-//    //MultipartFile file = request.getFile("file");
-//    //usersService.saveFile(file, userid);
-//    return ResponseEntity.ok().body("picture uploaded");
-//
-//    // public String uploadImage(@RequestParam("files") MultipartHttpServletRequest request) {
-//    // MultipartFile mPF = request.getFile(files);
-//    // System.out.println("vlsigje");
-//    // usersService.saveFile(mPF);
-//    // return "redirect:/";
-//  }
 
-  
-//NEEDS ATTENTION TO BE COMPATIBLE WITH PICS TABLE
-//  @GetMapping("showFile/{userId}")
-//  public ResponseEntity<ByteArrayResource> downloadfile(@PathVariable Integer userId) {
-//    Users users = usersService.getfile(userId).get();
-//    return ResponseEntity.ok().contentType(MediaType.parseMediaType(users.getPictureType()))
-//        .header(HttpHeaders.CONTENT_DISPOSITION,
-//            "attachment:filename=\"" + users.getPictureName() + "\"")
-//        .body(new ByteArrayResource(users.getPic()));
-//
-//  }
   
   
 

@@ -90,8 +90,6 @@ class MessagesPageComponent extends React.Component<any, IMessagePageState> {
     this.setState({ conversation: messages });
     //console.log(messages);
     setTimeout(() => {
-      //console.log(accessIndex, this.state.recursiveAccess.length)
-      console.log(this.state.selectedUser)
       if (this.state.recursiveAccess.length - 1 == accessIndex && this.props.history.location.pathname == "/messages") {
         this.recursiveFetch(u, accessIndex);
       }

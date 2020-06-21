@@ -76,7 +76,6 @@ class UserProfileComponent extends React.Component<
 
   getUser = async (userId: number) => {
     let requestedUser = await getUsersById(userId);
-    console.log(requestedUser)
     return requestedUser;
   };
 

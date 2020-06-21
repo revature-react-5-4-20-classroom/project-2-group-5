@@ -115,26 +115,28 @@ public class UsersServiceImplementation implements UsersService {
     return users;
   }
 
-  @Override
-  public Users saveFile(MultipartFile file, Integer id) {
-    String docname = file.getOriginalFilename();
-    try {
-      Users user = this.getById(id);
-      user.setPictureName(docname);
-      user.setPictureType(file.getContentType());
-      user.setPic(file.getBytes());
-
-      // Users user = new Users("username1513", "password15", "alias15", "role15", docname,
-      // file.getContentType(),
-      // file.getBytes());
-      // user.setUserId(usersRepository.findAll().get(usersRepository.findAll().size() -
-      // 1).getUserId() + 1);
-      return usersRepository.save(user);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return null;
-  }
+  
+//NEEDS ATTENTION TO BE COMPATIBLE WITH PICS TABLE
+//  @Override
+//  public Users saveFile(MultipartFile file, Integer id) {
+//    String docname = file.getOriginalFilename();
+//    try {
+//      Users user = this.getById(id);
+//      user.setPictureName(docname);
+//      user.setPictureType(file.getContentType());
+//      user.setPic(file.getBytes());
+//
+//      // Users user = new Users("username1513", "password15", "alias15", "role15", docname,
+//      // file.getContentType(),
+//      // file.getBytes());
+//      // user.setUserId(usersRepository.findAll().get(usersRepository.findAll().size() -
+//      // 1).getUserId() + 1);
+//      return usersRepository.save(user);
+//    } catch (Exception e) {
+//      e.printStackTrace();
+//    }
+//    return null;
+//  }
 
   // getting image by user id
   @Override

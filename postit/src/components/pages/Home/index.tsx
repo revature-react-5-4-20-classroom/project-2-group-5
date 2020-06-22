@@ -51,7 +51,7 @@ export class HomeComponent extends React.Component<any, IHomeState> {
     let end = postsArr.length;
     console.log('new posts', postsArr);
     this.setState({
-      allPosts: postsArr.slice(start, end),
+      allPosts: postsArr.slice(start, end).reverse(),
       shouldUpdate: true,
     });
     // this.shouldComponentUpdate(this.props, this.state);
@@ -63,7 +63,7 @@ export class HomeComponent extends React.Component<any, IHomeState> {
     let start = postsArr.length - 4;
     let end = postsArr.length;
     this.setState({
-      subPosts: postsArr.slice(start, end),
+      subPosts: postsArr.slice(start, end).reverse(),
       shouldUpdate: true,
     });
     // this.shouldComponentUpdate(this.props, this.state);

@@ -40,7 +40,7 @@ export class SearchPage extends React.Component<any, ISearchPageState> {
       results.forEach(async (element) => {
         let morePosts: Post[] = await getPostsByUserId(element.userId);
         posts = [...posts, ...morePosts];
-        this.setState({ searchResults: posts });
+        this.setState({ searchResults: posts.slice(0).reverse() });
       });
     } else {
       this.setState({ searchResults: [] });

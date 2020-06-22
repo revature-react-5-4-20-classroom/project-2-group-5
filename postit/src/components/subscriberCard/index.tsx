@@ -143,7 +143,7 @@ export class SubscriberCard extends React.Component<ISubscriberCardProps, any> {
                           className='profile-pic'
                           width='65%'
                           alt='Card image cap'
-                          src={somePic}
+                          src={`http://18.191.138.4:8081/pics/${this.props.subscription.subscriberId}`}
                         />
                       </Link>
                     </Col>

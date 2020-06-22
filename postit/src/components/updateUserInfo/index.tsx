@@ -30,7 +30,7 @@ class UpdateUserInfoComponent extends React.Component<any, any> {
       username: this.props.currUser.username,
       alias: this.props.currUser.alias,
       role: this.props.currUser.role,
-      password: "",
+      password:'',
       response: "Any",
       profilePic: img,
     };
@@ -51,6 +51,7 @@ class UpdateUserInfoComponent extends React.Component<any, any> {
   };
   updateInfo = async (e: any) => {
     e.preventDefault();
+    if(this.state.password.length==0){return }
     try {
       const newUser = new User(
         this.state.userId,
@@ -65,6 +66,7 @@ class UpdateUserInfoComponent extends React.Component<any, any> {
     } catch (err) {
       console.log(err);
     }
+
   };
   changeProfilepic = async (e: any) => {
     e.preventDefault();
@@ -88,6 +90,11 @@ class UpdateUserInfoComponent extends React.Component<any, any> {
       response: await deleteUser(this.props.currUser.userId),
     });
   };
+  setPassword=(e:any)=>{
+    this.setState({
+      password:e.currentTarget.value,
+    })
+  }
 
   render() {
     return (
@@ -101,13 +108,13 @@ class UpdateUserInfoComponent extends React.Component<any, any> {
             name="file"
             id="name"
             visbility="hidden"
-            onChange={this.bindInputChangeToState}
+            onChange={this.bindInputChangeToState1}
           ></Input>
         </Form>
         <button onClick={this.changeProfilepic}>upload</button>
         <br />
         <br />
-        <Form className="center">
+        <Form className="center" onSubmit={this.updateInfo}>
           <FormGroup>
             <Label for="username" pp>
               Username:
@@ -136,35 +143,17 @@ class UpdateUserInfoComponent extends React.Component<any, any> {
           </FormGroup>
           <FormGroup>
             <Label for="text">Password:</Label>
-
             <Input
-              onChange={this.bindInputChangeToState}
-              type="text"
+              onChange={this.setPassword}
+              type="password"
               name="password"
               id="password"
+              value={this.state.password}
               placeholder="Password"
               required
             />
           </FormGroup>
-          {/* <FormGroup>
-            <Label for="text">Re enter Password:</Label>
-            <Input
-              onChange={(e) => {
-                {
-                  this.state.password == e.currentTarget.value
-                    ? {color:"green"}:
-                   {color : "red"}
-                }
-              }}
-              // onChange={this.bindInputChangeToState}
-              //value={this.state.password}
-              type="text"
-              name="password"
-              id="password"
-              placeholder="Password"
-              required
-            />
-          </FormGroup> */}
+          
           <FormGroup
             style={{
               display: this.props.currUser.role == "admin" ? "block" : "none",
@@ -185,7 +174,7 @@ class UpdateUserInfoComponent extends React.Component<any, any> {
           <Row>
             <Col>
               {" "}
-              <Button color="secondary" onClick={this.updateInfo}>
+              <Button color="secondary" >
                 Update
               </Button>
             </Col>
@@ -210,30 +199,3 @@ const mapStateToProps = (state: UserState) => {
 };
 
 export const UpdateUserInfo = connect(mapStateToProps)(UpdateUserInfoComponent);
-
-// delete user
-// constructor(props: any) {
-//     super(props);
-//     this.state = {
-//       userId: this.props.currUser.userId,
-//       username: this.props.currUser.username,
-//       alias: this.props.currUser.alias,
-//       reole: this.props.currUser.role,
-//       password: this.props.currUser.password,
-//       response: 'Any',
-//     };
-//   }
-
-//   deleteUser = async (e: any) => {
-//     e.preventDefault();
-//     const newUser = new User(
-//       this.state.userId,
-//       this.state.username,
-//       this.state.alias,
-//       this.state.role,
-//       this.state.password
-//     );
-//     this.setState({
-//       response: await deleteUser(newUser),
-//     });
-//   };

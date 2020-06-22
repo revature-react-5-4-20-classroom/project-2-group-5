@@ -93,7 +93,7 @@ class CommentsComponents extends React.Component<any, any> {
                     })}
                   </ul>
                 ) : (
-                  <h5>no comments to show</h5>
+                  <h5>No Comments yet. Be the first:</h5>
                 )}
               </>
             ) : (

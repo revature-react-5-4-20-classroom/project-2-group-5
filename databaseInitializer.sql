@@ -62,9 +62,9 @@ INSERT INTO messages(author, receiver, content) values
 
 
 -- INSERT INTO users values
--- ('coolguy', 'password', 'frosty', 'user'), -- 1
--- ('coolgirl', 'password', 'butterfly', 'user'), -- 2
--- ('coolkid', 'password', 'legokid', 'user'); --3 
+-- (DEFAULT, 'coolguy', 'password', 'frosty', 'user'), -- 1
+-- (DEFAULT, 'coolgirl', 'password', 'butterfly', 'user'), -- 2
+-- (DEFAULT, 'coolkid', 'password', 'legokid', 'user'); --3 
 
 -- INSERT INTO posts(author, date_posted, title, content) values 
 -- (2, 20200620, 'Sephora', 'Did yall see the new sale going on at sephora this week?  Definitely going!'), -- 1

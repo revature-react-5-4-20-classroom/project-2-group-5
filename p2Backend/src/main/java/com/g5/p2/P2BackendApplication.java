@@ -31,7 +31,7 @@ public class P2BackendApplication {
     return new WebMvcConfigurer() {
       @Override
       public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("http://localhost:3000").allowCredentials(true)
+        registry.addMapping("/**").allowedOrigins("http://revaturepostit.s3-website-us-west-1.amazonaws.com").allowCredentials(true)
             .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS");
 
       }

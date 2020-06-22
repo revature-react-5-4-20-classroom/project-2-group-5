@@ -142,7 +142,7 @@ class UserProfileComponent extends React.Component<
               <Row className="profile-info-row">
                 <Col xs={4} className=" center-div">
                   <img
-                    src={img}
+                    src={`http://18.191.138.4:8081/pics/${this.state.reqUser?.userId}`}
                     alt="profile pic"
                     className="profile-profile-pic"
                   />

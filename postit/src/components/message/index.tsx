@@ -20,7 +20,7 @@ export class MessageRow extends React.Component<any, any> {
                           className='profile-pic'
                           width='65%'
                           alt='Card image cap'
-                          src={pic /* this.props.user.pic */}
+                          src={`http://18.191.138.4:8081/pics/${this.props.message.author}`}
                         />
                       </Link>
                     </CardBody>
@@ -51,7 +51,7 @@ export class MessageRow extends React.Component<any, any> {
                           className='profile-pic'
                           width='65%'
                           alt='Card image cap'
-                          src={pic /* this.props.user.pic */}
+                          src={`http://18.191.138.4:8081/pics/${this.props.message.author}`}
                         />
                       </Link>
                     </CardBody>

@@ -47,7 +47,7 @@ export class PostComponent extends React.Component<IPostComponentProps, any> {
               <Col xs={12} className='center-div'>
                 <Link to={`/profile/redirect/${this.props.post.author}`}>
                   <img
-                    src={img}
+                    src={`http://18.191.138.4:8081/pics/${this.props.post.author}`}
                     alt='profile pic'
                     className='post-profile-pic'
                   />

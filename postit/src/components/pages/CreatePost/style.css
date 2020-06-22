@@ -1,0 +1,8 @@
+.main-container {
+  height: calc(100% - 56px);
+  max-width: 100% !important;
+}
+
+.title-row {
+  margin: 10px 0px 10px 0px;
+}

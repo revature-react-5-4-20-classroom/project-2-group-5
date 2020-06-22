@@ -82,6 +82,17 @@ export class NavigationComponent extends React.Component<any, any> {
               <NavLink
                 color='secondary'
                 activeClassName='active'
+                hidden={this.props.isAuthenticated === false}
+                className='nav-link'
+                to='/createpost'
+              >
+                Post
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                color='secondary'
+                activeClassName='active'
                 hidden={this.props.currUser}
                 className='nav-link'
                 to='/login'
